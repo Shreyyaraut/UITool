@@ -58,7 +58,7 @@ export type ComponentType =
   | "deviceInfo"
   | "deviceConfiguration"
   | "navigation"
-  
+
 
 // export interface UIComponent {
 //     id: string;
@@ -174,4 +174,11 @@ export interface UIComponent {
   y: number;
   width: number;
   height: number;
+}
+
+export interface SavedPage {
+  pageId: string;
+  pageName: string;
+  components: UIComponent[];
+  createdAt: string;
 }

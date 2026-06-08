@@ -1,6 +1,4 @@
-import {
-  forwardRef,
-} from "react";
+import { forwardRef } from "react";
 import type { UIComponent } from "../types";
 import CanvasItem from "./CanvasItem";
 
@@ -30,17 +28,12 @@ const MobileCanvas = forwardRef<
   ) => {
     return (
       <div className="mobile-section">
-        <div
-          className="mobile-frame"
-          ref={ref}
-        >
+        <div className="mobile-frame" ref={ref}>
           <div className="mobile-header"></div>
 
           <div
             className="mobile-screen"
-            onClick={() =>
-              setSelectedId(null)
-            }
+            onClick={() => setSelectedId(null)}
           >
             {components.length === 0 && (
               <div className="empty-text">
@@ -52,18 +45,10 @@ const MobileCanvas = forwardRef<
               <CanvasItem
                 key={item.id}
                 item={item}
-                deleteComponent={
-                  deleteComponent
-                }
-                editComponent={
-                  editComponent
-                }
-                selectedId={
-                  selectedId
-                }
-                setSelectedId={
-                  setSelectedId
-                }
+                deleteComponent={deleteComponent}
+                editComponent={editComponent}
+                selectedId={selectedId}
+                setSelectedId={setSelectedId}
               />
             ))}
           </div>

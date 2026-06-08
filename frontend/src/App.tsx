@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import html2canvas from "html2canvas";
 import "./App.css";
 
@@ -58,12 +58,16 @@ import DeviceInfoSelectModal from "./components/DeviceInfoSelectModal";
 import DeviceConfigurationSelectModal from "./components/DeviceConfigurationSelectModal";
 import NavigationSelectModal from "./components/NavigationSelectModal";
 import InputFieldSelectModal from "./components/InputFieldSelectModal";
+// import PageSidebar from "./components/PageSidebar";
+import PagePanel from "./components/PagePanel";
 
 import type {
   UIComponent,
   ComponentType,
   HeadingLevel,
 } from "./types";
+
+const LOCAL_STORAGE_KEY = "mobile-ui-components";
 
 const headingOptions: {
   label: string;
@@ -452,29 +456,29 @@ const chipTagOptions: {
   label: string;
   chipVariant: UIComponent["chipVariant"];
 }[] = [
-  { label: "Default", chipVariant: "default" },
-  { label: "Disabled", chipVariant: "disabled" },
-  { label: "Filled", chipVariant: "filled" },
-  { label: "Information", chipVariant: "information" },
-  { label: "Success", chipVariant: "success" },
-  { label: "Error", chipVariant: "error" },
-  { label: "Warning", chipVariant: "warning" },
-];  
+    { label: "Default", chipVariant: "default" },
+    { label: "Disabled", chipVariant: "disabled" },
+    { label: "Filled", chipVariant: "filled" },
+    { label: "Information", chipVariant: "information" },
+    { label: "Success", chipVariant: "success" },
+    { label: "Error", chipVariant: "error" },
+    { label: "Warning", chipVariant: "warning" },
+  ];
 
 const multiSelectChipOptions: {
   label: string;
   multiSelectChipVariant:
-    UIComponent["multiSelectChipVariant"];
+  UIComponent["multiSelectChipVariant"];
 }[] = [
-  {
-    label: "Default",
-    multiSelectChipVariant: "default",
-  },
-  {
-    label: "Selected",
-    multiSelectChipVariant: "selected",
-  },
-];
+    {
+      label: "Default",
+      multiSelectChipVariant: "default",
+    },
+    {
+      label: "Selected",
+      multiSelectChipVariant: "selected",
+    },
+  ];
 
 const verticalStepperOptions = [
   {
@@ -497,55 +501,55 @@ const stepProgressOptions = [
 const fileUploadOptions: {
   label: string;
   fileUploadVariant:
-    UIComponent["fileUploadVariant"];
+  UIComponent["fileUploadVariant"];
 }[] = [
-  {
-    label: "Choose File",
-    fileUploadVariant: "default",
-  },
-  {
-    label: "Choose File",
-    fileUploadVariant: "dashed",
-  },
-];
+    {
+      label: "Choose File",
+      fileUploadVariant: "default",
+    },
+    {
+      label: "Choose File",
+      fileUploadVariant: "dashed",
+    },
+  ];
 
 const galleryUploadOptions: {
   label: string;
   galleryUploadVariant:
-    UIComponent["galleryUploadVariant"];
+  UIComponent["galleryUploadVariant"];
 }[] = [
-  {
-    label: "Choose from Gallery",
-    galleryUploadVariant: "default",
-  },
-  {
-    label: "Choose from Gallery",
-    galleryUploadVariant: "dashed",
-  },
-  {
-    label: "Choose from Gallery",
-    galleryUploadVariant: "active",
-  },
-  {
-    label: "Choose from Gallery",
-    galleryUploadVariant: "activeDashed",
-  },
-];
+    {
+      label: "Choose from Gallery",
+      galleryUploadVariant: "default",
+    },
+    {
+      label: "Choose from Gallery",
+      galleryUploadVariant: "dashed",
+    },
+    {
+      label: "Choose from Gallery",
+      galleryUploadVariant: "active",
+    },
+    {
+      label: "Choose from Gallery",
+      galleryUploadVariant: "activeDashed",
+    },
+  ];
 
 const customCameraOptions: {
   label: string;
   customCameraVariant:
-    UIComponent["customCameraVariant"];
+  UIComponent["customCameraVariant"];
 }[] = [
-  {
-    label: "Take Selfie",
-    customCameraVariant: "selfie",
-  },
-  {
-    label: "Scan Document",
-    customCameraVariant: "document",
-  },
-];
+    {
+      label: "Take Selfie",
+      customCameraVariant: "selfie",
+    },
+    {
+      label: "Scan Document",
+      customCameraVariant: "document",
+    },
+  ];
 
 const actionSheetOptions = [
   {
@@ -568,25 +572,25 @@ const selectionActionSheetOptions = [
 const selectionIconButtonOptions: {
   label: string;
   selectionIconButtonVariant:
-    UIComponent["selectionIconButtonVariant"];
+  UIComponent["selectionIconButtonVariant"];
 }[] = [
-  {
-    label: "Default",
-    selectionIconButtonVariant: "default",
-  },
-  {
-    label: "Selected",
-    selectionIconButtonVariant: "selected",
-  },
-  {
-    label: "Disabled",
-    selectionIconButtonVariant: "disabled",
-  },
-  {
-    label: "Sizes",
-    selectionIconButtonVariant: "sizes",
-  },
-];
+    {
+      label: "Default",
+      selectionIconButtonVariant: "default",
+    },
+    {
+      label: "Selected",
+      selectionIconButtonVariant: "selected",
+    },
+    {
+      label: "Disabled",
+      selectionIconButtonVariant: "disabled",
+    },
+    {
+      label: "Sizes",
+      selectionIconButtonVariant: "sizes",
+    },
+  ];
 
 const topTabsOptions = [
   {
@@ -604,15 +608,15 @@ const accordionSkeletonOptions: {
   label: string;
   variant: "light" | "dark";
 }[] = [
-  {
-    label: "Light Accordion Skeleton",
-    variant: "light",
-  },
-  {
-    label: "Dark Accordion Skeleton",
-    variant: "dark",
-  },
-];
+    {
+      label: "Light Accordion Skeleton",
+      variant: "light",
+    },
+    {
+      label: "Dark Accordion Skeleton",
+      variant: "dark",
+    },
+  ];
 
 const deviceConfigurationOptions = [
   {
@@ -623,32 +627,32 @@ const deviceConfigurationOptions = [
 const imageSliderSkeletonOptions: {
   label: string;
   imageSliderSkeletonVariant:
-    UIComponent["imageSliderSkeletonVariant"];
+  UIComponent["imageSliderSkeletonVariant"];
 }[] = [
-  {
-    label: "Light Image Slider Skeleton",
-    imageSliderSkeletonVariant: "light",
-  },
-  {
-    label: "Dark Image Slider Skeleton",
-    imageSliderSkeletonVariant: "dark",
-  },
-];
+    {
+      label: "Light Image Slider Skeleton",
+      imageSliderSkeletonVariant: "light",
+    },
+    {
+      label: "Dark Image Slider Skeleton",
+      imageSliderSkeletonVariant: "dark",
+    },
+  ];
 
 const stepperSkeletonOptions: {
   label: string;
   stepperSkeletonVariant:
-    UIComponent["stepperSkeletonVariant"];
+  UIComponent["stepperSkeletonVariant"];
 }[] = [
-  {
-    label: "Light Stepper Skeleton",
-    stepperSkeletonVariant: "light",
-  },
-  {
-    label: "Dark Stepper Skeleton",
-    stepperSkeletonVariant: "dark",
-  },
-];
+    {
+      label: "Light Stepper Skeleton",
+      stepperSkeletonVariant: "light",
+    },
+    {
+      label: "Dark Stepper Skeleton",
+      stepperSkeletonVariant: "dark",
+    },
+  ];
 
 const biometricOptions = [
   {
@@ -708,18 +712,18 @@ const inputFieldOptions: {
   label: string;
   type: ComponentType;
 }[] = [
-  { label: "Text Field", type: "textField" },
-  { label: "Email Field", type: "emailField" },
-  { label: "Password Field", type: "passwordField" },
-  { label: "Search Field", type: "searchField" },
-  { label: "Verification Field", type: "verificationField" },
-  { label: "DOB Field", type: "dobField" },
-  { label: "OTP Field", type: "otpField" },
-  { label: "Bio Field", type: "bioField" },
-  { label: "Credit Card Field", type: "creditCardField" },
-  { label: "CVV Field", type: "cvvField" },
-  { label: "Phone Number Field", type: "phoneNumberField" },
-];
+    { label: "Text Field", type: "textField" },
+    { label: "Email Field", type: "emailField" },
+    { label: "Password Field", type: "passwordField" },
+    { label: "Search Field", type: "searchField" },
+    { label: "Verification Field", type: "verificationField" },
+    { label: "DOB Field", type: "dobField" },
+    { label: "OTP Field", type: "otpField" },
+    { label: "Bio Field", type: "bioField" },
+    { label: "Credit Card Field", type: "creditCardField" },
+    { label: "CVV Field", type: "cvvField" },
+    { label: "Phone Number Field", type: "phoneNumberField" },
+  ];
 
 export default function App() {
   const [search, setSearch] =
@@ -729,10 +733,69 @@ export default function App() {
     useRef<HTMLDivElement>(null);
 
   const [components, setComponents] =
-    useState<UIComponent[]>([]);
+  useState<UIComponent[]>(() => {
+    const savedData =
+      localStorage.getItem(LOCAL_STORAGE_KEY);
+
+    if (!savedData) return [];
+
+    try {
+      const parsedData =
+        JSON.parse(savedData);
+
+      console.log(
+        "Loaded from LocalStorage:",
+        parsedData
+      );
+
+      return parsedData;
+    } catch (error) {
+      console.error(
+        "LocalStorage parse error:",
+        error
+      );
+
+      return [];
+    }
+  });
+
+//   useEffect(() => {
+//   localStorage.setItem(
+//     LOCAL_STORAGE_KEY,
+//     JSON.stringify(components)
+//   );
+
+//   console.log("Saved Components:", components);
+
+//   console.table(
+//     components.map((item) => ({
+//       id: item.id,
+//       type: item.type,
+//       label: item.label,
+//       width: item.width,
+//       height: item.height,
+//     }))
+//   );
+// }, [components]);
 
   const [selectedId, setSelectedId] =
     useState<string | null>(null);
+
+  const [pages, setPages] =
+  useState<SavedPage[]>(() => {
+    const savedPages =
+      localStorage.getItem("mobile-pages");
+
+    return savedPages
+      ? JSON.parse(savedPages)
+      : [];
+  });
+
+const [currentPageId, setCurrentPageId] =
+  useState<string | null>(null);
+
+// const [sidebarOpen, setSidebarOpen] =
+//   useState(false);  
 
   const [showHeadingModal, setShowHeadingModal] =
     useState(false);
@@ -825,120 +888,154 @@ export default function App() {
   ] = useState(false);
 
   const [showChipTagModal, setShowChipTagModal] =
-  useState(false);
+    useState(false);
 
   const [
-  showMultiSelectChipModal,
-  setShowMultiSelectChipModal,
-] = useState(false);
+    showMultiSelectChipModal,
+    setShowMultiSelectChipModal,
+  ] = useState(false);
 
-const [
-  showVerticalStepperModal,
-  setShowVerticalStepperModal,
-] = useState(false);
+  const [
+    showVerticalStepperModal,
+    setShowVerticalStepperModal,
+  ] = useState(false);
 
-const [
-  showHorizontalStepperModal,
-  setShowHorizontalStepperModal,
-] = useState(false);
+  const [
+    showHorizontalStepperModal,
+    setShowHorizontalStepperModal,
+  ] = useState(false);
 
-const [
-  showStepProgressModal,
-  setShowStepProgressModal,
-] = useState(false);
+  const [
+    showStepProgressModal,
+    setShowStepProgressModal,
+  ] = useState(false);
 
-const [showFileUploadModal, setShowFileUploadModal] =
-  useState(false);
+  const [showFileUploadModal, setShowFileUploadModal] =
+    useState(false);
 
-const [
-  showGalleryUploadModal,
-  setShowGalleryUploadModal,
-] = useState(false);  
+  const [
+    showGalleryUploadModal,
+    setShowGalleryUploadModal,
+  ] = useState(false);
 
-const [
-  showCustomCameraModal,
-  setShowCustomCameraModal,
-] = useState(false);
+  const [
+    showCustomCameraModal,
+    setShowCustomCameraModal,
+  ] = useState(false);
 
-const [showActionSheetModal, setShowActionSheetModal] =
-  useState(false);
+  const [showActionSheetModal, setShowActionSheetModal] =
+    useState(false);
 
-const [
-  showActionSheetImageModal,
-  setShowActionSheetImageModal,
-] = useState(false);  
+  const [
+    showActionSheetImageModal,
+    setShowActionSheetImageModal,
+  ] = useState(false);
 
-const [
-  showSelectionActionSheetModal,
-  setShowSelectionActionSheetModal,
-] = useState(false);
+  const [
+    showSelectionActionSheetModal,
+    setShowSelectionActionSheetModal,
+  ] = useState(false);
 
-const [
-  showSelectionIconButtonModal,
-  setShowSelectionIconButtonModal,
-] = useState(false);
+  const [
+    showSelectionIconButtonModal,
+    setShowSelectionIconButtonModal,
+  ] = useState(false);
 
-const [showTopTabsModal, setShowTopTabsModal] =
-  useState(false);
+  const [showTopTabsModal, setShowTopTabsModal] =
+    useState(false);
 
-const [showBottomTabsModal, setShowBottomTabsModal] =
-  useState(false);  
+  const [showBottomTabsModal, setShowBottomTabsModal] =
+    useState(false);
 
-const [
-  showAccordionSkeletonModal,
-  setShowAccordionSkeletonModal,
-] = useState(false);  
+  const [
+    showAccordionSkeletonModal,
+    setShowAccordionSkeletonModal,
+  ] = useState(false);
 
-const [
-  showImageSliderSkeletonModal,
-  setShowImageSliderSkeletonModal,
-] = useState(false);
+  const [
+    showImageSliderSkeletonModal,
+    setShowImageSliderSkeletonModal,
+  ] = useState(false);
 
-const [
-  showStepperSkeletonModal,
-  setShowStepperSkeletonModal,
-] = useState(false);
+  const [
+    showStepperSkeletonModal,
+    setShowStepperSkeletonModal,
+  ] = useState(false);
 
-const [showBiometricModal, setShowBiometricModal] =
-  useState(false);
+  const [showBiometricModal, setShowBiometricModal] =
+    useState(false);
 
-const [
-  showBiometricErrorModal,
-  setShowBiometricErrorModal,
-] = useState(false);  
+  const [
+    showBiometricErrorModal,
+    setShowBiometricErrorModal,
+  ] = useState(false);
 
-const [showContactsModal, setShowContactsModal] =
-  useState(false);
+  const [showContactsModal, setShowContactsModal] =
+    useState(false);
 
-const [
-  showContactsErrorModal,
-  setShowContactsErrorModal,
-] = useState(false); 
+  const [
+    showContactsErrorModal,
+    setShowContactsErrorModal,
+  ] = useState(false);
 
-const [showLocationModal, setShowLocationModal] =
-  useState(false);
+  const [showLocationModal, setShowLocationModal] =
+    useState(false);
 
-const [showLanguageModal, setShowLanguageModal] =
-  useState(false);  
+  const [showLanguageModal, setShowLanguageModal] =
+    useState(false);
 
-const [
-  showDateNumberFormattingModal,
-  setShowDateNumberFormattingModal,
-] = useState(false);  
+  const [
+    showDateNumberFormattingModal,
+    setShowDateNumberFormattingModal,
+  ] = useState(false);
 
-const [showDeviceInfoModal, setShowDeviceInfoModal] =
-  useState(false);
+  const [showDeviceInfoModal, setShowDeviceInfoModal] =
+    useState(false);
 
-const [
-  showDeviceConfigurationModal,
-  setShowDeviceConfigurationModal,
-] = useState(false);  
+  const [
+    showDeviceConfigurationModal,
+    setShowDeviceConfigurationModal,
+  ] = useState(false);
 
-const [showNavigationModal, setShowNavigationModal] =
-  useState(false);
+  const [showNavigationModal, setShowNavigationModal] =
+    useState(false);
 
-const [showInputFieldModal, setShowInputFieldModal] =
-  useState(false);  
+  const [showInputFieldModal, setShowInputFieldModal] =
+    useState(false);
+
+
+useEffect(() => {
+  localStorage.setItem(
+    "mobile-ui-components",
+    JSON.stringify(components)
+  );
+}, [components]);
+
+useEffect(() => {
+  localStorage.setItem(
+    "mobile-pages",
+    JSON.stringify(pages)
+  );
+
+  console.clear();
+
+  console.log("PAGES JSON");
+
+  console.log(
+    JSON.stringify(pages, null, 2)
+  );
+
+  // console.log("================================");
+}, [pages]);
+
+useEffect(() => {
+  const savedPages =
+    localStorage.getItem("mobile-pages");
+
+  if (savedPages) {
+    setPages(JSON.parse(savedPages));
+  }
+}, []);
 
   const downloadPng = async () => {
     if (!mobileRef.current) return;
@@ -1160,144 +1257,145 @@ const [showInputFieldModal, setShowInputFieldModal] =
     }
 
     if (type === "chipTag") {
-  setShowChipTagModal(true);
-  return;
-}
+      setShowChipTagModal(true);
+      return;
+    }
 
-if (type === "multiSelectChip") {
-  setShowMultiSelectChipModal(true);
-  return;
-}
+    if (type === "multiSelectChip") {
+      setShowMultiSelectChipModal(true);
+      return;
+    }
 
-if (type === "verticalStepper") {
-  setShowVerticalStepperModal(true);
-  return;
-}
+    if (type === "verticalStepper") {
+      setShowVerticalStepperModal(true);
+      return;
+    }
 
-if (type === "horizontalStepper") {
-  setShowHorizontalStepperModal(true);
-  return;
-}
+    if (type === "horizontalStepper") {
+      setShowHorizontalStepperModal(true);
+      return;
+    }
 
-if (type === "stepProgress") {
-  setShowStepProgressModal(true);
-  return;
-}
+    if (type === "stepProgress") {
+      setShowStepProgressModal(true);
+      return;
+    }
 
-if (type === "fileUpload") {
-  setShowFileUploadModal(true);
-  return;
-}
+    if (type === "fileUpload") {
+      setShowFileUploadModal(true);
+      return;
+    }
 
-if (type === "galleryUpload") {
-  setShowGalleryUploadModal(true);
-  return;
-}
+    if (type === "galleryUpload") {
+      setShowGalleryUploadModal(true);
+      return;
+    }
 
-if (type === "customCamera") {
-  setShowCustomCameraModal(true);
-  return;
-}
+    if (type === "customCamera") {
+      setShowCustomCameraModal(true);
+      return;
+    }
 
-if (type === "actionSheet") {
-  setShowActionSheetModal(true);
-  return;
-}
+    if (type === "actionSheet") {
+      setShowActionSheetModal(true);
+      return;
+    }
 
-if (type === "actionSheetImage") {
-  setShowActionSheetImageModal(true);
-  return;
-}
+    if (type === "actionSheetImage") {
+      setShowActionSheetImageModal(true);
+      return;
+    }
 
-if (type === "selectionActionSheet") {
-  setShowSelectionActionSheetModal(true);
-  return;
-}
+    if (type === "selectionActionSheet") {
+      setShowSelectionActionSheetModal(true);
+      return;
+    }
 
-if (type === "selectionIconButton") {
-  setShowSelectionIconButtonModal(true);
-  return;
-}
+    if (type === "selectionIconButton") {
+      setShowSelectionIconButtonModal(true);
+      return;
+    }
 
-if (type === "topTabs") {
-  setShowTopTabsModal(true);
-  return;
-}
+    if (type === "topTabs") {
+      setShowTopTabsModal(true);
+      return;
+    }
 
-if (type === "bottomTabs") {
-  setShowBottomTabsModal(true);
-  return;
-}
+    if (type === "bottomTabs") {
+      setShowBottomTabsModal(true);
+      return;
+    }
 
-if (type === "accordionSkeleton") {
-  setShowAccordionSkeletonModal(true);
-  return;
-}
+    if (type === "accordionSkeleton") {
+      setShowAccordionSkeletonModal(true);
+      return;
+    }
 
-if (type === "imageSliderSkeleton") {
-  setShowImageSliderSkeletonModal(true);
-  return;
-}
+    if (type === "imageSliderSkeleton") {
+      setShowImageSliderSkeletonModal(true);
+      return;
+    }
 
-if (type === "stepperSkeleton") {
-  setShowStepperSkeletonModal(true);
-  return;
-}
+    if (type === "stepperSkeleton") {
+      setShowStepperSkeletonModal(true);
+      return;
+    }
 
-if (type === "biometric") {
-  setShowBiometricModal(true);
-  return;
-}
+    if (type === "biometric") {
+      setShowBiometricModal(true);
+      return;
+    }
 
-if (type === "biometricError") {
-  setShowBiometricErrorModal(true);
-  return;
-}
+    if (type === "biometricError") {
+      setShowBiometricErrorModal(true);
+      return;
+    }
 
-if (type === "contacts") {
-  setShowContactsModal(true);
-  return;
-}
+    if (type === "contacts") {
+      setShowContactsModal(true);
+      return;
+    }
 
-if (type === "contactsError") {
-  setShowContactsErrorModal(true);
-  return;
-}
+    if (type === "contactsError") {
+      setShowContactsErrorModal(true);
+      return;
+    }
 
-if (type === "location") {
-  setShowLocationModal(true);
-  return;
-}
+    if (type === "location") {
+      setShowLocationModal(true);
+      return;
+    }
 
-if (type === "language") {
-  setShowLanguageModal(true);
-  return;
-}
+    if (type === "language") {
+      setShowLanguageModal(true);
+      return;
+    }
 
-if (type === "dateNumberFormatting") {
-  setShowDateNumberFormattingModal(true);
-  return;
-}
+    if (type === "dateNumberFormatting") {
+      setShowDateNumberFormattingModal(true);
+      return;
+    }
 
-if (type === "deviceInfo") {
-  setShowDeviceInfoModal(true);
-  return;
-}
+    if (type === "deviceInfo") {
+      setShowDeviceInfoModal(true);
+      return;
+    }
 
-if (type === "deviceConfiguration") {
-  setShowDeviceConfigurationModal(true);
-  return;
-}
+    if (type === "deviceConfiguration") {
+      setShowDeviceConfigurationModal(true);
+      return;
+    }
 
-if (type === "navigation") {
-  setShowNavigationModal(true);
-  return;
-}
+    if (type === "navigation") {
+      setShowNavigationModal(true);
+      return;
+    }
 
-if (type === "inputField") {
-  setShowInputFieldModal(true);
-  return;
-}
+    if (type === "inputField") {
+      setShowInputFieldModal(true);
+      return;
+    }
+
 
     const size = getDefaultSize(type);
 
@@ -1928,632 +2026,632 @@ if (type === "inputField") {
   };
 
   const addSelectedChipTags = (
-  selectedChipTags: {
-    label: string;
-    chipVariant: UIComponent["chipVariant"];
-  }[]
-) => {
-  const chipComponents: UIComponent[] =
-    selectedChipTags.map((chip, index) => ({
-      id: crypto.randomUUID(),
-      type: "chipTag",
-      label: chip.label,
-      chipVariant: chip.chipVariant,
-      x: 40,
-      y: 40 + index * 45,
-      width: 120,
-      height: 36,
-      children: [],
-    }));
+    selectedChipTags: {
+      label: string;
+      chipVariant: UIComponent["chipVariant"];
+    }[]
+  ) => {
+    const chipComponents: UIComponent[] =
+      selectedChipTags.map((chip, index) => ({
+        id: crypto.randomUUID(),
+        type: "chipTag",
+        label: chip.label,
+        chipVariant: chip.chipVariant,
+        x: 40,
+        y: 40 + index * 45,
+        width: 120,
+        height: 36,
+        children: [],
+      }));
 
-  addItemsToCanvas(chipComponents);
-  setShowChipTagModal(false);
-};
+    addItemsToCanvas(chipComponents);
+    setShowChipTagModal(false);
+  };
 
-const addSelectedMultiSelectChips = (
-  selectedChips: {
-    label: string;
-    multiSelectChipVariant:
-      UIComponent["multiSelectChipVariant"];
-  }[]
-) => {
-  const chipComponents: UIComponent[] =
-    selectedChips.map((chip, index) => ({
-      id: crypto.randomUUID(),
-      type: "multiSelectChip",
-      label: chip.label,
+  const addSelectedMultiSelectChips = (
+    selectedChips: {
+      label: string;
       multiSelectChipVariant:
-        chip.multiSelectChipVariant,
-      x: 40,
-      y: 40 + index * 55,
-      width: 220,
-      height: 42,
-      children: [],
-    }));
-
-  addItemsToCanvas(chipComponents);
-  setShowMultiSelectChipModal(false);
-};
-
-const addSelectedVerticalSteppers = (
-  selectedVerticalSteppers: {
-    label: string;
-  }[]
-) => {
-  const stepperComponents: UIComponent[] =
-    selectedVerticalSteppers.map((stepper, index) => ({
-      id: crypto.randomUUID(),
-      type: "verticalStepper",
-      label: stepper.label,
-      x: 40,
-      y: 40 + index * 240,
-      width: 220,
-      height: 230,
-      children: [],
-    }));
-
-  addItemsToCanvas(stepperComponents);
-  setShowVerticalStepperModal(false);
-};
-
-const addSelectedHorizontalSteppers = (
-  selectedHorizontalSteppers: {
-    label: string;
-  }[]
-) => {
-  const stepperComponents: UIComponent[] =
-    selectedHorizontalSteppers.map((stepper, index) => ({
-      id: crypto.randomUUID(),
-      type: "horizontalStepper",
-      label: stepper.label,
-      x: 40,
-      y: 40 + index * 90,
-      width: 220,
-      height: 80,
-      children: [],
-    }));
-
-  addItemsToCanvas(stepperComponents);
-  setShowHorizontalStepperModal(false);
-};
-
-const addSelectedStepProgress = (
-  selectedStepProgress: {
-    label: string;
-  }[]
-) => {
-  const progressComponents: UIComponent[] =
-    selectedStepProgress.map((progress, index) => ({
-      id: crypto.randomUUID(),
-      type: "stepProgress",
-      label: progress.label,
-      x: 40,
-      y: 40 + index * 95,
-      width: 220,
-      height: 90,
-      children: [],
-    }));
-
-  addItemsToCanvas(progressComponents);
-  setShowStepProgressModal(false);
-};
-
-const addSelectedFileUploads = (
-  selectedFileUploads: {
-    label: string;
-    fileUploadVariant:
-      UIComponent["fileUploadVariant"];
-  }[]
-) => {
-  const fileUploadComponents: UIComponent[] =
-    selectedFileUploads.map((file, index) => ({
-      id: crypto.randomUUID(),
-      type: "fileUpload",
-      label: file.label,
-      fileUploadVariant: file.fileUploadVariant,
-      x: 40,
-      y: 40 + index * 70,
-      width: 220,
-      height: 50,
-      children: [],
-    }));
-
-  addItemsToCanvas(fileUploadComponents);
-  setShowFileUploadModal(false);
-};
-
-const addSelectedGalleryUploads = (
-  selectedGalleryUploads: {
-    label: string;
-    galleryUploadVariant:
-      UIComponent["galleryUploadVariant"];
-  }[]
-) => {
-  const galleryUploadComponents: UIComponent[] =
-    selectedGalleryUploads.map((upload, index) => ({
-      id: crypto.randomUUID(),
-      type: "galleryUpload",
-      label: upload.label,
-      galleryUploadVariant:
-        upload.galleryUploadVariant,
-      x: 40,
-      y: 40 + index * 72,
-      width: 220,
-      height: 50,
-      children: [],
-    }));
-
-  addItemsToCanvas(galleryUploadComponents);
-  setShowGalleryUploadModal(false);
-};
-
-const addSelectedCustomCameras = (
-  selectedCustomCameras: {
-    label: string;
-    customCameraVariant:
-      UIComponent["customCameraVariant"];
-  }[]
-) => {
-  const customCameraComponents: UIComponent[] =
-    selectedCustomCameras.map((camera, index) => ({
-      id: crypto.randomUUID(),
-      type: "customCamera",
-      label: camera.label,
-      customCameraVariant:
-        camera.customCameraVariant,
-      x: 40,
-      y: 40 + index * 65,
-      width: 220,
-      height: 48,
-      children: [],
-    }));
-
-  addItemsToCanvas(customCameraComponents);
-  setShowCustomCameraModal(false);
-};
-
-const addSelectedActionSheets = (
-  selectedActionSheets: {
-    label: string;
-  }[]
-) => {
-  const actionSheetComponents: UIComponent[] =
-    selectedActionSheets.map((sheet) => ({
-      id: crypto.randomUUID(),
-      type: "actionSheet",
-      label: sheet.label,
-      x: 0,
-      y: 0,
-      width: 220,
-      height: 420,
-      children: [],
-    }));
-
-  addItemsToCanvas(actionSheetComponents);
-  setShowActionSheetModal(false);
-};
-
-const addSelectedActionSheetImages = (
-  selectedActionSheetImages: {
-    label: string;
-  }[]
-) => {
-  const sheetComponents: UIComponent[] =
-    selectedActionSheetImages.map((sheet) => ({
-      id: crypto.randomUUID(),
-      type: "actionSheetImage",
-      label: sheet.label,
-      x: 0,
-      y: 0,
-      width: 220,
-      height: 420,
-      children: [],
-    }));
-
-  addItemsToCanvas(sheetComponents);
-  setShowActionSheetImageModal(false);
-};
-
-const addSelectedSelectionActionSheets = (
-  selectedSheets: {
-    label: string;
-  }[]
-) => {
-  const sheetComponents: UIComponent[] =
-    selectedSheets.map((sheet) => ({
-      id: crypto.randomUUID(),
-      type: "selectionActionSheet",
-      label: sheet.label,
-      x: 0,
-      y: 0,
-      width: 220,
-      height: 420,
-      children: [],
-    }));
-
-  addItemsToCanvas(sheetComponents);
-  setShowSelectionActionSheetModal(false);
-};
-
-const addSelectedSelectionIconButtons = (
-  selectedIconButtons: {
-    label: string;
-    selectionIconButtonVariant:
-      UIComponent["selectionIconButtonVariant"];
-  }[]
-) => {
-  const iconComponents: UIComponent[] =
-    selectedIconButtons.map((icon, index) => ({
-      id: crypto.randomUUID(),
-      type: "selectionIconButton",
-      label: icon.label,
-      selectionIconButtonVariant:
-        icon.selectionIconButtonVariant,
-      x: 40,
-      y: 40 + index * 80,
-      width: 220,
-      height: 70,
-      children: [],
-    }));
-
-  addItemsToCanvas(iconComponents);
-  setShowSelectionIconButtonModal(false);
-};
-
-const addSelectedTopTabs = (
-  selectedTopTabs: {
-    label: string;
-  }[]
-) => {
-  const tabComponents: UIComponent[] =
-    selectedTopTabs.map((tab, index) => ({
-      id: crypto.randomUUID(),
-      type: "topTabs",
-      label: tab.label,
-      x: 40,
-      y: 40 + index * 360,
-      width: 220,
-      height: 340,
-      children: [],
-    }));
-
-  addItemsToCanvas(tabComponents);
-  setShowTopTabsModal(false);
-};
-
-const addSelectedBottomTabs = (
-  selectedBottomTabs: {
-    label: string;
-  }[]
-) => {
-  const tabComponents: UIComponent[] =
-    selectedBottomTabs.map((tab, index) => ({
-      id: crypto.randomUUID(),
-      type: "bottomTabs",
-      label: tab.label,
-      x: 40,
-      y: 40 + index * 430,
-      width: 220,
-      height: 430,
-      children: [],
-    }));
-
-  addItemsToCanvas(tabComponents);
-  setShowBottomTabsModal(false);
-};
-
-const addSelectedAccordionSkeletons = (
-  selectedSkeletons: {
-    label: string;
-    variant: "light" | "dark";
-  }[]
-) => {
-  const skeletonComponents: UIComponent[] =
-    selectedSkeletons.map(
-      (skeleton, index) => ({
+      UIComponent["multiSelectChipVariant"];
+    }[]
+  ) => {
+    const chipComponents: UIComponent[] =
+      selectedChips.map((chip, index) => ({
         id: crypto.randomUUID(),
-        type: "accordionSkeleton",
-        label: skeleton.label,
-        skeletonVariant:
-          skeleton.variant,
+        type: "multiSelectChip",
+        label: chip.label,
+        multiSelectChipVariant:
+          chip.multiSelectChipVariant,
         x: 40,
-        y: 40 + index * 120,
+        y: 40 + index * 55,
         width: 220,
-        height: 110,
+        height: 42,
         children: [],
-      })
-    );
+      }));
 
-  addItemsToCanvas(skeletonComponents);
+    addItemsToCanvas(chipComponents);
+    setShowMultiSelectChipModal(false);
+  };
 
-  setShowAccordionSkeletonModal(false);
-};
-
-const addSelectedImageSliderSkeletons = (
-  selectedSkeletons: {
-    label: string;
-    imageSliderSkeletonVariant:
-      UIComponent["imageSliderSkeletonVariant"];
-  }[]
-) => {
-  const skeletonComponents: UIComponent[] =
-    selectedSkeletons.map((skeleton, index) => ({
-      id: crypto.randomUUID(),
-      type: "imageSliderSkeleton",
-      label: skeleton.label,
-      imageSliderSkeletonVariant:
-        skeleton.imageSliderSkeletonVariant,
-      x: 40,
-      y: 40 + index * 180,
-      width: 220,
-      height: 160,
-      children: [],
-    }));
-
-  addItemsToCanvas(skeletonComponents);
-  setShowImageSliderSkeletonModal(false);
-};
-
-const addSelectedStepperSkeletons = (
-  selectedSkeletons: {
-    label: string;
-    stepperSkeletonVariant:
-      UIComponent["stepperSkeletonVariant"];
-  }[]
-) => {
-  const skeletonComponents: UIComponent[] =
-    selectedSkeletons.map((skeleton, index) => ({
-      id: crypto.randomUUID(),
-      type: "stepperSkeleton",
-      label: skeleton.label,
-      stepperSkeletonVariant:
-        skeleton.stepperSkeletonVariant,
-      x: 40,
-      y: 40 + index * 105,
-      width: 220,
-      height: 90,
-      children: [],
-    }));
-
-  addItemsToCanvas(skeletonComponents);
-  setShowStepperSkeletonModal(false);
-};
-
-const addSelectedBiometrics = (
-  selectedBiometrics: {
-    label: string;
-  }[]
-) => {
-  const biometricComponents: UIComponent[] =
-    selectedBiometrics.map((bio) => ({
-      id: crypto.randomUUID(),
-      type: "biometric",
-      label: bio.label,
-      x: 0,
-      y: 0,
-      width: 220,
-      height: 420,
-      children: [],
-    }));
-
-  addItemsToCanvas(biometricComponents);
-  setShowBiometricModal(false);
-};
-
-const addSelectedBiometricErrors = (
-  selectedBiometricErrors: {
-    label: string;
-  }[]
-) => {
-  const biometricErrorComponents: UIComponent[] =
-    selectedBiometricErrors.map((bio) => ({
-      id: crypto.randomUUID(),
-      type: "biometricError",
-      label: bio.label,
-      x: 0,
-      y: 0,
-      width: 220,
-      height: 520,
-      children: [],
-    }));
-
-  addItemsToCanvas(biometricErrorComponents);
-  setShowBiometricErrorModal(false);
-};
-
-const addSelectedContacts = (
-  selectedContacts: {
-    label: string;
-  }[]
-) => {
-  const contactComponents: UIComponent[] =
-    selectedContacts.map((contact) => ({
-      id: crypto.randomUUID(),
-      type: "contacts",
-      label: contact.label,
-      x: 0,
-      y: 0,
-      width: 220,
-      height: 540,
-      children: [],
-    }));
-
-  addItemsToCanvas(contactComponents);
-  setShowContactsModal(false);
-};
-
-const addSelectedContactsError = (
-  selectedContactsError: {
-    label: string;
-  }[]
-) => {
-  const errorComponents: UIComponent[] =
-    selectedContactsError.map((contact) => ({
-      id: crypto.randomUUID(),
-      type: "contactsError",
-      label: contact.label,
-      x: 0,
-      y: 0,
-      width: 220,
-      height: 540,
-      children: [],
-    }));
-
-  addItemsToCanvas(errorComponents);
-  setShowContactsErrorModal(false);
-};
-
-const addSelectedLocations = (
-  selectedLocations: {
-    label: string;
-  }[]
-) => {
-  const locationComponents: UIComponent[] =
-    selectedLocations.map((location) => ({
-      id: crypto.randomUUID(),
-      type: "location",
-      label: location.label,
-      x: 0,
-      y: 0,
-      width: 220,
-      height: 540,
-      children: [],
-    }));
-
-  addItemsToCanvas(locationComponents);
-  setShowLocationModal(false);
-};
-
-const addSelectedLanguages = (
-  selectedLanguages: {
-    label: string;
-  }[]
-) => {
-  const languageComponents: UIComponent[] =
-    selectedLanguages.map((language) => ({
-      id: crypto.randomUUID(),
-      type: "language",
-      label: language.label,
-      x: 0,
-      y: 0,
-      width: 220,
-      height: 420,
-      children: [],
-    }));
-
-  addItemsToCanvas(languageComponents);
-  setShowLanguageModal(false);
-};
-
-const addSelectedDateNumberFormatting = (
-  selectedItems: {
-    label: string;
-  }[]
-) => {
-  const dateNumberComponents: UIComponent[] =
-    selectedItems.map((item) => ({
-      id: crypto.randomUUID(),
-      type: "dateNumberFormatting",
-      label: item.label,
-      x: 0,
-      y: 0,
-      width: 220,
-      height: 520,
-      children: [],
-    }));
-
-  addItemsToCanvas(dateNumberComponents);
-  setShowDateNumberFormattingModal(false);
-};
-
-const addSelectedDeviceInfo = (
-  selectedDeviceInfo: {
-    label: string;
-  }[]
-) => {
-  const deviceInfoComponents: UIComponent[] =
-    selectedDeviceInfo.map((item, index) => ({
-      id: crypto.randomUUID(),
-      type: "deviceInfo",
-      label: item.label,
-      x: 40,
-      y: 40 + index * 90,
-      width: 220,
-      height: 70,
-      children: [],
-    }));
-
-  addItemsToCanvas(deviceInfoComponents);
-  setShowDeviceInfoModal(false);
-};
-
-const addSelectedDeviceConfigurations = (
-  selectedItems: {
-    label: string;
-  }[]
-) => {
-  const configComponents: UIComponent[] =
-    selectedItems.map((item) => ({
-      id: crypto.randomUUID(),
-      type: "deviceConfiguration",
-      label: item.label,
-      x: 0,
-      y: 0,
-      width: 220,
-      height: 560,
-      children: [],
-    }));
-
-  addItemsToCanvas(configComponents);
-  setShowDeviceConfigurationModal(false);
-};
-
-const addSelectedNavigation = (
-  selectedNavigation: {
-    label: string;
-  }[]
-) => {
-  const navigationComponents: UIComponent[] =
-    selectedNavigation.map((nav) => ({
-      id: crypto.randomUUID(),
-      type: "navigation",
-      label: nav.label,
-      x: 0,
-      y: 0,
-      width: 220,
-      height: 520,
-      children: [],
-    }));
-
-  addItemsToCanvas(navigationComponents);
-  setShowNavigationModal(false);
-};
-
-const addSelectedInputFields = (
-  selectedFields: {
-    label: string;
-    type: ComponentType;
-  }[]
-) => {
-  const inputComponents: UIComponent[] =
-    selectedFields.map((field, index) => {
-      const size = getDefaultSize(field.type);
-
-      return {
+  const addSelectedVerticalSteppers = (
+    selectedVerticalSteppers: {
+      label: string;
+    }[]
+  ) => {
+    const stepperComponents: UIComponent[] =
+      selectedVerticalSteppers.map((stepper, index) => ({
         id: crypto.randomUUID(),
-        type: field.type,
-        label: field.label,
+        type: "verticalStepper",
+        label: stepper.label,
         x: 40,
-        y: 40 + index * 75,
-        width: size.width,
-        height: size.height,
+        y: 40 + index * 240,
+        width: 220,
+        height: 230,
         children: [],
-      };
-    });
+      }));
 
-  addItemsToCanvas(inputComponents);
-  setShowInputFieldModal(false);
-};
+    addItemsToCanvas(stepperComponents);
+    setShowVerticalStepperModal(false);
+  };
+
+  const addSelectedHorizontalSteppers = (
+    selectedHorizontalSteppers: {
+      label: string;
+    }[]
+  ) => {
+    const stepperComponents: UIComponent[] =
+      selectedHorizontalSteppers.map((stepper, index) => ({
+        id: crypto.randomUUID(),
+        type: "horizontalStepper",
+        label: stepper.label,
+        x: 40,
+        y: 40 + index * 90,
+        width: 220,
+        height: 80,
+        children: [],
+      }));
+
+    addItemsToCanvas(stepperComponents);
+    setShowHorizontalStepperModal(false);
+  };
+
+  const addSelectedStepProgress = (
+    selectedStepProgress: {
+      label: string;
+    }[]
+  ) => {
+    const progressComponents: UIComponent[] =
+      selectedStepProgress.map((progress, index) => ({
+        id: crypto.randomUUID(),
+        type: "stepProgress",
+        label: progress.label,
+        x: 40,
+        y: 40 + index * 95,
+        width: 220,
+        height: 90,
+        children: [],
+      }));
+
+    addItemsToCanvas(progressComponents);
+    setShowStepProgressModal(false);
+  };
+
+  const addSelectedFileUploads = (
+    selectedFileUploads: {
+      label: string;
+      fileUploadVariant:
+      UIComponent["fileUploadVariant"];
+    }[]
+  ) => {
+    const fileUploadComponents: UIComponent[] =
+      selectedFileUploads.map((file, index) => ({
+        id: crypto.randomUUID(),
+        type: "fileUpload",
+        label: file.label,
+        fileUploadVariant: file.fileUploadVariant,
+        x: 40,
+        y: 40 + index * 70,
+        width: 220,
+        height: 50,
+        children: [],
+      }));
+
+    addItemsToCanvas(fileUploadComponents);
+    setShowFileUploadModal(false);
+  };
+
+  const addSelectedGalleryUploads = (
+    selectedGalleryUploads: {
+      label: string;
+      galleryUploadVariant:
+      UIComponent["galleryUploadVariant"];
+    }[]
+  ) => {
+    const galleryUploadComponents: UIComponent[] =
+      selectedGalleryUploads.map((upload, index) => ({
+        id: crypto.randomUUID(),
+        type: "galleryUpload",
+        label: upload.label,
+        galleryUploadVariant:
+          upload.galleryUploadVariant,
+        x: 40,
+        y: 40 + index * 72,
+        width: 220,
+        height: 50,
+        children: [],
+      }));
+
+    addItemsToCanvas(galleryUploadComponents);
+    setShowGalleryUploadModal(false);
+  };
+
+  const addSelectedCustomCameras = (
+    selectedCustomCameras: {
+      label: string;
+      customCameraVariant:
+      UIComponent["customCameraVariant"];
+    }[]
+  ) => {
+    const customCameraComponents: UIComponent[] =
+      selectedCustomCameras.map((camera, index) => ({
+        id: crypto.randomUUID(),
+        type: "customCamera",
+        label: camera.label,
+        customCameraVariant:
+          camera.customCameraVariant,
+        x: 40,
+        y: 40 + index * 65,
+        width: 220,
+        height: 48,
+        children: [],
+      }));
+
+    addItemsToCanvas(customCameraComponents);
+    setShowCustomCameraModal(false);
+  };
+
+  const addSelectedActionSheets = (
+    selectedActionSheets: {
+      label: string;
+    }[]
+  ) => {
+    const actionSheetComponents: UIComponent[] =
+      selectedActionSheets.map((sheet) => ({
+        id: crypto.randomUUID(),
+        type: "actionSheet",
+        label: sheet.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 420,
+        children: [],
+      }));
+
+    addItemsToCanvas(actionSheetComponents);
+    setShowActionSheetModal(false);
+  };
+
+  const addSelectedActionSheetImages = (
+    selectedActionSheetImages: {
+      label: string;
+    }[]
+  ) => {
+    const sheetComponents: UIComponent[] =
+      selectedActionSheetImages.map((sheet) => ({
+        id: crypto.randomUUID(),
+        type: "actionSheetImage",
+        label: sheet.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 420,
+        children: [],
+      }));
+
+    addItemsToCanvas(sheetComponents);
+    setShowActionSheetImageModal(false);
+  };
+
+  const addSelectedSelectionActionSheets = (
+    selectedSheets: {
+      label: string;
+    }[]
+  ) => {
+    const sheetComponents: UIComponent[] =
+      selectedSheets.map((sheet) => ({
+        id: crypto.randomUUID(),
+        type: "selectionActionSheet",
+        label: sheet.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 420,
+        children: [],
+      }));
+
+    addItemsToCanvas(sheetComponents);
+    setShowSelectionActionSheetModal(false);
+  };
+
+  const addSelectedSelectionIconButtons = (
+    selectedIconButtons: {
+      label: string;
+      selectionIconButtonVariant:
+      UIComponent["selectionIconButtonVariant"];
+    }[]
+  ) => {
+    const iconComponents: UIComponent[] =
+      selectedIconButtons.map((icon, index) => ({
+        id: crypto.randomUUID(),
+        type: "selectionIconButton",
+        label: icon.label,
+        selectionIconButtonVariant:
+          icon.selectionIconButtonVariant,
+        x: 40,
+        y: 40 + index * 80,
+        width: 220,
+        height: 70,
+        children: [],
+      }));
+
+    addItemsToCanvas(iconComponents);
+    setShowSelectionIconButtonModal(false);
+  };
+
+  const addSelectedTopTabs = (
+    selectedTopTabs: {
+      label: string;
+    }[]
+  ) => {
+    const tabComponents: UIComponent[] =
+      selectedTopTabs.map((tab, index) => ({
+        id: crypto.randomUUID(),
+        type: "topTabs",
+        label: tab.label,
+        x: 40,
+        y: 40 + index * 360,
+        width: 220,
+        height: 340,
+        children: [],
+      }));
+
+    addItemsToCanvas(tabComponents);
+    setShowTopTabsModal(false);
+  };
+
+  const addSelectedBottomTabs = (
+    selectedBottomTabs: {
+      label: string;
+    }[]
+  ) => {
+    const tabComponents: UIComponent[] =
+      selectedBottomTabs.map((tab, index) => ({
+        id: crypto.randomUUID(),
+        type: "bottomTabs",
+        label: tab.label,
+        x: 40,
+        y: 40 + index * 430,
+        width: 220,
+        height: 430,
+        children: [],
+      }));
+
+    addItemsToCanvas(tabComponents);
+    setShowBottomTabsModal(false);
+  };
+
+  const addSelectedAccordionSkeletons = (
+    selectedSkeletons: {
+      label: string;
+      variant: "light" | "dark";
+    }[]
+  ) => {
+    const skeletonComponents: UIComponent[] =
+      selectedSkeletons.map(
+        (skeleton, index) => ({
+          id: crypto.randomUUID(),
+          type: "accordionSkeleton",
+          label: skeleton.label,
+          skeletonVariant:
+            skeleton.variant,
+          x: 40,
+          y: 40 + index * 120,
+          width: 220,
+          height: 110,
+          children: [],
+        })
+      );
+
+    addItemsToCanvas(skeletonComponents);
+
+    setShowAccordionSkeletonModal(false);
+  };
+
+  const addSelectedImageSliderSkeletons = (
+    selectedSkeletons: {
+      label: string;
+      imageSliderSkeletonVariant:
+      UIComponent["imageSliderSkeletonVariant"];
+    }[]
+  ) => {
+    const skeletonComponents: UIComponent[] =
+      selectedSkeletons.map((skeleton, index) => ({
+        id: crypto.randomUUID(),
+        type: "imageSliderSkeleton",
+        label: skeleton.label,
+        imageSliderSkeletonVariant:
+          skeleton.imageSliderSkeletonVariant,
+        x: 40,
+        y: 40 + index * 180,
+        width: 220,
+        height: 160,
+        children: [],
+      }));
+
+    addItemsToCanvas(skeletonComponents);
+    setShowImageSliderSkeletonModal(false);
+  };
+
+  const addSelectedStepperSkeletons = (
+    selectedSkeletons: {
+      label: string;
+      stepperSkeletonVariant:
+      UIComponent["stepperSkeletonVariant"];
+    }[]
+  ) => {
+    const skeletonComponents: UIComponent[] =
+      selectedSkeletons.map((skeleton, index) => ({
+        id: crypto.randomUUID(),
+        type: "stepperSkeleton",
+        label: skeleton.label,
+        stepperSkeletonVariant:
+          skeleton.stepperSkeletonVariant,
+        x: 40,
+        y: 40 + index * 105,
+        width: 220,
+        height: 90,
+        children: [],
+      }));
+
+    addItemsToCanvas(skeletonComponents);
+    setShowStepperSkeletonModal(false);
+  };
+
+  const addSelectedBiometrics = (
+    selectedBiometrics: {
+      label: string;
+    }[]
+  ) => {
+    const biometricComponents: UIComponent[] =
+      selectedBiometrics.map((bio) => ({
+        id: crypto.randomUUID(),
+        type: "biometric",
+        label: bio.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 420,
+        children: [],
+      }));
+
+    addItemsToCanvas(biometricComponents);
+    setShowBiometricModal(false);
+  };
+
+  const addSelectedBiometricErrors = (
+    selectedBiometricErrors: {
+      label: string;
+    }[]
+  ) => {
+    const biometricErrorComponents: UIComponent[] =
+      selectedBiometricErrors.map((bio) => ({
+        id: crypto.randomUUID(),
+        type: "biometricError",
+        label: bio.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 520,
+        children: [],
+      }));
+
+    addItemsToCanvas(biometricErrorComponents);
+    setShowBiometricErrorModal(false);
+  };
+
+  const addSelectedContacts = (
+    selectedContacts: {
+      label: string;
+    }[]
+  ) => {
+    const contactComponents: UIComponent[] =
+      selectedContacts.map((contact) => ({
+        id: crypto.randomUUID(),
+        type: "contacts",
+        label: contact.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 540,
+        children: [],
+      }));
+
+    addItemsToCanvas(contactComponents);
+    setShowContactsModal(false);
+  };
+
+  const addSelectedContactsError = (
+    selectedContactsError: {
+      label: string;
+    }[]
+  ) => {
+    const errorComponents: UIComponent[] =
+      selectedContactsError.map((contact) => ({
+        id: crypto.randomUUID(),
+        type: "contactsError",
+        label: contact.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 540,
+        children: [],
+      }));
+
+    addItemsToCanvas(errorComponents);
+    setShowContactsErrorModal(false);
+  };
+
+  const addSelectedLocations = (
+    selectedLocations: {
+      label: string;
+    }[]
+  ) => {
+    const locationComponents: UIComponent[] =
+      selectedLocations.map((location) => ({
+        id: crypto.randomUUID(),
+        type: "location",
+        label: location.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 540,
+        children: [],
+      }));
+
+    addItemsToCanvas(locationComponents);
+    setShowLocationModal(false);
+  };
+
+  const addSelectedLanguages = (
+    selectedLanguages: {
+      label: string;
+    }[]
+  ) => {
+    const languageComponents: UIComponent[] =
+      selectedLanguages.map((language) => ({
+        id: crypto.randomUUID(),
+        type: "language",
+        label: language.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 420,
+        children: [],
+      }));
+
+    addItemsToCanvas(languageComponents);
+    setShowLanguageModal(false);
+  };
+
+  const addSelectedDateNumberFormatting = (
+    selectedItems: {
+      label: string;
+    }[]
+  ) => {
+    const dateNumberComponents: UIComponent[] =
+      selectedItems.map((item) => ({
+        id: crypto.randomUUID(),
+        type: "dateNumberFormatting",
+        label: item.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 520,
+        children: [],
+      }));
+
+    addItemsToCanvas(dateNumberComponents);
+    setShowDateNumberFormattingModal(false);
+  };
+
+  const addSelectedDeviceInfo = (
+    selectedDeviceInfo: {
+      label: string;
+    }[]
+  ) => {
+    const deviceInfoComponents: UIComponent[] =
+      selectedDeviceInfo.map((item, index) => ({
+        id: crypto.randomUUID(),
+        type: "deviceInfo",
+        label: item.label,
+        x: 40,
+        y: 40 + index * 90,
+        width: 220,
+        height: 70,
+        children: [],
+      }));
+
+    addItemsToCanvas(deviceInfoComponents);
+    setShowDeviceInfoModal(false);
+  };
+
+  const addSelectedDeviceConfigurations = (
+    selectedItems: {
+      label: string;
+    }[]
+  ) => {
+    const configComponents: UIComponent[] =
+      selectedItems.map((item) => ({
+        id: crypto.randomUUID(),
+        type: "deviceConfiguration",
+        label: item.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 560,
+        children: [],
+      }));
+
+    addItemsToCanvas(configComponents);
+    setShowDeviceConfigurationModal(false);
+  };
+
+  const addSelectedNavigation = (
+    selectedNavigation: {
+      label: string;
+    }[]
+  ) => {
+    const navigationComponents: UIComponent[] =
+      selectedNavigation.map((nav) => ({
+        id: crypto.randomUUID(),
+        type: "navigation",
+        label: nav.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 520,
+        children: [],
+      }));
+
+    addItemsToCanvas(navigationComponents);
+    setShowNavigationModal(false);
+  };
+
+  const addSelectedInputFields = (
+    selectedFields: {
+      label: string;
+      type: ComponentType;
+    }[]
+  ) => {
+    const inputComponents: UIComponent[] =
+      selectedFields.map((field, index) => {
+        const size = getDefaultSize(field.type);
+
+        return {
+          id: crypto.randomUUID(),
+          type: field.type,
+          label: field.label,
+          x: 40,
+          y: 40 + index * 75,
+          width: size.width,
+          height: size.height,
+          children: [],
+        };
+      });
+
+    addItemsToCanvas(inputComponents);
+    setShowInputFieldModal(false);
+  };
 
   const deleteComponent = (id: string) => {
     setComponents((prev) =>
@@ -2627,25 +2725,126 @@ const addSelectedInputFields = (
     );
   };
 
+//   const saveCurrentPage = () => {
+//   const pageName =
+//     prompt("Enter Page Name");
+
+//   if (!pageName) return;
+
+//   const newPage = {
+//     id: crypto.randomUUID(),
+//     name: pageName,
+//     components,
+//     createdAt:
+//       new Date().toISOString(),
+//   };
+
+//   setPages((prev) => [
+//     ...prev,
+//     newPage,
+//   ]);
+// };
+
+const loadPage = (pageId: string) => {
+  const page = pages.find(
+  (item) => item.pageId === pageId
+);
+
+  if (!page) return;
+
+  setComponents(page.components);
+ setCurrentPageId(page.pageId);
+  setSelectedId(null);
+  // setSidebarOpen(false);
+
+  console.log("Loaded Page:", page);
+};
+
+const deletePage = (pageId: string) => {
+  setPages((prev) =>
+    prev.filter((item) => item.id !== pageId)
+  );
+
+  if (currentPageId === pageId) {
+    setCurrentPageId(null);
+    setComponents([]);
+  }
+};
+
+const createNewPage = () => {
+  const pageName = prompt("Enter Page Name");
+
+  if (!pageName) return;
+
+  const newPage: SavedPage = {
+    pageId: crypto.randomUUID(),
+    pageName,
+    components: [],
+    createdAt: new Date().toISOString(),
+  };
+
+  setPages((prev) => [...prev, newPage]);
+  setCurrentPageId(newPage.pageId);
+  setComponents([]);
+};
+
+const saveCurrentPage = () => {
+  if (!currentPageId) {
+    const pageName = prompt("Enter Page Name");
+
+    if (!pageName) return;
+
+    const newPage: SavedPage = {
+      pageId: crypto.randomUUID(),
+      pageName,
+      components: [...components],
+      createdAt: new Date().toISOString(),
+    };
+
+    setPages((prev) => [...prev, newPage]);
+    setCurrentPageId(newPage.pageId);
+    return;
+  }
+
+  setPages((prev) =>
+    prev.map((page) =>
+      page.pageId === currentPageId
+        ? {
+            ...page,
+            components: [...components],
+          }
+        : page
+    )
+  );
+};
+
   return (
     <div className="builder-page">
-      <MobileCanvas
-        ref={mobileRef}
-        components={components}
-        updatePosition={updatePosition}
-        updateSize={updateSize}
-        deleteComponent={deleteComponent}
-        editComponent={editComponent}
-        selectedId={selectedId}
-        setSelectedId={setSelectedId}
-      />
+  <PagePanel
+    pages={pages}
+    currentPageId={currentPageId}
+    onNewPage={createNewPage}
+    onSavePage={saveCurrentPage}
+    onSelectPage={loadPage}
+    onDeletePage={deletePage}
+  />
 
-      <ComponentSidebar
-        search={search}
-        setSearch={setSearch}
-        addComponent={addComponent}
-        downloadPng={downloadPng}
-      />
+  <MobileCanvas
+    ref={mobileRef}
+    components={components}
+    deleteComponent={deleteComponent}
+    editComponent={editComponent}
+    selectedId={selectedId}
+    setSelectedId={setSelectedId}
+  />
+
+  <ComponentSidebar
+    search={search}
+    setSearch={setSearch}
+    addComponent={addComponent}
+    downloadPng={downloadPng}
+  />
+
 
       {showHeadingModal && (
         <HeadingSelectModal
@@ -2895,282 +3094,282 @@ const addSelectedInputFields = (
       )}
 
       {showChipTagModal && (
-  <ChipTagSelectModal
-    chipTagOptions={chipTagOptions}
-    onClose={() => setShowChipTagModal(false)}
-    onAdd={addSelectedChipTags}
-  />
-)}
+        <ChipTagSelectModal
+          chipTagOptions={chipTagOptions}
+          onClose={() => setShowChipTagModal(false)}
+          onAdd={addSelectedChipTags}
+        />
+      )}
 
-{showMultiSelectChipModal && (
-  <MultiSelectChipSelectModal
-    multiSelectChipOptions={
-      multiSelectChipOptions
-    }
-    onClose={() =>
-      setShowMultiSelectChipModal(false)
-    }
-    onAdd={addSelectedMultiSelectChips}
-  />
-)}
+      {showMultiSelectChipModal && (
+        <MultiSelectChipSelectModal
+          multiSelectChipOptions={
+            multiSelectChipOptions
+          }
+          onClose={() =>
+            setShowMultiSelectChipModal(false)
+          }
+          onAdd={addSelectedMultiSelectChips}
+        />
+      )}
 
-{showVerticalStepperModal && (
-  <VerticalStepperSelectModal
-    verticalStepperOptions={verticalStepperOptions}
-    onClose={() =>
-      setShowVerticalStepperModal(false)
-    }
-    onAdd={addSelectedVerticalSteppers}
-  />
-)}
+      {showVerticalStepperModal && (
+        <VerticalStepperSelectModal
+          verticalStepperOptions={verticalStepperOptions}
+          onClose={() =>
+            setShowVerticalStepperModal(false)
+          }
+          onAdd={addSelectedVerticalSteppers}
+        />
+      )}
 
-{showHorizontalStepperModal && (
-  <HorizontalStepperSelectModal
-    horizontalStepperOptions={
-      horizontalStepperOptions
-    }
-    onClose={() =>
-      setShowHorizontalStepperModal(false)
-    }
-    onAdd={addSelectedHorizontalSteppers}
-  />
-)}
+      {showHorizontalStepperModal && (
+        <HorizontalStepperSelectModal
+          horizontalStepperOptions={
+            horizontalStepperOptions
+          }
+          onClose={() =>
+            setShowHorizontalStepperModal(false)
+          }
+          onAdd={addSelectedHorizontalSteppers}
+        />
+      )}
 
-{showStepProgressModal && (
-  <StepProgressSelectModal
-    stepProgressOptions={stepProgressOptions}
-    onClose={() => setShowStepProgressModal(false)}
-    onAdd={addSelectedStepProgress}
-  />
-)}
+      {showStepProgressModal && (
+        <StepProgressSelectModal
+          stepProgressOptions={stepProgressOptions}
+          onClose={() => setShowStepProgressModal(false)}
+          onAdd={addSelectedStepProgress}
+        />
+      )}
 
-{showFileUploadModal && (
-  <FileUploadSelectModal
-    fileUploadOptions={fileUploadOptions}
-    onClose={() => setShowFileUploadModal(false)}
-    onAdd={addSelectedFileUploads}
-  />
-)}
+      {showFileUploadModal && (
+        <FileUploadSelectModal
+          fileUploadOptions={fileUploadOptions}
+          onClose={() => setShowFileUploadModal(false)}
+          onAdd={addSelectedFileUploads}
+        />
+      )}
 
-{showGalleryUploadModal && (
-  <GalleryUploadSelectModal
-    galleryUploadOptions={galleryUploadOptions}
-    onClose={() =>
-      setShowGalleryUploadModal(false)
-    }
-    onAdd={addSelectedGalleryUploads}
-  />
-)}
+      {showGalleryUploadModal && (
+        <GalleryUploadSelectModal
+          galleryUploadOptions={galleryUploadOptions}
+          onClose={() =>
+            setShowGalleryUploadModal(false)
+          }
+          onAdd={addSelectedGalleryUploads}
+        />
+      )}
 
-{showCustomCameraModal && (
-  <CustomCameraSelectModal
-    customCameraOptions={customCameraOptions}
-    onClose={() =>
-      setShowCustomCameraModal(false)
-    }
-    onAdd={addSelectedCustomCameras}
-  />
-)}
+      {showCustomCameraModal && (
+        <CustomCameraSelectModal
+          customCameraOptions={customCameraOptions}
+          onClose={() =>
+            setShowCustomCameraModal(false)
+          }
+          onAdd={addSelectedCustomCameras}
+        />
+      )}
 
-{showActionSheetModal && (
-  <ActionSheetSelectModal
-    actionSheetOptions={actionSheetOptions}
-    onClose={() =>
-      setShowActionSheetModal(false)
-    }
-    onAdd={addSelectedActionSheets}
-  />
-)}
+      {showActionSheetModal && (
+        <ActionSheetSelectModal
+          actionSheetOptions={actionSheetOptions}
+          onClose={() =>
+            setShowActionSheetModal(false)
+          }
+          onAdd={addSelectedActionSheets}
+        />
+      )}
 
-{showActionSheetImageModal && (
-  <ActionSheetImageSelectModal
-    actionSheetImageOptions={
-      actionSheetImageOptions
-    }
-    onClose={() =>
-      setShowActionSheetImageModal(false)
-    }
-    onAdd={addSelectedActionSheetImages}
-  />
-)}
+      {showActionSheetImageModal && (
+        <ActionSheetImageSelectModal
+          actionSheetImageOptions={
+            actionSheetImageOptions
+          }
+          onClose={() =>
+            setShowActionSheetImageModal(false)
+          }
+          onAdd={addSelectedActionSheetImages}
+        />
+      )}
 
-{showSelectionActionSheetModal && (
-  <SelectionActionSheetSelectModal
-    selectionActionSheetOptions={
-      selectionActionSheetOptions
-    }
-    onClose={() =>
-      setShowSelectionActionSheetModal(false)
-    }
-    onAdd={addSelectedSelectionActionSheets}
-  />
-)}
+      {showSelectionActionSheetModal && (
+        <SelectionActionSheetSelectModal
+          selectionActionSheetOptions={
+            selectionActionSheetOptions
+          }
+          onClose={() =>
+            setShowSelectionActionSheetModal(false)
+          }
+          onAdd={addSelectedSelectionActionSheets}
+        />
+      )}
 
-{showSelectionIconButtonModal && (
-  <SelectionIconButtonSelectModal
-    selectionIconButtonOptions={
-      selectionIconButtonOptions
-    }
-    onClose={() =>
-      setShowSelectionIconButtonModal(false)
-    }
-    onAdd={addSelectedSelectionIconButtons}
-  />
-)}
+      {showSelectionIconButtonModal && (
+        <SelectionIconButtonSelectModal
+          selectionIconButtonOptions={
+            selectionIconButtonOptions
+          }
+          onClose={() =>
+            setShowSelectionIconButtonModal(false)
+          }
+          onAdd={addSelectedSelectionIconButtons}
+        />
+      )}
 
-{showTopTabsModal && (
-  <TopTabsSelectModal
-    topTabsOptions={topTabsOptions}
-    onClose={() => setShowTopTabsModal(false)}
-    onAdd={addSelectedTopTabs}
-  />
-)}
+      {showTopTabsModal && (
+        <TopTabsSelectModal
+          topTabsOptions={topTabsOptions}
+          onClose={() => setShowTopTabsModal(false)}
+          onAdd={addSelectedTopTabs}
+        />
+      )}
 
-{showBottomTabsModal && (
-  <BottomTabsSelectModal
-    bottomTabsOptions={bottomTabsOptions}
-    onClose={() => setShowBottomTabsModal(false)}
-    onAdd={addSelectedBottomTabs}
-  />
-)}
+      {showBottomTabsModal && (
+        <BottomTabsSelectModal
+          bottomTabsOptions={bottomTabsOptions}
+          onClose={() => setShowBottomTabsModal(false)}
+          onAdd={addSelectedBottomTabs}
+        />
+      )}
 
-{showAccordionSkeletonModal && (
-  <AccordionSkeletonSelectModal
-    accordionSkeletonOptions={
-      accordionSkeletonOptions
-    }
-    onClose={() =>
-      setShowAccordionSkeletonModal(false)
-    }
-    onAdd={addSelectedAccordionSkeletons}
-  />
-)}
+      {showAccordionSkeletonModal && (
+        <AccordionSkeletonSelectModal
+          accordionSkeletonOptions={
+            accordionSkeletonOptions
+          }
+          onClose={() =>
+            setShowAccordionSkeletonModal(false)
+          }
+          onAdd={addSelectedAccordionSkeletons}
+        />
+      )}
 
-{showImageSliderSkeletonModal && (
-  <ImageSliderSkeletonSelectModal
-    imageSliderSkeletonOptions={
-      imageSliderSkeletonOptions
-    }
-    onClose={() =>
-      setShowImageSliderSkeletonModal(false)
-    }
-    onAdd={addSelectedImageSliderSkeletons}
-  />
-)}
+      {showImageSliderSkeletonModal && (
+        <ImageSliderSkeletonSelectModal
+          imageSliderSkeletonOptions={
+            imageSliderSkeletonOptions
+          }
+          onClose={() =>
+            setShowImageSliderSkeletonModal(false)
+          }
+          onAdd={addSelectedImageSliderSkeletons}
+        />
+      )}
 
-{showStepperSkeletonModal && (
-  <StepperSkeletonSelectModal
-    stepperSkeletonOptions={
-      stepperSkeletonOptions
-    }
-    onClose={() =>
-      setShowStepperSkeletonModal(false)
-    }
-    onAdd={addSelectedStepperSkeletons}
-  />
-)}
+      {showStepperSkeletonModal && (
+        <StepperSkeletonSelectModal
+          stepperSkeletonOptions={
+            stepperSkeletonOptions
+          }
+          onClose={() =>
+            setShowStepperSkeletonModal(false)
+          }
+          onAdd={addSelectedStepperSkeletons}
+        />
+      )}
 
-{showBiometricModal && (
-  <BiometricSelectModal
-    biometricOptions={biometricOptions}
-    onClose={() =>
-      setShowBiometricModal(false)
-    }
-    onAdd={addSelectedBiometrics}
-  />
-)}
+      {showBiometricModal && (
+        <BiometricSelectModal
+          biometricOptions={biometricOptions}
+          onClose={() =>
+            setShowBiometricModal(false)
+          }
+          onAdd={addSelectedBiometrics}
+        />
+      )}
 
-{showBiometricErrorModal && (
-  <BiometricErrorSelectModal
-    biometricErrorOptions={biometricErrorOptions}
-    onClose={() =>
-      setShowBiometricErrorModal(false)
-    }
-    onAdd={addSelectedBiometricErrors}
-  />
-)}
+      {showBiometricErrorModal && (
+        <BiometricErrorSelectModal
+          biometricErrorOptions={biometricErrorOptions}
+          onClose={() =>
+            setShowBiometricErrorModal(false)
+          }
+          onAdd={addSelectedBiometricErrors}
+        />
+      )}
 
-{showContactsModal && (
-  <ContactsSelectModal
-    contactsOptions={contactsOptions}
-    onClose={() => setShowContactsModal(false)}
-    onAdd={addSelectedContacts}
-  />
-)}
+      {showContactsModal && (
+        <ContactsSelectModal
+          contactsOptions={contactsOptions}
+          onClose={() => setShowContactsModal(false)}
+          onAdd={addSelectedContacts}
+        />
+      )}
 
-{showContactsErrorModal && (
-  <ContactsErrorSelectModal
-    contactsErrorOptions={contactsErrorOptions}
-    onClose={() =>
-      setShowContactsErrorModal(false)
-    }
-    onAdd={addSelectedContactsError}
-  />
-)}
+      {showContactsErrorModal && (
+        <ContactsErrorSelectModal
+          contactsErrorOptions={contactsErrorOptions}
+          onClose={() =>
+            setShowContactsErrorModal(false)
+          }
+          onAdd={addSelectedContactsError}
+        />
+      )}
 
-{showLocationModal && (
-  <LocationSelectModal
-    locationOptions={locationOptions}
-    onClose={() => setShowLocationModal(false)}
-    onAdd={addSelectedLocations}
-  />
-)}
+      {showLocationModal && (
+        <LocationSelectModal
+          locationOptions={locationOptions}
+          onClose={() => setShowLocationModal(false)}
+          onAdd={addSelectedLocations}
+        />
+      )}
 
-{showLanguageModal && (
-  <LanguageSelectModal
-    languageOptions={languageOptions}
-    onClose={() => setShowLanguageModal(false)}
-    onAdd={addSelectedLanguages}
-  />
-)}
+      {showLanguageModal && (
+        <LanguageSelectModal
+          languageOptions={languageOptions}
+          onClose={() => setShowLanguageModal(false)}
+          onAdd={addSelectedLanguages}
+        />
+      )}
 
-{showDateNumberFormattingModal && (
-  <DateNumberFormattingSelectModal
-    dateNumberFormattingOptions={
-      dateNumberFormattingOptions
-    }
-    onClose={() =>
-      setShowDateNumberFormattingModal(false)
-    }
-    onAdd={addSelectedDateNumberFormatting}
-  />
-)}
+      {showDateNumberFormattingModal && (
+        <DateNumberFormattingSelectModal
+          dateNumberFormattingOptions={
+            dateNumberFormattingOptions
+          }
+          onClose={() =>
+            setShowDateNumberFormattingModal(false)
+          }
+          onAdd={addSelectedDateNumberFormatting}
+        />
+      )}
 
-{showDeviceInfoModal && (
-  <DeviceInfoSelectModal
-    deviceInfoOptions={deviceInfoOptions}
-    onClose={() => setShowDeviceInfoModal(false)}
-    onAdd={addSelectedDeviceInfo}
-  />
-)}
+      {showDeviceInfoModal && (
+        <DeviceInfoSelectModal
+          deviceInfoOptions={deviceInfoOptions}
+          onClose={() => setShowDeviceInfoModal(false)}
+          onAdd={addSelectedDeviceInfo}
+        />
+      )}
 
-{showDeviceConfigurationModal && (
-  <DeviceConfigurationSelectModal
-    deviceConfigurationOptions={
-      deviceConfigurationOptions
-    }
-    onClose={() =>
-      setShowDeviceConfigurationModal(false)
-    }
-    onAdd={addSelectedDeviceConfigurations}
-  />
-)}
+      {showDeviceConfigurationModal && (
+        <DeviceConfigurationSelectModal
+          deviceConfigurationOptions={
+            deviceConfigurationOptions
+          }
+          onClose={() =>
+            setShowDeviceConfigurationModal(false)
+          }
+          onAdd={addSelectedDeviceConfigurations}
+        />
+      )}
 
-{showNavigationModal && (
-  <NavigationSelectModal
-    navigationOptions={navigationOptions}
-    onClose={() => setShowNavigationModal(false)}
-    onAdd={addSelectedNavigation}
-  />
-)}
+      {showNavigationModal && (
+        <NavigationSelectModal
+          navigationOptions={navigationOptions}
+          onClose={() => setShowNavigationModal(false)}
+          onAdd={addSelectedNavigation}
+        />
+      )}
 
-{showInputFieldModal && (
-  <InputFieldSelectModal
-    inputFieldOptions={inputFieldOptions}
-    onClose={() => setShowInputFieldModal(false)}
-    onAdd={addSelectedInputFields}
-  />
-)}
+      {showInputFieldModal && (
+        <InputFieldSelectModal
+          inputFieldOptions={inputFieldOptions}
+          onClose={() => setShowInputFieldModal(false)}
+          onAdd={addSelectedInputFields}
+        />
+      )}
 
     </div>
   );
