@@ -179,6 +179,7 @@ export interface UIComponent {
 export interface SavedPage {
   pageId: string;
   pageName: string;
+  route: string;
   components: UIComponent[];
   createdAt: string;
 }

@@ -1,3 +1,8 @@
+import {
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";;
 import { useRef, useState, useEffect } from "react";
 import html2canvas from "html2canvas";
 import "./App.css";
@@ -60,6 +65,8 @@ import NavigationSelectModal from "./components/NavigationSelectModal";
 import InputFieldSelectModal from "./components/InputFieldSelectModal";
 // import PageSidebar from "./components/PageSidebar";
 import PagePanel from "./components/PagePanel";
+import GeneratedPage from "./components/GeneratedPage";
+
 
 import type {
   UIComponent,
@@ -796,6 +803,11 @@ const [currentPageId, setCurrentPageId] =
 
 // const [sidebarOpen, setSidebarOpen] =
 //   useState(false);  
+
+const location = useLocation();
+
+const isBuilderRoute =
+  location.pathname === "/";
 
   const [showHeadingModal, setShowHeadingModal] =
     useState(false);
@@ -2761,14 +2773,25 @@ const loadPage = (pageId: string) => {
 };
 
 const deletePage = (pageId: string) => {
-  setPages((prev) =>
-    prev.filter((item) => item.id !== pageId)
-  );
+  setPages((prev) => {
+    const updatedPages = prev.filter(
+      (page) => page.pageId !== pageId
+    );
+
+    localStorage.setItem(
+      "mobile-pages",
+      JSON.stringify(updatedPages)
+    );
+
+    return updatedPages;
+  });
 
   if (currentPageId === pageId) {
     setCurrentPageId(null);
     setComponents([]);
   }
+
+  console.log("Deleted Page:", pageId);
 };
 
 const createNewPage = () => {
@@ -2776,9 +2799,16 @@ const createNewPage = () => {
 
   if (!pageName) return;
 
+  const route =
+    "/" +
+    pageName
+      .toLowerCase()
+      .replace(/\s+/g, "-");
+
   const newPage: SavedPage = {
     pageId: crypto.randomUUID(),
     pageName,
+    route,
     components: [],
     createdAt: new Date().toISOString(),
   };
@@ -2788,21 +2818,12 @@ const createNewPage = () => {
   setComponents([]);
 };
 
+const [saveMessage, setSaveMessage] =
+  useState(false);
+
 const saveCurrentPage = () => {
   if (!currentPageId) {
-    const pageName = prompt("Enter Page Name");
-
-    if (!pageName) return;
-
-    const newPage: SavedPage = {
-      pageId: crypto.randomUUID(),
-      pageName,
-      components: [...components],
-      createdAt: new Date().toISOString(),
-    };
-
-    setPages((prev) => [...prev, newPage]);
-    setCurrentPageId(newPage.pageId);
+    alert("Please create or select a page first");
     return;
   }
 
@@ -2811,42 +2832,79 @@ const saveCurrentPage = () => {
       page.pageId === currentPageId
         ? {
             ...page,
-            components: [...components],
+            components: JSON.parse(
+              JSON.stringify(components)
+            ),
           }
         : page
     )
   );
+
+  setSaveMessage(true);
+
+  setTimeout(() => {
+    setSaveMessage(false);
+  }, 2000);
 };
 
   return (
-    <div className="builder-page">
-  <PagePanel
-    pages={pages}
-    currentPageId={currentPageId}
-    onNewPage={createNewPage}
-    onSavePage={saveCurrentPage}
-    onSelectPage={loadPage}
-    onDeletePage={deletePage}
-  />
+  <>
+    {saveMessage && (
+  <div className="save-success-toast">
+    Saved Successfully
+  </div>
+)} 
 
-  <MobileCanvas
-    ref={mobileRef}
-    components={components}
-    deleteComponent={deleteComponent}
-    editComponent={editComponent}
-    selectedId={selectedId}
-    setSelectedId={setSelectedId}
-  />
+    {isBuilderRoute && (
+      <div className="builder-page">
+        <PagePanel
+          pages={pages}
+          currentPageId={currentPageId}
+          onNewPage={createNewPage}
+          onSavePage={saveCurrentPage}
+          onSelectPage={loadPage}
+          onDeletePage={deletePage}
+        />
 
-  <ComponentSidebar
-    search={search}
-    setSearch={setSearch}
-    addComponent={addComponent}
-    downloadPng={downloadPng}
-  />
+        <MobileCanvas
+          ref={mobileRef}
+          components={components}
+          deleteComponent={deleteComponent}
+          editComponent={editComponent}
+          selectedId={selectedId}
+          setSelectedId={setSelectedId}
+        />
 
+        <ComponentSidebar
+          search={search}
+          setSearch={setSearch}
+          addComponent={addComponent}
+          downloadPng={downloadPng}
+        />
+      </div>
+    )}
 
-      {showHeadingModal && (
+    <Routes>
+      {pages.map((page) => (
+        <Route
+          key={page.pageId}
+          path={page.route}
+          element={
+            <GeneratedPage page={page} />
+          }
+        />
+      ))}
+
+      <Route
+        path="/"
+        element={null}
+      />
+    </Routes>
+
+    {isBuilderRoute && (
+      <>
+        {/* keep all your modals here */}
+        {showHeadingModal && (
         <HeadingSelectModal
           headingOptions={headingOptions}
           onClose={() =>
@@ -3370,7 +3428,8 @@ const saveCurrentPage = () => {
           onAdd={addSelectedInputFields}
         />
       )}
-
-    </div>
-  );
+      </>
+    )}
+  </>
+);
 }

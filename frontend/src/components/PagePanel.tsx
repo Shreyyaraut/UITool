@@ -51,7 +51,8 @@ export default function PagePanel({
                 onSelectPage(page.pageId)
               }
             >
-              {page.pageName}
+              <span>{page.pageName}</span>
+              {/* <small>{page.route}</small> */}
             </button>
 
             <button
