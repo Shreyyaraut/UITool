@@ -11,7 +11,8 @@ export default function CreditCardFieldComponent({
   return (
     <div className="creditcardfield-wrapper">
       <label className="creditcardfield-label">
-        {item.label || "Credit Card"}
+        {/* {item.label || "Credit Card"} */}
+        { "Credit Card" }
       </label>
 
       <div className="preview-creditcardfield">

@@ -10,7 +10,7 @@ export default function TextFieldComponent({ item }: Props) {
   const value =
     variant === "filledFocused" || variant === "filled"
       ? item.label
-      : "";
+      : "First name";
 
   return (
     <div className="textfield-wrapper">
@@ -27,7 +27,7 @@ export default function TextFieldComponent({ item }: Props) {
         }
         value={value}
         readOnly
-      />
+      /> 
     </div>
   );
 }

@@ -11,17 +11,18 @@ export default function PhoneNumberFieldComponent({
   return (
     <div className="phonefield-wrapper">
       <label className="phonefield-label">
-        {item.label || "Phone Number"}
+        {/* {item.label || "Phone Number"} */}
+        { "Phone Number" }
       </label>
 
       <div className="preview-phonefield">
         <div className="phone-country">
           {/* <span className="phone-flag">🇮🇳</span> */}
-          <span>+91</span>
-          <FiChevronDown />
+          {/* <span>+91</span>
+          <FiChevronDown /> */}
         </div>
 
-        <div className="phone-divider"></div>
+        {/* <div className="phone-divider"></div> */}
 
         <input
           type="text"

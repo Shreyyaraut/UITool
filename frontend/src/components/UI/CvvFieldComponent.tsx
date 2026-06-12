@@ -11,7 +11,8 @@ export default function CvvFieldComponent({
   return (
     <div className="cvvfield-wrapper">
       <label className="cvvfield-label">
-        {item.label || "CVC / CVV"}
+        {/* {item.label || "CVC / CVV"} */}
+        { "CVC / CVV" }
       </label>
 
       <div className="preview-cvvfield">

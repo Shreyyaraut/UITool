@@ -174,91 +174,91 @@ export default function RenderComponent({ item }: Props) {
             return <InformationCardComponent item={item} />;
 
         case "chipTag":
-  return <ChipTagComponent item={item} />;    
+            return <ChipTagComponent item={item} />;
 
-  case "multiSelectChip":
-  return <MultiSelectChipComponent item={item} />;
+        case "multiSelectChip":
+            return <MultiSelectChipComponent item={item} />;
 
-  case "verticalStepper":
-  return <VerticalStepperComponent />;
+        case "verticalStepper":
+            return <VerticalStepperComponent />;
 
-  case "horizontalStepper":
-  return <HorizontalStepperComponent />;
+        case "horizontalStepper":
+            return <HorizontalStepperComponent />;
 
-  case "stepProgress":
-  return <StepProgressComponent />;
+        case "stepProgress":
+            return <StepProgressComponent />;
 
-  case "fileUpload":
-  return <FileUploadComponent item={item} />;
+        case "fileUpload":
+            return <FileUploadComponent item={item} />;
 
-  case "galleryUpload":
-  return <GalleryUploadComponent item={item} />;
+        case "galleryUpload":
+            return <GalleryUploadComponent item={item} />;
 
-  case "customCamera":
-  return <CustomCameraComponent item={item} />;
+        case "customCamera":
+            return <CustomCameraComponent item={item} />;
 
-  case "actionSheet":
-  return <ActionSheetComponent />;
+        case "actionSheet":
+            return <ActionSheetComponent />;
 
-  case "actionSheetImage":
-  return <ActionSheetImageComponent />;
+        case "actionSheetImage":
+            return <ActionSheetImageComponent />;
 
-  case "selectionActionSheet":
-  return <SelectionActionSheetComponent />;
+        case "selectionActionSheet":
+            return <SelectionActionSheetComponent />;
 
-  case "selectionIconButton":
-  return <SelectionIconButtonComponent item={item} />;
+        case "selectionIconButton":
+            return <SelectionIconButtonComponent item={item} />;
 
-  case "accordionSkeleton":
-  return (
-    <AccordionSkeletonComponent
-      item={item}
-    />
-  );
+        case "accordionSkeleton":
+            return (
+                <AccordionSkeletonComponent
+                    item={item}
+                />
+            );
 
-  case "imageSliderSkeleton":
-  return (
-    <ImageSliderSkeletonComponent
-      item={item}
-    />
-  );
+        case "imageSliderSkeleton":
+            return (
+                <ImageSliderSkeletonComponent
+                    item={item}
+                />
+            );
 
-  case "stepperSkeleton":
-  return (
-    <StepperSkeletonComponent
-      item={item}
-    />
-  );
+        case "stepperSkeleton":
+            return (
+                <StepperSkeletonComponent
+                    item={item}
+                />
+            );
 
-  case "biometric":
-  return <BiometricComponent />;
+        case "biometric":
+            return <BiometricComponent />;
 
-  case "biometricError":
-  return <BiometricErrorComponent />;
+        case "biometricError":
+            return <BiometricErrorComponent />;
 
-  case "contacts":
-  return <ContactsComponent />;
+        case "contacts":
+            return <ContactsComponent />;
 
-  case "contactsError":
-  return <ContactsErrorComponent />;
+        case "contactsError":
+            return <ContactsErrorComponent />;
 
-  case "location":
-  return <LocationComponent />;
+        case "location":
+            return <LocationComponent />;
 
-  case "language":
-  return <LanguageComponent />;
+        case "language":
+            return <LanguageComponent />;
 
-  case "dateNumberFormatting":
-  return <DateNumberFormattingComponent />;
+        case "dateNumberFormatting":
+            return <DateNumberFormattingComponent />;
 
-  case "deviceInfo":
-  return <DeviceInfoComponent />;
+        case "deviceInfo":
+            return <DeviceInfoComponent />;
 
-  case "deviceConfiguration":
-  return <DeviceConfigurationComponent />;
+        case "deviceConfiguration":
+            return <DeviceConfigurationComponent />;
 
-  case "navigation":
-  return <NavigationComponent />;
+        case "navigation":
+            return <NavigationComponent />;
 
         default:
             return null;

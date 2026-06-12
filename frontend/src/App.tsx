@@ -80,31 +80,35 @@ const headingOptions: {
   label: string;
   headingLevel: HeadingLevel;
 }[] = [
-    {
-      label: "Display Text",
-      headingLevel: "display",
-    },
-    {
-      label: "Headline Text",
-      headingLevel: "headline",
-    },
-    {
-      label: "Title Text",
-      headingLevel: "title",
-    },
-    {
-      label: "Subtitle Text",
-      headingLevel: "subtitle",
-    },
-    {
-      label: "Body Text",
-      headingLevel: "body",
-    },
-    {
-      label: "Caption Text",
-      headingLevel: "caption",
-    },
-  ];
+  {
+    label: "Display Text",
+    headingLevel: "display",
+  },
+  {
+    label: "Headline Text",
+    headingLevel: "headline",
+  },
+  {
+    label: "Title Text",
+    headingLevel: "title",
+  },
+  {
+    label: "Subtitle Text",
+    headingLevel: "subtitle",
+  },
+  {
+    label: "Body Text",
+    headingLevel: "body",
+  },
+  {
+    label: "Caption Text",
+    headingLevel: "caption",
+  },
+  {
+    label: "Overline Text",
+    headingLevel: "overline",
+  },
+];
 
 const buttonOptions: {
   label: string;

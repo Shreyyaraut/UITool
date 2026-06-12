@@ -68,9 +68,9 @@ export default function BiometricErrorSelectModal({
 
               <div className="biometric-error-preview-box">
                 <div className="biometric-error-screen">
-                  <div className="biometric-error-header">
+                  {/* <div className="biometric-error-header">
                     <FiArrowLeft />
-                  </div>
+                  </div> */}
 
                   <div className="biometric-error-content">
                     <MdFingerprint className="biometric-error-icon" />

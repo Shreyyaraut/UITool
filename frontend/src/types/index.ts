@@ -57,7 +57,16 @@ export type ComponentType =
   | "dateNumberFormatting"
   | "deviceInfo"
   | "deviceConfiguration"
-  | "navigation"
+  | "navigation";
+
+  export type HeadingLevel =
+  | "display"
+  | "headline"
+  | "title"
+  | "subtitle"
+  | "body"
+  | "caption"
+  | "overline";
 
 
 // export interface UIComponent {
@@ -75,6 +84,8 @@ export interface UIComponent {
   id: string;
   type: ComponentType;
   label: string;
+  
+  headingLevel?: HeadingLevel;
 
   buttonVariant?:
   | "primary"

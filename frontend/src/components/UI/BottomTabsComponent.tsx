@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { FiHome, FiUser } from "react-icons/fi";
+import { FiUser } from "react-icons/fi";
+import { IoMdHome } from "react-icons/io";
+
 
 export default function BottomTabsComponent() {
   const [activeTab, setActiveTab] =
@@ -22,7 +24,7 @@ export default function BottomTabsComponent() {
             setActiveTab("Home");
           }}
         >
-          <FiHome />
+          <IoMdHome />
           <span>Home</span>
         </button>
 

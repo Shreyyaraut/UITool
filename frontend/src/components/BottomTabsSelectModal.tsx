@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { FiHome, FiUser } from "react-icons/fi";
+import { FiUser } from "react-icons/fi";
+import { IoMdHome } from "react-icons/io";
 
 interface BottomTabsOption {
   label: string;
@@ -75,7 +76,7 @@ export default function BottomTabsSelectModal({
                     type="button"
                     className="bottom-tabs-btn active"
                   >
-                    <FiHome />
+                    <IoMdHome />
                     <span>Home</span>
                   </button>
 

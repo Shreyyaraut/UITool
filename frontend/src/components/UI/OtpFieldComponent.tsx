@@ -10,7 +10,8 @@ export default function OtpFieldComponent({
   return (
     <div className="otpfield-wrapper">
       <label className="otpfield-label">
-        {item.label || "Enter OTP"}
+        {/* {item.label || "Enter OTP"} */}
+        { "Enter OTP" }
       </label>
 
       <div className="otp-box-group">

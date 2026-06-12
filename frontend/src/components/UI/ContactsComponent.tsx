@@ -26,7 +26,7 @@ export default function ContactsComponent() {
 
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Search for contact"
           readOnly
         />
       </div>

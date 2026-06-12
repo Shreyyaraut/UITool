@@ -1,3 +1,5 @@
+import { FiX } from "react-icons/fi";
+
 export default function DropdownListComponent() {
   const cities = [
     "Agra",
@@ -6,7 +8,8 @@ export default function DropdownListComponent() {
     "Aligarh",
     "Amritsar",
     "Bengaluru",
-    "Bhopal",
+    // "Bhopal",
+    // "Bhubaneswar",
   ];
 
   return (
@@ -14,6 +17,16 @@ export default function DropdownListComponent() {
       <div className="dropdown-list-overlay"></div>
 
       <div className="dropdown-list-sheet">
+        <div className="dropdown-list-header">
+          <span className="dropdown-list-title">
+            Select City
+          </span>
+
+          <button className="dropdown-list-close">
+            <FiX />
+          </button>
+        </div>
+
         {cities.map((city) => (
           <div
             key={city}
