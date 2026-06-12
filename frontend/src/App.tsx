@@ -66,12 +66,25 @@ import InputFieldSelectModal from "./components/InputFieldSelectModal";
 // import PageSidebar from "./components/PageSidebar";
 import PagePanel from "./components/PagePanel";
 import GeneratedPage from "./components/GeneratedPage";
+import NotificationSelectModal from "./components/NotificationSelectModal";
+import SwitchButtonSelectModal from "./components/UI/SwitchButtonSelectModal";
+import HeaderSelectModal from "./components/UI/HeaderSelectModal";
+import ReadOnlyFormSelectModal from "./components/UI/ReadOnlyFormSelectModal";
+import TransactionSelectModal from "./components/UI/TransactionSelectModal";
+import TransactionSuccessSelectModal from "./components/UI/TransactionSuccessSelectModal";
+import PassbookSelectModal from "./components/UI/PassbookSelectModal";
+import FundTransferSelectModal from "./components/UI/FundTransferSelectModal";
+import MyTransactionsSelectModal from "./components/UI/MyTransactionsSelectModal";
+import PhonebookSelectModal from "./components/UI/PhonebookSelectModal";
+import MultiSelectCardsSelectModal from "./components/UI/MultiSelectCardsSelectModal";
+import IconWithCardSelectModal from "./components/UI/IconWithCardSelectModal";
 
 
 import type {
   UIComponent,
   ComponentType,
   HeadingLevel,
+  SavedPage,
 } from "./types";
 
 const LOCAL_STORAGE_KEY = "mobile-ui-components";
@@ -731,6 +744,65 @@ const inputFieldOptions: {
     { label: "CVV Field", type: "cvvField" },
     { label: "Phone Number Field", type: "phoneNumberField" },
   ];
+  const notificationOptions = [{ label: "Notification" }];
+
+const switchButtonOptions: {
+  label: string;
+  switchButtonVariant: UIComponent["switchButtonVariant"];
+}[] = [
+  { label: "Dark Mode", switchButtonVariant: "off" },
+  { label: "Dark Mode", switchButtonVariant: "on" },
+];
+
+const headerOptions = [{ label: "Kitchen Sink" }];
+
+const readOnlyFormOptions = [{ label: "Read Only Form" }];
+
+const transactionOptions: {
+  label: string;
+  transactionVariant: UIComponent["transactionVariant"];
+}[] = [
+  { label: "Transaction PIN", transactionVariant: "pin" },
+  { label: "Transaction PIN Error", transactionVariant: "pinError" },
+  { label: "Transaction UPI", transactionVariant: "upi" },
+  { label: "Transaction UPI Error", transactionVariant: "upiError" },
+];
+
+const transactionSuccessOptions = [
+  { label: "Transaction Successful" },
+];
+
+const passbookOptions = [{ label: "Passbook" }];
+
+const fundTransferOptions = [{ label: "Fund Transfer" }];
+
+const myTransactionsOptions: {
+  label: string;
+  myTransactionsVariant: UIComponent["myTransactionsVariant"];
+}[] = [
+  { label: "Transactions List", myTransactionsVariant: "list" },
+  { label: "Transactions Expanded", myTransactionsVariant: "expanded" },
+];
+
+const phonebookOptions: {
+  label: string;
+  phonebookVariant: UIComponent["phonebookVariant"];
+}[] = [
+  { label: "Send Money", phonebookVariant: "sendMoney" },
+  { label: "Phonebook Access", phonebookVariant: "access" },
+];
+
+const multiSelectCardsOptions = [
+  { label: "Multi Select Cards" },
+];
+
+const iconWithCardOptions: {
+  label: string;
+  iconWithCardVariant: UIComponent["iconWithCardVariant"];
+}[] = [
+  { label: "Filled", iconWithCardVariant: "filled" },
+  { label: "Outlined", iconWithCardVariant: "outlined" },
+];
 
 export default function App() {
   const [search, setSearch] =
@@ -1014,6 +1086,19 @@ const isBuilderRoute =
 
   const [showInputFieldModal, setShowInputFieldModal] =
     useState(false);
+
+    const [showNotificationModal, setShowNotificationModal] = useState(false);
+const [showSwitchButtonModal, setShowSwitchButtonModal] = useState(false);
+const [showHeaderModal, setShowHeaderModal] = useState(false);
+const [showReadOnlyFormModal, setShowReadOnlyFormModal] = useState(false);
+const [showTransactionModal, setShowTransactionModal] = useState(false);
+const [showTransactionSuccessModal, setShowTransactionSuccessModal] = useState(false);
+const [showPassbookModal, setShowPassbookModal] = useState(false);
+const [showFundTransferModal, setShowFundTransferModal] = useState(false);
+const [showMyTransactionsModal, setShowMyTransactionsModal] = useState(false);
+const [showPhonebookModal, setShowPhonebookModal] = useState(false);
+const [showMultiSelectCardsModal, setShowMultiSelectCardsModal] = useState(false);
+const [showIconWithCardModal, setShowIconWithCardModal] = useState(false);
 
 
 useEffect(() => {
@@ -1407,6 +1492,65 @@ useEffect(() => {
       setShowInputFieldModal(true);
       return;
     }
+    if (type === "notification") {
+  setShowNotificationModal(true);
+  return;
+}
+
+if (type === "switchButton") {
+  setShowSwitchButtonModal(true);
+  return;
+}
+
+if (type === "header") {
+  setShowHeaderModal(true);
+  return;
+}
+
+if (type === "readOnlyForm") {
+  setShowReadOnlyFormModal(true);
+  return;
+}
+
+if (type === "transaction") {
+  setShowTransactionModal(true);
+  return;
+}
+
+if (type === "transactionSuccess") {
+  setShowTransactionSuccessModal(true);
+  return;
+}
+
+if (type === "passbook") {
+  setShowPassbookModal(true);
+  return;
+}
+
+if (type === "fundTransfer") {
+  setShowFundTransferModal(true);
+  return;
+}
+
+if (type === "myTransactions") {
+  setShowMyTransactionsModal(true);
+  return;
+}
+
+if (type === "phonebook") {
+  setShowPhonebookModal(true);
+  return;
+}
+
+if (type === "multiSelectCards") {
+  setShowMultiSelectCardsModal(true);
+  return;
+}
+
+if (type === "iconWithCard") {
+  setShowIconWithCardModal(true);
+  return;
+}
 
 
     const size = getDefaultSize(type);
@@ -2664,7 +2808,190 @@ useEffect(() => {
     addItemsToCanvas(inputComponents);
     setShowInputFieldModal(false);
   };
+const addSelectedNotifications = (
+  selected: { label: string }[]
+) => {
+  const components: UIComponent[] = selected.map(() => ({
+    id: crypto.randomUUID(),
+    type: "notification",
+    label: "Notification",
+    x: 20, y: 40,
+    width: 60, height: 50,
+    children: [],
+  }));
+  addItemsToCanvas(components);
+  setShowNotificationModal(false);
+};
 
+const addSelectedSwitchButtons = (
+  selected: { label: string; switchButtonVariant: UIComponent["switchButtonVariant"] }[]
+) => {
+  const components: UIComponent[] = selected.map((item, i) => ({
+    id: crypto.randomUUID(),
+    type: "switchButton",
+    label: item.label,
+    switchButtonVariant: item.switchButtonVariant,
+    x: 0, y: 40 + i * 55,
+    width: 320, height: 44,
+    children: [],
+  }));
+  addItemsToCanvas(components);
+  setShowSwitchButtonModal(false);
+};
+
+const addSelectedHeaders = (
+  selected: { label: string }[]
+) => {
+  const components: UIComponent[] = selected.map((item, i) => ({
+    id: crypto.randomUUID(),
+    type: "header",
+    label: item.label,
+    x: 0, y: 40 + i * 60,
+    width: 320, height: 52,
+    children: [],
+  }));
+  addItemsToCanvas(components);
+  setShowHeaderModal(false);
+};
+
+const addSelectedReadOnlyForms = (
+  selected: { label: string }[]
+) => {
+  const components: UIComponent[] = selected.map(() => ({
+    id: crypto.randomUUID(),
+    type: "readOnlyForm",
+    label: "Profile",
+    x: 0, y: 0,
+    width: 320, height: 520,
+    children: [],
+  }));
+  addItemsToCanvas(components);
+  setShowReadOnlyFormModal(false);
+};
+
+const addSelectedTransactions = (
+  selected: { label: string; transactionVariant: UIComponent["transactionVariant"] }[]
+) => {
+  const components: UIComponent[] = selected.map((item) => ({
+    id: crypto.randomUUID(),
+    type: "transaction",
+    label: item.label,
+    transactionVariant: item.transactionVariant,
+    x: 0, y: 0,
+    width: 320, height: 700,
+    children: [],
+  }));
+  addItemsToCanvas(components);
+  setShowTransactionModal(false);
+};
+
+const addSelectedTransactionSuccess = (
+  selected: { label: string }[]
+) => {
+  const components: UIComponent[] = selected.map(() => ({
+    id: crypto.randomUUID(),
+    type: "transactionSuccess",
+    label: "Transaction Successful",
+    x: 0, y: 0,
+    width: 320, height: 480,
+    children: [],
+  }));
+  addItemsToCanvas(components);
+  setShowTransactionSuccessModal(false);
+};
+
+const addSelectedPassbooks = (
+  selected: { label: string }[]
+) => {
+  const components: UIComponent[] = selected.map(() => ({
+    id: crypto.randomUUID(),
+    type: "passbook",
+    label: "Passbook",
+    x: 0, y: 0,
+    width: 320, height: 520,
+    children: [],
+  }));
+  addItemsToCanvas(components);
+  setShowPassbookModal(false);
+};
+
+const addSelectedFundTransfers = (
+  selected: { label: string }[]
+) => {
+  const components: UIComponent[] = selected.map(() => ({
+    id: crypto.randomUUID(),
+    type: "fundTransfer",
+    label: "Fund Transfer",
+    x: 0, y: 0,
+    width: 320, height: 600,
+    children: [],
+  }));
+  addItemsToCanvas(components);
+  setShowFundTransferModal(false);
+};
+
+const addSelectedMyTransactions = (
+  selected: { label: string; myTransactionsVariant: UIComponent["myTransactionsVariant"] }[]
+) => {
+  const components: UIComponent[] = selected.map((item) => ({
+    id: crypto.randomUUID(),
+    type: "myTransactions",
+    label: item.label,
+    myTransactionsVariant: item.myTransactionsVariant,
+    x: 0, y: 0,
+    width: 320, height: 560,
+    children: [],
+  }));
+  addItemsToCanvas(components);
+  setShowMyTransactionsModal(false);
+};
+
+const addSelectedPhonebook = (
+  selected: { label: string; phonebookVariant: UIComponent["phonebookVariant"] }[]
+) => {
+  const components: UIComponent[] = selected.map((item) => ({
+    id: crypto.randomUUID(),
+    type: "phonebook",
+    label: item.label,
+    phonebookVariant: item.phonebookVariant,
+    x: 0, y: 0,
+    width: 320, height: item.phonebookVariant === "access" ? 400 : 500,
+    children: [],
+  }));
+  addItemsToCanvas(components);
+  setShowPhonebookModal(false);
+};
+
+const addSelectedMultiSelectCards = (
+  selected: { label: string }[]
+) => {
+  const components: UIComponent[] = selected.map(() => ({
+    id: crypto.randomUUID(),
+    type: "multiSelectCards",
+    label: "Multi Select Cards",
+    x: 0, y: 0,
+    width: 320, height: 540,
+    children: [],
+  }));
+  addItemsToCanvas(components);
+  setShowMultiSelectCardsModal(false);
+};
+
+const addSelectedIconWithCard = (
+  selected: { label: string; iconWithCardVariant: UIComponent["iconWithCardVariant"] }[]
+) => {
+  const components: UIComponent[] = selected.map((item, i) => ({
+    id: crypto.randomUUID(),
+    type: "iconWithCard",
+    label: item.label,
+    iconWithCardVariant: item.iconWithCardVariant,
+    x: 0, y: 40 + i * 420,
+    width: 320, height: 400,
+    children: [],
+  }));
+  addItemsToCanvas(components);
+  setShowIconWithCardModal(false);
+};
   const deleteComponent = (id: string) => {
     setComponents((prev) =>
       prev.filter((item) => item.id !== id)
@@ -2840,6 +3167,66 @@ const saveCurrentPage = () => {
     )
   );
 
+  const notificationOptions = [{ label: "Notification" }];
+
+const switchButtonOptions: {
+  label: string;
+  switchButtonVariant: UIComponent["switchButtonVariant"];
+}[] = [
+  { label: "Dark Mode", switchButtonVariant: "off" },
+  { label: "Dark Mode", switchButtonVariant: "on" },
+];
+
+const headerOptions = [{ label: "Kitchen Sink" }];
+
+const readOnlyFormOptions = [{ label: "Read Only Form" }];
+
+const transactionOptions: {
+  label: string;
+  transactionVariant: UIComponent["transactionVariant"];
+}[] = [
+  { label: "Transaction PIN", transactionVariant: "pin" },
+  { label: "Transaction PIN Error", transactionVariant: "pinError" },
+  { label: "Transaction UPI", transactionVariant: "upi" },
+  { label: "Transaction UPI Error", transactionVariant: "upiError" },
+];
+
+const transactionSuccessOptions = [
+  { label: "Transaction Successful" },
+];
+
+const passbookOptions = [{ label: "Passbook" }];
+
+const fundTransferOptions = [{ label: "Fund Transfer" }];
+
+const myTransactionsOptions: {
+  label: string;
+  myTransactionsVariant: UIComponent["myTransactionsVariant"];
+}[] = [
+  { label: "Transactions List", myTransactionsVariant: "list" },
+  { label: "Transactions Expanded", myTransactionsVariant: "expanded" },
+];
+
+const phonebookOptions: {
+  label: string;
+  phonebookVariant: UIComponent["phonebookVariant"];
+}[] = [
+  { label: "Send Money", phonebookVariant: "sendMoney" },
+  { label: "Phonebook Access", phonebookVariant: "access" },
+];
+
+const multiSelectCardsOptions = [
+  { label: "Multi Select Cards" },
+];
+
+const iconWithCardOptions: {
+  label: string;
+  iconWithCardVariant: UIComponent["iconWithCardVariant"];
+}[] = [
+  { label: "Filled", iconWithCardVariant: "filled" },
+  { label: "Outlined", iconWithCardVariant: "outlined" },
+];
+
   setSaveMessage(true);
 
   setTimeout(() => {
@@ -2881,6 +3268,7 @@ const saveCurrentPage = () => {
           addComponent={addComponent}
           downloadPng={downloadPng}
         />
+        
       </div>
     )}
 
@@ -3428,6 +3816,102 @@ const saveCurrentPage = () => {
           onAdd={addSelectedInputFields}
         />
       )}
+
+      {showNotificationModal && (
+  <NotificationSelectModal
+    notificationOptions={notificationOptions}
+    onClose={() => setShowNotificationModal(false)}
+    onAdd={addSelectedNotifications}
+  />
+)}
+
+{showSwitchButtonModal && (
+  <SwitchButtonSelectModal
+    switchButtonOptions={switchButtonOptions}
+    onClose={() => setShowSwitchButtonModal(false)}
+    onAdd={addSelectedSwitchButtons}
+  />
+)}
+
+{showHeaderModal && (
+  <HeaderSelectModal
+    headerOptions={headerOptions}
+    onClose={() => setShowHeaderModal(false)}
+    onAdd={addSelectedHeaders}
+  />
+)}
+
+{showReadOnlyFormModal && (
+  <ReadOnlyFormSelectModal
+    readOnlyFormOptions={readOnlyFormOptions}
+    onClose={() => setShowReadOnlyFormModal(false)}
+    onAdd={addSelectedReadOnlyForms}
+  />
+)}
+
+{showTransactionModal && (
+  <TransactionSelectModal
+    transactionOptions={transactionOptions}
+    onClose={() => setShowTransactionModal(false)}
+    onAdd={addSelectedTransactions}
+  />
+)}
+
+{showTransactionSuccessModal && (
+  <TransactionSuccessSelectModal
+    transactionSuccessOptions={transactionSuccessOptions}
+    onClose={() => setShowTransactionSuccessModal(false)}
+    onAdd={addSelectedTransactionSuccess}
+  />
+)}
+
+{showPassbookModal && (
+  <PassbookSelectModal
+    passbookOptions={passbookOptions}
+    onClose={() => setShowPassbookModal(false)}
+    onAdd={addSelectedPassbooks}
+  />
+)}
+
+{showFundTransferModal && (
+  <FundTransferSelectModal
+    fundTransferOptions={fundTransferOptions}
+    onClose={() => setShowFundTransferModal(false)}
+    onAdd={addSelectedFundTransfers}
+  />
+)}
+
+{showMyTransactionsModal && (
+  <MyTransactionsSelectModal
+    myTransactionsOptions={myTransactionsOptions}
+    onClose={() => setShowMyTransactionsModal(false)}
+    onAdd={addSelectedMyTransactions}
+  />
+)}
+
+{showPhonebookModal && (
+  <PhonebookSelectModal
+    phonebookOptions={phonebookOptions}
+    onClose={() => setShowPhonebookModal(false)}
+    onAdd={addSelectedPhonebook}
+  />
+)}
+
+{showMultiSelectCardsModal && (
+  <MultiSelectCardsSelectModal
+    multiSelectCardsOptions={multiSelectCardsOptions}
+    onClose={() => setShowMultiSelectCardsModal(false)}
+    onAdd={addSelectedMultiSelectCards}
+  />
+)}
+
+{showIconWithCardModal && (
+  <IconWithCardSelectModal
+    iconWithCardOptions={iconWithCardOptions}
+    onClose={() => setShowIconWithCardModal(false)}
+    onAdd={addSelectedIconWithCard}
+  />
+)}
       </>
     )}
   </>

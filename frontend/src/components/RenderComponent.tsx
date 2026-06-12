@@ -5,7 +5,7 @@ import CardComponent from "./UI/CardComponent";
 import HeadingComponent from "./UI/HeadingComponent";
 import InputComponent from "./UI/InputComponent";
 import ParagraphComponent from "./UI/ParagraphComponent";
-import TextareaComponent from "./UI/textareaComponent";
+import TextareaComponent from "./UI/TextareaComponent";
 import SideMenuComponent from "./UI/SideMenuComponent";
 import TopTabsComponent from "./UI/TopTabsComponent";
 import BottomTabsComponent from "./UI/BottomTabsComponent";
@@ -58,6 +58,18 @@ import DateNumberFormattingComponent from "./UI/DateNumberFormattingComponent";
 import DeviceInfoComponent from "./UI/DeviceInfoComponent";
 import DeviceConfigurationComponent from "./UI/DeviceConfigurationComponent";
 import NavigationComponent from "./UI/NavigationComponent";
+import NotificationComponent from "./UI/Notificationcomponent";
+import SwitchButtonComponent from "./SwitchButtonComponent";
+import HeaderComponent from "./HeaderComponent";
+import ReadOnlyFormComponent from "./ReadOnlyFormComponent";
+import TransactionComponent from "./TransactionComponent";
+import TransactionSuccessComponent from "./TransactionSuccessComponent";
+import PassbookComponent from "./PassbookComponent";
+import FundTransferComponent from "./FundTransferComponent";
+import MyTransactionsComponent from "./MyTransactionsComponent";
+import PhonebookComponent from "./PhonebookComponent";
+import MultiSelectCardsComponent from "./MultiSelectCardsComponent";
+import IconWithCardComponent from "./IconWithCardComponent";
 
 interface Props {
     item: UIComponent;
@@ -259,6 +271,42 @@ export default function RenderComponent({ item }: Props) {
 
   case "navigation":
   return <NavigationComponent />;
+
+  case "notification":
+  return <NotificationComponent />;
+
+case "switchButton":
+  return <SwitchButtonComponent item={item} />;
+
+case "header":
+  return <HeaderComponent />;
+
+case "readOnlyForm":
+  return <ReadOnlyFormComponent />;
+
+case "transaction":
+  return <TransactionComponent item={item} />;
+
+case "transactionSuccess":
+  return <TransactionSuccessComponent />;
+
+case "passbook":
+  return <PassbookComponent />;
+
+case "fundTransfer":
+  return <FundTransferComponent />;
+
+case "myTransactions":
+  return <MyTransactionsComponent item={item} />;
+
+case "phonebook":
+  return <PhonebookComponent item={item} />;
+
+case "multiSelectCards":
+  return <MultiSelectCardsComponent />;
+
+case "iconWithCard":
+  return <IconWithCardComponent item={item} />;
 
         default:
             return null;

@@ -1,3 +1,12 @@
+export type HeadingLevel =
+  | "display"
+  | "headline"
+  | "title"
+  | "subtitle"
+  | "body"
+  | "caption";
+
+
 export type ComponentType =
   | "button"
   | "card"
@@ -58,6 +67,18 @@ export type ComponentType =
   | "deviceInfo"
   | "deviceConfiguration"
   | "navigation"
+  | "notification"
+  | "switchButton"
+  | "readOnlyForm"
+  | "transaction"
+  | "transactionSuccess"
+  | "passbook"
+  | "fundTransfer"
+  | "myTransactions"
+  | "phonebook"
+  | "multiSelectCards"
+  | "iconWithCard"
+  | "header"
 
 
 // export interface UIComponent {
@@ -174,6 +195,20 @@ export interface UIComponent {
   y: number;
   width: number;
   height: number;
+
+  switchButtonVariant?: "off" | "on";
+
+transactionVariant?:
+  | "pin"
+  | "pinError"
+  | "upi"
+  | "upiError";
+
+myTransactionsVariant?: "list" | "expanded";
+
+phonebookVariant?: "sendMoney" | "access";
+
+iconWithCardVariant?: "filled" | "outlined";
 }
 
 export interface SavedPage {
@@ -183,3 +218,6 @@ export interface SavedPage {
   components: UIComponent[];
   createdAt: string;
 }
+
+
+

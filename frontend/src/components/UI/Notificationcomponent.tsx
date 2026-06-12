@@ -1,4 +1,3 @@
-
 export default function NotificationComponent() {
   return (
     <div className="notification-wrapper">
