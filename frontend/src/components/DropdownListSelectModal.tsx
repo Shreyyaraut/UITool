@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FiX } from "react-icons/fi";
 
 interface DropdownListOption {
   label: string;
@@ -15,13 +16,9 @@ export default function DropdownListSelectModal({
   onClose,
   onAdd,
 }: Props) {
-  const [selected, setSelected] = useState<
-    DropdownListOption[]
-  >([]);
+  const [selected, setSelected] = useState<DropdownListOption[]>([]);
 
-  const toggleDropdownList = (
-    option: DropdownListOption
-  ) => {
+  const toggleDropdownList = (option: DropdownListOption) => {
     setSelected((prev) => {
       const exists = prev.some(
         (item) => item.label === option.label
@@ -44,8 +41,6 @@ export default function DropdownListSelectModal({
     "Aligarh",
     "Amritsar",
     "Bengaluru",
-    "Bhopal",
-    "Bhubaneswar",
   ];
 
   return (
@@ -70,14 +65,27 @@ export default function DropdownListSelectModal({
                 checked={selected.some(
                   (item) => item.label === option.label
                 )}
-                onChange={() =>
-                  toggleDropdownList(option)
-                }
+                onChange={() => toggleDropdownList(option)}
               />
 
               <div className="dropdown-list-preview-box">
+                <div className="dropdown-list-preview-overlay"></div>
+
                 <div className="dropdown-list-preview-sheet">
-                  {cities.slice(0, 4).map((city) => (
+                  <div className="dropdown-list-header">
+                    <span className="dropdown-list-title">
+                      Select City
+                    </span>
+
+                    <button
+                      type="button"
+                      className="dropdown-list-close"
+                    >
+                      <FiX />
+                    </button>
+                  </div>
+
+                  {cities.map((city) => (
                     <div
                       key={city}
                       className="dropdown-list-item"

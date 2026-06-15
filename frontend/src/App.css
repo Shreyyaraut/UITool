@@ -2048,9 +2048,9 @@ body {
 
 .dropdown-list-preview-box {
   flex: 1;
-  height: 220px;
+  height: 360px;
   background: #a3a3a3;
-  border-radius: 12px;
+  border-radius: 0;
   position: relative;
   overflow: hidden;
 }
@@ -2060,9 +2060,39 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--text-white);
-  border-radius: 18px 18px 0 0;
-  padding: 14px;
+
+  background: var(--bg-primary);
+  border-radius: 22px 22px 0 0;
+  padding: 18px;
+
+  min-height: 280px;
+}
+
+.dropdown-list-preview-sheet .dropdown-list-header {
+  height: 38px;
+  margin: 0;
+  padding: 0 0 12px;
+  border-bottom: 1px solid var(--divider-color);
+}
+
+.dropdown-list-preview-sheet .dropdown-list-title {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.dropdown-list-preview-sheet .dropdown-list-close {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--text-primary);
+}
+
+.dropdown-list-preview-sheet .dropdown-list-close svg {
+  font-size: 16px;
+}
+
+.dropdown-list-preview-sheet .dropdown-list-item {
+  height: 40px;
+  font-size: 14px;
 }
 
 .dropdown-list2-wrapper {
@@ -2171,21 +2201,36 @@ body {
 
 .dropdown-list2-preview-box {
   flex: 1;
-  height: 580px;
+  height: 420px;
   background: var(--bg-primary);
   border: 1px solid var(--border-light);
   border-radius: 0;
   overflow: hidden;
   padding: 0;
-
-  /* IMPORTANT */
-  display: block;
 }
 
 .dropdown-list2-preview-box .dropdown-list2-wrapper {
+  width: 100%;
   height: 100%;
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: var(--bg-primary);
+  overflow: hidden;
+}
+
+.dropdown-list2-preview-box .dropdown-list2-header {
+  height: 56px;
+  padding: 0 18px;
+}
+
+.dropdown-list2-preview-box .dropdown-list2-search {
+  height: 38px;
+  margin: 12px 16px;
+}
+
+.dropdown-list2-preview-box .dropdown-list2-item {
+  height: 38px;
+  padding: 0 16px;
 }
 
 .accordion-wrapper {
@@ -2757,6 +2802,46 @@ body {
 
 .modal-vertical-stepper-preview {
   flex: 1;
+  min-height: 240px;
+  padding: 16px 12px;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  background: var(--bg-primary);
+}
+
+/* Preview Specific */
+
+.modal-vertical-stepper-preview .stepper-item {
+  min-height: 38px;
+}
+
+.modal-vertical-stepper-preview .stepper-left {
+  width: 20px;
+}
+
+.modal-vertical-stepper-preview .stepper-dot {
+  width: 14px;
+  height: 14px;
+}
+
+.modal-vertical-stepper-preview .stepper-line {
+  top: 15px;
+  height: 23px;
+}
+
+.modal-vertical-stepper-preview .stepper-label {
+  font-size: 11px;
+}
+
+.modal-vertical-stepper-preview .stepper-view-btn {
+  font-size: 9px;
+}
+
+.modal-vertical-stepper-preview .stepper-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .horizontal-stepper {
@@ -3161,7 +3246,7 @@ body {
   gap: 12px;
 }
 
-.actionsheet-preview-option>input {
+.actionsheet-preview-option > input {
   width: 16px;
   height: 16px;
   margin-top: 12px;
@@ -3183,6 +3268,34 @@ body {
   border-radius: 12px;
 }
 
+.action-sheet-wrapper.preview .action-sheet {
+  padding: 0;
+  overflow: hidden;
+}
+
+.action-sheet-wrapper.preview .action-sheet-header {
+  height: 42px;
+  padding: 0 14px;
+}
+
+.action-sheet-wrapper.preview .action-sheet-content {
+  padding: 16px 14px 18px;
+}
+
+.action-sheet-wrapper.preview .action-sheet-content h3 {
+  font-size: 13px;
+}
+
+.action-sheet-wrapper.preview .action-sheet-content p {
+  font-size: 11px;
+  margin-bottom: 16px;
+}
+
+.action-sheet-wrapper.preview .action-confirm-btn,
+.action-sheet-wrapper.preview .action-cancel-btn {
+  height: 36px;
+  font-size: 11px;
+}
 /* .image-sheet {
   padding-top: 10px;
 } */
@@ -3289,7 +3402,7 @@ body {
   gap: 12px;
 }
 
-.selection-sheet-preview-option>input {
+.selection-sheet-preview-option > input {
   width: 16px;
   height: 16px;
   margin-top: 12px;
@@ -3309,6 +3422,35 @@ body {
   position: absolute;
   inset: 0;
   border-radius: 12px;
+}
+
+.selection-action-sheet-wrapper.preview .selection-action-sheet {
+  padding: 0;
+  overflow: hidden;
+}
+
+.selection-action-sheet-wrapper.preview .selection-sheet-header {
+  height: 42px;
+  padding: 0 14px;
+}
+
+.selection-action-sheet-wrapper.preview .selection-sheet-content {
+  padding: 14px;
+  gap: 10px;
+}
+
+.selection-action-sheet-wrapper.preview .selection-option {
+  height: 36px;
+  font-size: 11px;
+}
+
+.selection-action-sheet-wrapper.preview .selection-sheet-close {
+  width: 20px;
+  height: 20px;
+}
+
+.selection-action-sheet-wrapper.preview .selection-sheet-close svg {
+  font-size: 12px;
 }
 
 .selection-icon-section {

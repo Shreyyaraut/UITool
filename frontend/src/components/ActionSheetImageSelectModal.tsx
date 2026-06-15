@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FiX } from "react-icons/fi";
 
 const imageUrl =
   "src/assets/appimg.jpg";
@@ -67,35 +68,48 @@ export default function ActionSheetImageSelectModal({
                 }
               />
 
-              <div className="action-sheet-preview-box">
-                <div className="action-sheet-wrapper preview">
-                  <div className="action-sheet-overlay"></div>
+<div className="action-sheet-preview-box">
+  <div className="action-sheet-wrapper preview">
+    <div className="action-sheet-overlay"></div>
 
-                  <div className="action-sheet image-sheet">
-                    <img
-                      src={imageUrl}
-                      alt="Action"
-                      className="action-sheet-img"
-                    />
+    <div className="action-sheet image-sheet">
+      <div className="action-sheet-header">
+        <span>Confirmation</span>
 
-                    <h3>Confirm Message</h3>
+        <button
+          type="button"
+          className="action-sheet-close"
+        >
+          <FiX />
+        </button>
+      </div>
 
-                    <p>
-                      This is a confirmation message
-                      <br />
-                      with an image
-                    </p>
+      <div className="action-sheet-content">
+        <img
+          src={imageUrl}
+          alt="Action"
+          className="action-sheet-img"
+        />
 
-                    <button className="action-confirm-btn">
-                      Confirm
-                    </button>
+        <h3>Confirm Message</h3>
 
-                    <button className="action-cancel-btn">
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              </div>
+        <p>
+          This is a confirmation message
+          <br />
+          with an image
+        </p>
+
+        <button className="action-confirm-btn">
+          Confirm
+        </button>
+
+        <button className="action-cancel-btn">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
             </label>
           ))}
         </div>

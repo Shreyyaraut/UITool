@@ -15,13 +15,9 @@ export default function VerticalStepperSelectModal({
   onClose,
   onAdd,
 }: Props) {
-  const [selected, setSelected] = useState<
-    VerticalStepperOption[]
-  >([]);
+  const [selected, setSelected] = useState<VerticalStepperOption[]>([]);
 
-  const toggleStepper = (
-    option: VerticalStepperOption
-  ) => {
+  const toggleStepper = (option: VerticalStepperOption) => {
     setSelected((prev) => {
       const exists = prev.some(
         (item) => item.label === option.label
@@ -38,30 +34,12 @@ export default function VerticalStepperSelectModal({
   };
 
   const steps = [
-    {
-      label: "Business Details",
-      status: "completed",
-    },
-    {
-      label: "Author Verification",
-      status: "completed",
-    },
-    {
-      label: "Aadhaar Verification",
-      status: "completed",
-    },
-    {
-      label: "Document Upload",
-      status: "active",
-    },
-    {
-      label: "Reference Admin Verification",
-      status: "disabled",
-    },
-    {
-      label: "Bank Verification",
-      status: "disabled",
-    },
+    { label: "Business Details", status: "completed", action: "View" },
+    { label: "Author Verification", status: "completed", action: "View" },
+    { label: "Aadhaar Verification", status: "completed", action: "View" },
+    { label: "Document Upload", status: "active" },
+    { label: "Reference Admin Verification", status: "disabled" },
+    { label: "Bank Verification", status: "disabled" },
   ];
 
   return (
@@ -86,9 +64,7 @@ export default function VerticalStepperSelectModal({
                 checked={selected.some(
                   (item) => item.label === option.label
                 )}
-                onChange={() =>
-                  toggleStepper(option)
-                }
+                onChange={() => toggleStepper(option)}
               />
 
               <div className="vertical-stepper modal-vertical-stepper-preview">
@@ -105,9 +81,20 @@ export default function VerticalStepperSelectModal({
                       )}
                     </div>
 
-                    <span className="stepper-label">
-                      {step.label}
-                    </span>
+                    <div className="stepper-content">
+                      <span className="stepper-label">
+                        {step.label}
+                      </span>
+
+                      {step.action && (
+                        <button
+                          type="button"
+                          className="stepper-view-btn"
+                        >
+                          {step.action}
+                        </button>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>

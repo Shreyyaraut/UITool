@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FiX } from "react-icons/fi";
 
 interface ActionSheetOption {
   label: string;
@@ -15,13 +16,9 @@ export default function ActionSheetSelectModal({
   onClose,
   onAdd,
 }: Props) {
-  const [selected, setSelected] = useState<
-    ActionSheetOption[]
-  >([]);
+  const [selected, setSelected] = useState<ActionSheetOption[]>([]);
 
-  const toggleActionSheet = (
-    option: ActionSheetOption
-  ) => {
+  const toggleActionSheet = (option: ActionSheetOption) => {
     setSelected((prev) => {
       const exists = prev.some(
         (item) => item.label === option.label
@@ -59,9 +56,7 @@ export default function ActionSheetSelectModal({
                 checked={selected.some(
                   (item) => item.label === option.label
                 )}
-                onChange={() =>
-                  toggleActionSheet(option)
-                }
+                onChange={() => toggleActionSheet(option)}
               />
 
               <div className="action-sheet-preview-box">
@@ -69,21 +64,34 @@ export default function ActionSheetSelectModal({
                   <div className="action-sheet-overlay"></div>
 
                   <div className="action-sheet">
-                    <h3>Confirm Message</h3>
+                    <div className="action-sheet-header">
+                      <span>Confirmation</span>
 
-                    <p>
-                      This is a confirmation message
-                      <br />
-                      without an image
-                    </p>
+                      <button
+                        type="button"
+                        className="action-sheet-close"
+                      >
+                        <FiX />
+                      </button>
+                    </div>
 
-                    <button className="action-confirm-btn">
-                      Confirm
-                    </button>
+                    <div className="action-sheet-content">
+                      <h3>Confirm Message</h3>
 
-                    <button className="action-cancel-btn">
-                      Cancel
-                    </button>
+                      <p>
+                        This is a confirmation message
+                        <br />
+                        without an image
+                      </p>
+
+                      <button className="action-confirm-btn">
+                        Confirm
+                      </button>
+
+                      <button className="action-cancel-btn">
+                        Cancel
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

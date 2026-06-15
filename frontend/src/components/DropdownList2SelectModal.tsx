@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FiArrowLeft, FiSearch } from "react-icons/fi";
 
 interface DropdownList2Option {
   label: string;
@@ -15,13 +16,9 @@ export default function DropdownList2SelectModal({
   onClose,
   onAdd,
 }: Props) {
-  const [selected, setSelected] = useState<
-    DropdownList2Option[]
-  >([]);
+  const [selected, setSelected] = useState<DropdownList2Option[]>([]);
 
-  const toggleDropdownList2 = (
-    option: DropdownList2Option
-  ) => {
+  const toggleDropdownList2 = (option: DropdownList2Option) => {
     setSelected((prev) => {
       const exists = prev.some(
         (item) => item.label === option.label
@@ -70,20 +67,43 @@ export default function DropdownList2SelectModal({
                 checked={selected.some(
                   (item) => item.label === option.label
                 )}
-                onChange={() =>
-                  toggleDropdownList2(option)
-                }
+                onChange={() => toggleDropdownList2(option)}
               />
 
               <div className="dropdown-list2-preview-box">
-                {cities.map((city) => (
-                  <div
-                    key={city}
-                    className="dropdown-list2-item"
-                  >
-                    {city}
+                <div className="dropdown-list2-wrapper">
+                  <div className="dropdown-list2-header">
+                    <button
+                      type="button"
+                      className="dropdown-list2-back"
+                    >
+                      <FiArrowLeft />
+                    </button>
+
+                    <span className="dropdown-list2-title">
+                      Select City
+                    </span>
                   </div>
-                ))}
+
+                  <div className="dropdown-list2-search">
+                    <FiSearch />
+
+                    <input
+                      type="text"
+                      placeholder="Search"
+                      readOnly
+                    />
+                  </div>
+
+                  {cities.map((city) => (
+                    <div
+                      key={city}
+                      className="dropdown-list2-item"
+                    >
+                      {city}
+                    </div>
+                  ))}
+                </div>
               </div>
             </label>
           ))}
