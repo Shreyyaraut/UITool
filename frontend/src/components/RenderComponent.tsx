@@ -5,7 +5,7 @@ import CardComponent from "./UI/CardComponent";
 import HeadingComponent from "./UI/HeadingComponent";
 import InputComponent from "./UI/InputComponent";
 import ParagraphComponent from "./UI/ParagraphComponent";
-import TextareaComponent from "./UI/textareaComponent";
+import TextareaComponent from "./UI/TextareaComponent";
 import SideMenuComponent from "./UI/SideMenuComponent";
 import TopTabsComponent from "./UI/TopTabsComponent";
 import BottomTabsComponent from "./UI/BottomTabsComponent";

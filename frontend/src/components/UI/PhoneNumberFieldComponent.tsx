@@ -1,4 +1,4 @@
-import { FiChevronDown } from "react-icons/fi";
+// import { FiChevronDown } from "react-icons/fi";
 import type { UIComponent } from "../../types";
 
 interface Props {

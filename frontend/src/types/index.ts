@@ -179,6 +179,17 @@ export interface UIComponent {
 
   stepperSkeletonVariant?: "light" | "dark";
 
+    bgColor?: string;
+  textColor?: string;
+  borderColor?: string;
+  borderRadius?: number;
+
+  description?: string;
+  placeholder?: string;
+
+  tabs?: string[];
+  bottomTabs?: string[];
+
   children?: UIComponent[];
 
   x: number;

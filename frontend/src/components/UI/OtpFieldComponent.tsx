@@ -5,7 +5,7 @@ interface Props {
 }
 
 export default function OtpFieldComponent({
-  item,
+  
 }: Props) {
   return (
     <div className="otpfield-wrapper">

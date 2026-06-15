@@ -79,7 +79,7 @@ export default function ComponentSidebar({
                 addComponent(
                   item.type,
                   item.label,
-                  item.headingLevel
+                  // item.headingLevel
                 )
               }
             >

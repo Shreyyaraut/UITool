@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MdFingerprint } from "react-icons/md";
-import { FiArrowLeft } from "react-icons/fi";
+// import { FiArrowLeft } from "react-icons/fi";
 
 interface BiometricErrorOption {
   label: string;

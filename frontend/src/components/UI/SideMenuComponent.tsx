@@ -7,7 +7,7 @@ import {
   FiMenu,
   FiX,
 } from "react-icons/fi";
-import { MdTab, MdViewDay } from "react-icons/md";
+// import { MdTab, MdViewDay } from "react-icons/md";
 
 export default function SideMenuComponent() {
   const [open, setOpen] = useState(false);

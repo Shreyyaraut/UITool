@@ -1,5 +1,5 @@
 import { MdFingerprint } from "react-icons/md";
-import { FiArrowLeft } from "react-icons/fi";
+// import { FiArrowLeft } from "react-icons/fi";
 
 export default function BiometricErrorComponent() {
   return (

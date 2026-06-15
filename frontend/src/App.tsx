@@ -74,6 +74,14 @@ import type {
   HeadingLevel,
 } from "./types";
 
+interface SavedPage {
+  pageId: string;
+  pageName: string;
+  route: string;
+  components: UIComponent[];
+  createdAt: string;
+}
+
 const LOCAL_STORAGE_KEY = "mobile-ui-components";
 
 const headingOptions: {
@@ -1856,7 +1864,7 @@ useEffect(() => {
     }[]
   ) => {
     const dropdownListComponents: UIComponent[] =
-      selectedDropdownLists.map((list, index) => ({
+      selectedDropdownLists.map((list) => ({
         id: crypto.randomUUID(),
         type: "dropdownList",
         label: list.label,
@@ -2705,41 +2713,41 @@ useEffect(() => {
     }
   };
 
-  const updatePosition = (
-    id: string,
-    x: number,
-    y: number
-  ) => {
-    setComponents((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? { ...item, x, y }
-          : item
-      )
-    );
-  };
+  // const updatePosition = (
+  //   id: string,
+  //   x: number,
+  //   y: number
+  // ) => {
+  //   setComponents((prev) =>
+  //     prev.map((item) =>
+  //       item.id === id
+  //         ? { ...item, x, y }
+  //         : item
+  //     )
+  //   );
+  // };
 
-  const updateSize = (
-    id: string,
-    width: number,
-    height: number,
-    x: number,
-    y: number
-  ) => {
-    setComponents((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? {
-            ...item,
-            width,
-            height,
-            x,
-            y,
-          }
-          : item
-      )
-    );
-  };
+  // const updateSize = (
+  //   id: string,
+  //   width: number,
+  //   height: number,
+  //   x: number,
+  //   y: number
+  // ) => {
+  //   setComponents((prev) =>
+  //     prev.map((item) =>
+  //       item.id === id
+  //         ? {
+  //           ...item,
+  //           width,
+  //           height,
+  //           x,
+  //           y,
+  //         }
+  //         : item
+  //     )
+  //   );
+  // };
 
 //   const saveCurrentPage = () => {
 //   const pageName =

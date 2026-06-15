@@ -918,7 +918,7 @@ body {
   color: var(--bg-primary);
   font-weight: 600;
   cursor: pointer;
-  var(--text-white)-space: nowrap;
+  /* var(--text-white)-space: nowrap; */
 
   display: flex;
   align-items: center;
