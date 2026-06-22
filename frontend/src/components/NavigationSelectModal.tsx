@@ -82,7 +82,7 @@ export default function NavigationSelectModal({
                           index === 0 ? "active" : ""
                         }`}
                       >
-                        <IoMdHome/>
+                        <IoMdHome />
                         <span>{item}</span>
                       </div>
                     ))}

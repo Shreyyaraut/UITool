@@ -58,6 +58,25 @@ import DateNumberFormattingComponent from "./UI/DateNumberFormattingComponent";
 import DeviceInfoComponent from "./UI/DeviceInfoComponent";
 import DeviceConfigurationComponent from "./UI/DeviceConfigurationComponent";
 import NavigationComponent from "./UI/NavigationComponent";
+import NotificationComponent from "./UI/Notificationcomponent";
+import ToggleComponent from "./UI/ToggleComponent";
+import SwitchButtonComponent from "./UI/SwitchButtonComponent";
+import HeaderComponent from "./UI/HeaderComponent";
+import ReadOnlyFormComponent from "./UI/ReadOnlyFormComponent";
+import TransactionComponent from "./UI/TransactionComponent";
+import TransactionSuccessfulComponent from "./UI/TransactionSuccessfulComponent";
+import PassbookComponent from "./UI/PassbookComponent";
+import FundTransferComponent from "./UI/FundTransferComponent";
+import TransactionSuccessStatusComponent from "./UI/TransactionSuccessStatusComponent";
+import TransactionFailedStatusComponent from "./UI/TransactionFailedStatusComponent";
+import TransactionDetailsComponent from "./UI/TransactionDetailsComponent";
+import MyTransactionsComponent from "./UI/MyTransactionsComponent";
+import PhonebookComponent from "./UI/PhonebookComponent";
+import PhonebookAccessComponent from "./UI/PhonebookAccessComponent";
+import MultiSelectCardsComponent from "./UI/MultiSelectCardsComponent";
+import IconWithCardComponent from "./UI/IconWithCardComponent";
+import ScannerComponent from "./UI/ScannerComponent";
+import BackButtonComponent from "./UI/BackButtonComponent";
 
 interface Props {
     item: UIComponent;
@@ -259,6 +278,63 @@ export default function RenderComponent({ item }: Props) {
 
         case "navigation":
             return <NavigationComponent />;
+
+        case "notification":
+            return <NotificationComponent />;
+
+        case "toggle":
+            return <ToggleComponent item={item} />;    
+
+        case "switchButton":
+            return <SwitchButtonComponent item={item} />;
+
+        case "header":
+            return <HeaderComponent />;
+
+        case "readOnlyForm":
+            return <ReadOnlyFormComponent />;
+
+        case "transaction":
+            return <TransactionComponent />;
+
+        case "transactionSuccessful":
+            return <TransactionSuccessfulComponent />;
+
+        case "passbook":
+            return <PassbookComponent />;
+
+        case "fundTransfer":
+            return <FundTransferComponent />;
+
+        case "transactionSuccessStatus":
+            return <TransactionSuccessStatusComponent />;
+            
+        case "transactionFailedStatus":
+            return <TransactionFailedStatusComponent />;    
+
+        case "transactionDetails":
+            return <TransactionDetailsComponent />;    
+
+        case "myTransactions":
+            return <MyTransactionsComponent item={item} />;
+
+        case "phonebook":
+            return <PhonebookComponent />;
+
+        case "phonebookAccess":
+            return <PhonebookAccessComponent />;    
+
+        case "multiSelectCards":
+            return <MultiSelectCardsComponent />;
+
+        case "iconWithCard":
+            return <IconWithCardComponent item={item} />
+            
+        case "scanner":
+            return <ScannerComponent />;
+
+        case "backButton":
+            return <BackButtonComponent />;    
 
         default:
             return null;

@@ -33,7 +33,10 @@ export default function CanvasItem({
     item.type === "selectionActionSheet" ||
     item.type === "biometric" ||
     item.type === "language" ||
-    item.type === "navigation";
+    item.type === "navigation" ||
+    item.type === "phonebookAccess" ||
+    item.type === "multiSelectCards" ||
+    item.type === "scanner";
   return (
     <div
       className={`canvas-component ${isSelected ? "active-component" : ""

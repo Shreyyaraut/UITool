@@ -66,21 +66,41 @@ import InputFieldSelectModal from "./components/InputFieldSelectModal";
 // import PageSidebar from "./components/PageSidebar";
 import PagePanel from "./components/PagePanel";
 import GeneratedPage from "./components/GeneratedPage";
+import NotificationSelectModal from "./components/NotificationSelectModal";
+import SwitchButtonSelectModal from "./components/SwitchButtonSelectModal";
+import HeaderSelectModal from "./components/HeaderSelectModal";
+import ReadOnlyFormSelectModal from "./components/ReadOnlyFormSelectModal";
+import TransactionSelectModal from "./components/TransactionSelectModal";
+import TransactionSuccessfulSelectModal from "./components/TransactionSuccessfulSelectModal";
+import PassbookSelectModal from "./components/PassbookSelectModal";
+import FundTransferSelectModal from "./components/FundTransferSelectModal";
+import TransactionSuccessStatusSelectModal from "./components/TransactionSuccessStatusSelectModal";
+import TransactionFailedStatusSelectModal from "./components/TransactionFailedStatusSelectModal";
+import TransactionDetailsSelectModal from "./components/TransactionDetailsSelectModal";
+import MyTransactionsSelectModal from "./components/MyTransactionsSelectModal";
+import PhonebookSelectModal from "./components/PhonebookSelectModal";
+import PhonebookAccessSelectModal from "./components/PhonebookAccessSelectModal";
+import MultiSelectCardsSelectModal from "./components/MultiSelectCardsSelectModal";
+import IconWithCardSelectModal from "./components/IconWithCardSelectModal";
+import ToggleSelectModal from "./components/ToggleSelectModal";
+import ScannerSelectModal from "./components/ScannerSelectModal";
+import BackButtonSelectModal from "./components/BackButtonSelectModal";
 
 
 import type {
   UIComponent,
   ComponentType,
   HeadingLevel,
+  SavedPage,
 } from "./types";
 
-interface SavedPage {
-  pageId: string;
-  pageName: string;
-  route: string;
-  components: UIComponent[];
-  createdAt: string;
-}
+// interface SavedPage {
+//   pageId: string;
+//   pageName: string;
+//   route: string;
+//   components: UIComponent[];
+//   createdAt: string;
+// }
 
 const LOCAL_STORAGE_KEY = "mobile-ui-components";
 
@@ -88,35 +108,35 @@ const headingOptions: {
   label: string;
   headingLevel: HeadingLevel;
 }[] = [
-  {
-    label: "Display Text",
-    headingLevel: "display",
-  },
-  {
-    label: "Headline Text",
-    headingLevel: "headline",
-  },
-  {
-    label: "Title Text",
-    headingLevel: "title",
-  },
-  {
-    label: "Subtitle Text",
-    headingLevel: "subtitle",
-  },
-  {
-    label: "Body Text",
-    headingLevel: "body",
-  },
-  {
-    label: "Caption Text",
-    headingLevel: "caption",
-  },
-  {
-    label: "Overline Text",
-    headingLevel: "overline",
-  },
-];
+    {
+      label: "Display Text",
+      headingLevel: "display",
+    },
+    {
+      label: "Headline Text",
+      headingLevel: "headline",
+    },
+    {
+      label: "Title Text",
+      headingLevel: "title",
+    },
+    {
+      label: "Subtitle Text",
+      headingLevel: "subtitle",
+    },
+    {
+      label: "Body Text",
+      headingLevel: "body",
+    },
+    {
+      label: "Caption Text",
+      headingLevel: "caption",
+    },
+    {
+      label: "Overline Text",
+      headingLevel: "overline",
+    },
+  ];
 
 const buttonOptions: {
   label: string;
@@ -744,6 +764,120 @@ const inputFieldOptions: {
     { label: "Phone Number Field", type: "phoneNumberField" },
   ];
 
+const notificationOptions = [
+  {
+    label: "Notification",
+  },
+];
+
+const toggleOptions: {
+  label: string;
+  toggleSize: "large" | "small";
+}[] = [
+    {
+      label: "Large Toggle",
+      toggleSize: "large",
+    },
+    {
+      label: "Small Toggle",
+      toggleSize: "small",
+    },
+  ];
+
+const switchButtonOptions: {
+  label: string;
+  switchButtonVariant: UIComponent["switchButtonVariant"];
+}[] = [
+    { label: "Dark Mode", switchButtonVariant: "off" },
+    { label: "Dark Mode", switchButtonVariant: "on" },
+  ];
+
+const headerOptions = [{ label: "Kitchen Sink" }];
+
+const readOnlyFormOptions = [
+  {
+    label: "Read Only Form",
+  },
+];
+
+const transactionOptions = [
+  {
+    label: "Transaction",
+  },
+];
+
+const transactionSuccessfulOptions = [
+  {
+    label: "Transaction Successful",
+  },
+];
+
+const passbookOptions = [{ label: "Passbook" }];
+
+const fundTransferOptions = [{ label: "Fund Transfer" }];
+
+const transactionSuccessStatusOptions = [
+  {
+    label: "Transaction Success Status",
+  },
+];
+
+const transactionFailedStatusOptions = [
+  {
+    label: "Transaction Failed Status",
+  },
+];
+
+const transactionDetailsOptions = [
+  {
+    label: "Transaction Details",
+  },
+];
+
+const myTransactionsOptions: {
+  label: string;
+  myTransactionsVariant: UIComponent["myTransactionsVariant"];
+}[] = [
+    { label: "Transactions List", myTransactionsVariant: "list" },
+    { label: "Transactions Expanded", myTransactionsVariant: "expanded" },
+  ];
+
+const phonebookOptions = [
+  {
+    label: "Phonebook",
+  },
+];
+
+const phonebookAccessOptions = [
+  {
+    label: "Phonebook Access",
+  },
+];
+
+const multiSelectCardsOptions = [
+  { label: "Multi Select Cards" },
+];
+
+const iconWithCardOptions: {
+  label: string;
+  iconWithCardVariant: UIComponent["iconWithCardVariant"];
+}[] = [
+    { label: "Filled", iconWithCardVariant: "filled" },
+    { label: "Outlined", iconWithCardVariant: "outlined" },
+  ];
+
+const scannerOptions = [
+  {
+    label: "Scanner",
+  },
+];
+
+const backButtonOptions = [
+  {
+    label: "Back Button",
+  },
+];
+
 export default function App() {
   const [search, setSearch] =
     useState("");
@@ -752,74 +886,74 @@ export default function App() {
     useRef<HTMLDivElement>(null);
 
   const [components, setComponents] =
-  useState<UIComponent[]>(() => {
-    const savedData =
-      localStorage.getItem(LOCAL_STORAGE_KEY);
+    useState<UIComponent[]>(() => {
+      const savedData =
+        localStorage.getItem(LOCAL_STORAGE_KEY);
 
-    if (!savedData) return [];
+      if (!savedData) return [];
 
-    try {
-      const parsedData =
-        JSON.parse(savedData);
+      try {
+        const parsedData =
+          JSON.parse(savedData);
 
-      console.log(
-        "Loaded from LocalStorage:",
-        parsedData
-      );
+        console.log(
+          "Loaded from LocalStorage:",
+          parsedData
+        );
 
-      return parsedData;
-    } catch (error) {
-      console.error(
-        "LocalStorage parse error:",
-        error
-      );
+        return parsedData;
+      } catch (error) {
+        console.error(
+          "LocalStorage parse error:",
+          error
+        );
 
-      return [];
-    }
-  });
+        return [];
+      }
+    });
 
-//   useEffect(() => {
-//   localStorage.setItem(
-//     LOCAL_STORAGE_KEY,
-//     JSON.stringify(components)
-//   );
+  //   useEffect(() => {
+  //   localStorage.setItem(
+  //     LOCAL_STORAGE_KEY,
+  //     JSON.stringify(components)
+  //   );
 
-//   console.log("Saved Components:", components);
+  //   console.log("Saved Components:", components);
 
-//   console.table(
-//     components.map((item) => ({
-//       id: item.id,
-//       type: item.type,
-//       label: item.label,
-//       width: item.width,
-//       height: item.height,
-//     }))
-//   );
-// }, [components]);
+  //   console.table(
+  //     components.map((item) => ({
+  //       id: item.id,
+  //       type: item.type,
+  //       label: item.label,
+  //       width: item.width,
+  //       height: item.height,
+  //     }))
+  //   );
+  // }, [components]);
 
   const [selectedId, setSelectedId] =
     useState<string | null>(null);
 
   const [pages, setPages] =
-  useState<SavedPage[]>(() => {
-    const savedPages =
-      localStorage.getItem("mobile-pages");
+    useState<SavedPage[]>(() => {
+      const savedPages =
+        localStorage.getItem("mobile-pages");
 
-    return savedPages
-      ? JSON.parse(savedPages)
-      : [];
-  });
+      return savedPages
+        ? JSON.parse(savedPages)
+        : [];
+    });
 
-const [currentPageId, setCurrentPageId] =
-  useState<string | null>(null);
+  const [currentPageId, setCurrentPageId] =
+    useState<string | null>(null);
 
-// const [sidebarOpen, setSidebarOpen] =
-//   useState(false);  
+  // const [sidebarOpen, setSidebarOpen] =
+  //   useState(false);  
 
-const location = useLocation();
+  const location = useLocation();
 
-const isBuilderRoute =
-  location.pathname === "/";
+  const isBuilderRoute =
+    location.pathname === "/";
 
   const [showHeadingModal, setShowHeadingModal] =
     useState(false);
@@ -1027,39 +1161,97 @@ const isBuilderRoute =
   const [showInputFieldModal, setShowInputFieldModal] =
     useState(false);
 
+  const [showNotificationModal, setShowNotificationModal] = useState(false);
 
-useEffect(() => {
-  localStorage.setItem(
-    "mobile-ui-components",
-    JSON.stringify(components)
-  );
-}, [components]);
+  const [showToggleModal, setShowToggleModal] =
+    useState(false);
 
-useEffect(() => {
-  localStorage.setItem(
-    "mobile-pages",
-    JSON.stringify(pages)
-  );
+  const [showSwitchButtonModal, setShowSwitchButtonModal] = useState(false);
 
-  console.clear();
+  const [showHeaderModal, setShowHeaderModal] = useState(false);
 
-  console.log("PAGES JSON");
+  const [showReadOnlyFormModal, setShowReadOnlyFormModal] = useState(false);
 
-  console.log(
-    JSON.stringify(pages, null, 2)
-  );
+  const [showTransactionModal, setShowTransactionModal] = useState(false);
 
-  // console.log("================================");
-}, [pages]);
+  const [
+    showTransactionSuccessfulModal,
+    setShowTransactionSuccessfulModal,
+  ] = useState(false);
 
-useEffect(() => {
-  const savedPages =
-    localStorage.getItem("mobile-pages");
+  const [
+    showTransactionFailedStatusModal,
+    setShowTransactionFailedStatusModal,
+  ] = useState(false);
 
-  if (savedPages) {
-    setPages(JSON.parse(savedPages));
-  }
-}, []);
+  const [
+    showTransactionDetailsModal,
+    setShowTransactionDetailsModal,
+  ] = useState(false);
+
+  const [showPassbookModal, setShowPassbookModal] = useState(false);
+
+  const [showFundTransferModal, setShowFundTransferModal] = useState(false);
+
+  const [
+    showTransactionSuccessStatusModal,
+    setShowTransactionSuccessStatusModal,
+  ] = useState(false);
+
+  const [showMyTransactionsModal, setShowMyTransactionsModal] = useState(false);
+
+  const [showPhonebookModal, setShowPhonebookModal] = useState(false);
+
+  const [
+    showPhonebookAccessModal,
+    setShowPhonebookAccessModal,
+  ] = useState(false);
+
+  const [showMultiSelectCardsModal, setShowMultiSelectCardsModal] = useState(false);
+
+  const [showIconWithCardModal, setShowIconWithCardModal] = useState(false);
+
+  const [showScannerModal, setShowScannerModal] =
+    useState(false);
+
+  const [
+    showBackButtonModal,
+    setShowBackButtonModal,
+  ] = useState(false);
+
+
+  useEffect(() => {
+    localStorage.setItem(
+      "mobile-ui-components",
+      JSON.stringify(components)
+    );
+  }, [components]);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "mobile-pages",
+      JSON.stringify(pages)
+    );
+
+    console.clear();
+
+    console.log("PAGES JSON");
+
+    console.log(
+      JSON.stringify(pages, null, 2)
+    );
+
+    // console.log("================================");
+  }, [pages]);
+
+  useEffect(() => {
+    const savedPages =
+      localStorage.getItem("mobile-pages");
+
+    if (savedPages) {
+      setPages(JSON.parse(savedPages));
+    }
+  }, []);
 
   const downloadPng = async () => {
     if (!mobileRef.current) return;
@@ -1417,6 +1609,100 @@ useEffect(() => {
 
     if (type === "inputField") {
       setShowInputFieldModal(true);
+      return;
+    }
+    if (type === "notification") {
+      setShowNotificationModal(true);
+      return;
+    }
+
+    if (type === "toggle") {
+      setShowToggleModal(true);
+      return;
+    }
+
+    if (type === "switchButton") {
+      setShowSwitchButtonModal(true);
+      return;
+    }
+
+    if (type === "header") {
+      setShowHeaderModal(true);
+      return;
+    }
+
+    if (type === "readOnlyForm") {
+      setShowReadOnlyFormModal(true);
+      return;
+    }
+
+    if (type === "transaction") {
+      setShowTransactionModal(true);
+      return;
+    }
+
+    if (type === "transactionSuccessful") {
+      setShowTransactionSuccessfulModal(true);
+      return;
+    }
+
+    if (type === "passbook") {
+      setShowPassbookModal(true);
+      return;
+    }
+
+    if (type === "fundTransfer") {
+      setShowFundTransferModal(true);
+      return;
+    }
+
+    if (type === "transactionSuccessStatus") {
+      setShowTransactionSuccessStatusModal(true);
+      return;
+    }
+
+    if (type === "transactionFailedStatus") {
+      setShowTransactionFailedStatusModal(true);
+      return;
+    }
+
+    if (type === "transactionDetails") {
+      setShowTransactionDetailsModal(true);
+      return;
+    }
+
+    if (type === "myTransactions") {
+      setShowMyTransactionsModal(true);
+      return;
+    }
+
+    if (type === "phonebook") {
+      setShowPhonebookModal(true);
+      return;
+    }
+
+    if (type === "phonebookAccess") {
+      setShowPhonebookAccessModal(true);
+      return;
+    }
+
+    if (type === "multiSelectCards") {
+      setShowMultiSelectCardsModal(true);
+      return;
+    }
+
+    if (type === "iconWithCard") {
+      setShowIconWithCardModal(true);
+      return;
+    }
+
+    if (type === "scanner") {
+      setShowScannerModal(true);
+      return;
+    }
+
+    if (type === "backButton") {
+      setShowBackButtonModal(true);
       return;
     }
 
@@ -2677,6 +2963,390 @@ useEffect(() => {
     setShowInputFieldModal(false);
   };
 
+  const addSelectedNotifications = (
+    selectedNotifications: {
+      label: string;
+    }[]
+  ) => {
+    const notificationComponents: UIComponent[] =
+      selectedNotifications.map((item, index) => ({
+        id: crypto.randomUUID(),
+        type: "notification",
+        label: item.label,
+        x: 40,
+        y: 40 + index * 50,
+        width: 40,
+        height: 40,
+        children: [],
+      }));
+
+    addItemsToCanvas(notificationComponents);
+    setShowNotificationModal(false);
+  };
+
+  const addSelectedToggles = (
+    selectedToggles: {
+      label: string;
+      toggleSize: "large" | "small";
+    }[]
+  ) => {
+    const toggleComponents: UIComponent[] =
+      selectedToggles.map((toggle, index) => ({
+        id: crypto.randomUUID(),
+        type: "toggle",
+        label: toggle.label,
+        toggleSize: toggle.toggleSize,
+        x: 40,
+        y: 40 + index * 46,
+        width: 220,
+        height:
+          toggle.toggleSize === "small"
+            ? 28
+            : 36,
+        children: [],
+      }));
+
+    addItemsToCanvas(toggleComponents);
+    setShowToggleModal(false);
+  };
+
+  const addSelectedSwitchButtons = (
+    selected: { label: string; switchButtonVariant: UIComponent["switchButtonVariant"] }[]
+  ) => {
+    const components: UIComponent[] = selected.map((item, i) => ({
+      id: crypto.randomUUID(),
+      type: "switchButton",
+      label: item.label,
+      switchButtonVariant: item.switchButtonVariant,
+      x: 0, y: 40 + i * 55,
+      width: 320, height: 44,
+      children: [],
+    }));
+    addItemsToCanvas(components);
+    setShowSwitchButtonModal(false);
+  };
+
+  const addSelectedHeaders = (
+    selected: { label: string }[]
+  ) => {
+    const components: UIComponent[] = selected.map((item, i) => ({
+      id: crypto.randomUUID(),
+      type: "header",
+      label: item.label,
+      x: 0, y: 40 + i * 60,
+      width: 320, height: 52,
+      children: [],
+    }));
+    addItemsToCanvas(components);
+    setShowHeaderModal(false);
+  };
+
+  const addSelectedReadOnlyForms = (
+    selectedForms: {
+      label: string;
+    }[]
+  ) => {
+    const readOnlyFormComponents: UIComponent[] =
+      selectedForms.map((form) => ({
+        id: crypto.randomUUID(),
+        type: "readOnlyForm",
+        label: form.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 560,
+        children: [],
+      }));
+
+    addItemsToCanvas(readOnlyFormComponents);
+    setShowReadOnlyFormModal(false);
+  };
+
+  const addSelectedTransactions = (
+    selectedTransactions: {
+      label: string;
+    }[]
+  ) => {
+    const transactionComponents: UIComponent[] =
+      selectedTransactions.map((item) => ({
+        id: crypto.randomUUID(),
+        type: "transaction",
+        label: item.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 560,
+        children: [],
+      }));
+
+    addItemsToCanvas(transactionComponents);
+    setShowTransactionModal(false);
+  };
+
+  const addSelectedTransactionSuccessful = (
+    selectedItems: {
+      label: string;
+    }[]
+  ) => {
+    const transactionComponents: UIComponent[] =
+      selectedItems.map((item) => ({
+        id: crypto.randomUUID(),
+        type: "transactionSuccessful",
+        label: item.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 560,
+        children: [],
+      }));
+
+    addItemsToCanvas(transactionComponents);
+    setShowTransactionSuccessfulModal(false);
+  };
+
+  const addSelectedPassbooks = (
+    selectedPassbooks: {
+      label: string;
+    }[]
+  ) => {
+    const passbookComponents: UIComponent[] =
+      selectedPassbooks.map((item) => ({
+        id: crypto.randomUUID(),
+        type: "passbook",
+        label: item.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 560,
+        children: [],
+      }));
+
+    addItemsToCanvas(passbookComponents);
+    setShowPassbookModal(false);
+  };
+
+  const addSelectedFundTransfers = (
+    selectedTransfers: {
+      label: string;
+    }[]
+  ) => {
+    const transferComponents: UIComponent[] =
+      selectedTransfers.map((item) => ({
+        id: crypto.randomUUID(),
+        type: "fundTransfer",
+        label: item.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 340,
+        children: [],
+      }));
+
+    addItemsToCanvas(transferComponents);
+    setShowFundTransferModal(false);
+  };
+
+  const addSelectedTransactionSuccessStatus = (
+    selectedItems: {
+      label: string;
+    }[]
+  ) => {
+    const statusComponents: UIComponent[] =
+      selectedItems.map((item) => ({
+        id: crypto.randomUUID(),
+        type: "transactionSuccessStatus",
+        label: item.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 300,
+        children: [],
+      }));
+
+    addItemsToCanvas(statusComponents);
+    setShowTransactionSuccessStatusModal(false);
+  };
+
+  const addSelectedTransactionFailedStatus = (
+    selectedItems: {
+      label: string;
+    }[]
+  ) => {
+    const statusComponents: UIComponent[] =
+      selectedItems.map((item) => ({
+        id: crypto.randomUUID(),
+        type: "transactionFailedStatus",
+        label: item.label,
+        x: 0,
+        y: 0,
+        width: 260,
+        height: 280,
+        children: [],
+      }));
+
+    addItemsToCanvas(statusComponents);
+    setShowTransactionFailedStatusModal(false);
+  };
+
+  const addSelectedTransactionDetails = (
+    selectedItems: {
+      label: string;
+    }[]
+  ) => {
+    const detailComponents: UIComponent[] =
+      selectedItems.map((item) => ({
+        id: crypto.randomUUID(),
+        type: "transactionDetails",
+        label: item.label,
+        x: 0,
+        y: 0,
+        width: 260,
+        height: 380,
+        children: [],
+      }));
+
+    addItemsToCanvas(detailComponents);
+    setShowTransactionDetailsModal(false);
+  };
+
+  const addSelectedMyTransactions = (
+    selected: { label: string; myTransactionsVariant: UIComponent["myTransactionsVariant"] }[]
+  ) => {
+    const components: UIComponent[] = selected.map((item) => ({
+      id: crypto.randomUUID(),
+      type: "myTransactions",
+      label: item.label,
+      myTransactionsVariant: item.myTransactionsVariant,
+      x: 0, y: 0,
+      width: 320, height: 560,
+      children: [],
+    }));
+    addItemsToCanvas(components);
+    setShowMyTransactionsModal(false);
+  };
+
+  const addSelectedPhonebooks = (
+    selectedPhonebooks: {
+      label: string;
+    }[]
+  ) => {
+    const phonebookComponents: UIComponent[] =
+      selectedPhonebooks.map((item) => ({
+        id: crypto.randomUUID(),
+        type: "phonebook",
+        label: item.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 560,
+        children: [],
+      }));
+
+    addItemsToCanvas(phonebookComponents);
+    setShowPhonebookModal(false);
+  };
+
+  const addSelectedPhonebookAccess = (
+    selectedItems: {
+      label: string;
+    }[]
+  ) => {
+    const accessComponents: UIComponent[] =
+      selectedItems.map((item) => ({
+        id: crypto.randomUUID(),
+        type: "phonebookAccess",
+        label: item.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 520,
+        children: [],
+      }));
+
+    addItemsToCanvas(accessComponents);
+    setShowPhonebookAccessModal(false);
+  };
+
+  const addSelectedMultiSelectCards = (
+    selectedItems: {
+      label: string;
+    }[]
+  ) => {
+    const cardComponents: UIComponent[] =
+      selectedItems.map((item) => ({
+        id: crypto.randomUUID(),
+        type: "multiSelectCards",
+        label: item.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 560,
+        children: [],
+      }));
+
+    addItemsToCanvas(cardComponents);
+    setShowMultiSelectCardsModal(false);
+  };
+
+  const addSelectedIconWithCard = (
+    selected: { label: string; iconWithCardVariant: UIComponent["iconWithCardVariant"] }[]
+  ) => {
+    const components: UIComponent[] = selected.map((item, i) => ({
+      id: crypto.randomUUID(),
+      type: "iconWithCard",
+      label: item.label,
+      iconWithCardVariant: item.iconWithCardVariant,
+      x: 0, y: 40 + i * 420,
+      width: 320, height: 400,
+      children: [],
+    }));
+    addItemsToCanvas(components);
+    setShowIconWithCardModal(false);
+  };
+
+  const addSelectedScanners = (
+    selectedItems: {
+      label: string;
+    }[]
+  ) => {
+    const scannerComponents: UIComponent[] =
+      selectedItems.map((item) => ({
+        id: crypto.randomUUID(),
+        type: "scanner",
+        label: item.label,
+        x: 0,
+        y: 0,
+        width: 220,
+        height: 560,
+        children: [],
+      }));
+
+    addItemsToCanvas(scannerComponents);
+    setShowScannerModal(false);
+  };
+
+  const addSelectedBackButtons = (
+    selectedItems: {
+      label: string;
+    }[]
+  ) => {
+    const backButtonComponents =
+      selectedItems.map((item) => ({
+        id: crypto.randomUUID(),
+        type: "backButton",
+        label: item.label,
+        width: 220,
+        height: 56,
+        children: [],
+      }));
+
+    addItemsToCanvas(
+      backButtonComponents
+    );
+
+    setShowBackButtonModal(false);
+  };
+
   const deleteComponent = (id: string) => {
     setComponents((prev) =>
       prev.filter((item) => item.id !== id)
@@ -2749,699 +3419,878 @@ useEffect(() => {
   //   );
   // };
 
-//   const saveCurrentPage = () => {
-//   const pageName =
-//     prompt("Enter Page Name");
+  //   const saveCurrentPage = () => {
+  //   const pageName =
+  //     prompt("Enter Page Name");
 
-//   if (!pageName) return;
+  //   if (!pageName) return;
 
-//   const newPage = {
-//     id: crypto.randomUUID(),
-//     name: pageName,
-//     components,
-//     createdAt:
-//       new Date().toISOString(),
-//   };
+  //   const newPage = {
+  //     id: crypto.randomUUID(),
+  //     name: pageName,
+  //     components,
+  //     createdAt:
+  //       new Date().toISOString(),
+  //   };
 
-//   setPages((prev) => [
-//     ...prev,
-//     newPage,
-//   ]);
-// };
+  //   setPages((prev) => [
+  //     ...prev,
+  //     newPage,
+  //   ]);
+  // };
 
-const loadPage = (pageId: string) => {
-  const page = pages.find(
-  (item) => item.pageId === pageId
-);
-
-  if (!page) return;
-
-  setComponents(page.components);
- setCurrentPageId(page.pageId);
-  setSelectedId(null);
-  // setSidebarOpen(false);
-
-  console.log("Loaded Page:", page);
-};
-
-const deletePage = (pageId: string) => {
-  setPages((prev) => {
-    const updatedPages = prev.filter(
-      (page) => page.pageId !== pageId
+  const loadPage = (pageId: string) => {
+    const page = pages.find(
+      (item) => item.pageId === pageId
     );
 
-    localStorage.setItem(
-      "mobile-pages",
-      JSON.stringify(updatedPages)
-    );
+    if (!page) return;
 
-    return updatedPages;
-  });
+    setComponents(page.components);
+    setCurrentPageId(page.pageId);
+    setSelectedId(null);
+    // setSidebarOpen(false);
 
-  if (currentPageId === pageId) {
-    setCurrentPageId(null);
-    setComponents([]);
-  }
-
-  console.log("Deleted Page:", pageId);
-};
-
-const createNewPage = () => {
-  const pageName = prompt("Enter Page Name");
-
-  if (!pageName) return;
-
-  const route =
-    "/" +
-    pageName
-      .toLowerCase()
-      .replace(/\s+/g, "-");
-
-  const newPage: SavedPage = {
-    pageId: crypto.randomUUID(),
-    pageName,
-    route,
-    components: [],
-    createdAt: new Date().toISOString(),
+    console.log("Loaded Page:", page);
   };
 
-  setPages((prev) => [...prev, newPage]);
-  setCurrentPageId(newPage.pageId);
-  setComponents([]);
-};
+  const deletePage = (pageId: string) => {
+    setPages((prev) => {
+      const updatedPages = prev.filter(
+        (page) => page.pageId !== pageId
+      );
 
-const [saveMessage, setSaveMessage] =
-  useState(false);
+      localStorage.setItem(
+        "mobile-pages",
+        JSON.stringify(updatedPages)
+      );
 
-const saveCurrentPage = () => {
-  if (!currentPageId) {
-    alert("Please create or select a page first");
-    return;
-  }
+      return updatedPages;
+    });
 
-  setPages((prev) =>
-    prev.map((page) =>
-      page.pageId === currentPageId
-        ? {
+    if (currentPageId === pageId) {
+      setCurrentPageId(null);
+      setComponents([]);
+    }
+
+    console.log("Deleted Page:", pageId);
+  };
+
+  const createNewPage = () => {
+    const pageName = prompt("Enter Page Name");
+
+    if (!pageName) return;
+
+    const route =
+      "/" +
+      pageName
+        .toLowerCase()
+        .replace(/\s+/g, "-");
+
+    const newPage: SavedPage = {
+      pageId: crypto.randomUUID(),
+      pageName,
+      route,
+      components: [],
+      createdAt: new Date().toISOString(),
+    };
+
+    setPages((prev) => [...prev, newPage]);
+    setCurrentPageId(newPage.pageId);
+    setComponents([]);
+  };
+
+  const [saveMessage, setSaveMessage] =
+    useState(false);
+
+  const saveCurrentPage = () => {
+    if (!currentPageId) {
+      alert("Please create or select a page first");
+      return;
+    }
+
+    setPages((prev) =>
+      prev.map((page) =>
+        page.pageId === currentPageId
+          ? {
             ...page,
             components: JSON.parse(
               JSON.stringify(components)
             ),
           }
-        : page
-    )
-  );
+          : page
+      )
+    );
 
-  setSaveMessage(true);
+    setSaveMessage(true);
 
-  setTimeout(() => {
-    setSaveMessage(false);
-  }, 2000);
-};
+    setTimeout(() => {
+      setSaveMessage(false);
+    }, 2000);
+  };
 
   return (
-  <>
-    {saveMessage && (
-  <div className="save-success-toast">
-    Saved Successfully
-  </div>
-)} 
+    <>
+      {saveMessage && (
+        <div className="save-success-toast">
+          Saved Successfully
+        </div>
+      )}
 
-    {isBuilderRoute && (
-      <div className="builder-page">
-        <PagePanel
-          pages={pages}
-          currentPageId={currentPageId}
-          onNewPage={createNewPage}
-          onSavePage={saveCurrentPage}
-          onSelectPage={loadPage}
-          onDeletePage={deletePage}
-        />
+      {isBuilderRoute && (
+        <div className="builder-page">
+          <PagePanel
+            pages={pages}
+            currentPageId={currentPageId}
+            onNewPage={createNewPage}
+            onSavePage={saveCurrentPage}
+            onSelectPage={loadPage}
+            onDeletePage={deletePage}
+          />
 
-        <MobileCanvas
-          ref={mobileRef}
-          components={components}
-          deleteComponent={deleteComponent}
-          editComponent={editComponent}
-          selectedId={selectedId}
-          setSelectedId={setSelectedId}
-        />
+          <MobileCanvas
+            ref={mobileRef}
+            components={components}
+            deleteComponent={deleteComponent}
+            editComponent={editComponent}
+            selectedId={selectedId}
+            setSelectedId={setSelectedId}
+          />
 
-        <ComponentSidebar
-          search={search}
-          setSearch={setSearch}
-          addComponent={addComponent}
-          downloadPng={downloadPng}
-        />
-      </div>
-    )}
+          <ComponentSidebar
+            search={search}
+            setSearch={setSearch}
+            addComponent={addComponent}
+            downloadPng={downloadPng}
+          />
 
-    <Routes>
-      {pages.map((page) => (
+        </div>
+      )}
+
+      <Routes>
+        {pages.map((page) => (
+          <Route
+            key={page.pageId}
+            path={page.route}
+            element={
+              <GeneratedPage page={page} />
+            }
+          />
+        ))}
+
         <Route
-          key={page.pageId}
-          path={page.route}
-          element={
-            <GeneratedPage page={page} />
-          }
+          path="/"
+          element={null}
         />
-      ))}
+      </Routes>
 
-      <Route
-        path="/"
-        element={null}
-      />
-    </Routes>
+      {isBuilderRoute && (
+        <>
+          {/* keep all your modals here */}
+          {showHeadingModal && (
+            <HeadingSelectModal
+              headingOptions={headingOptions}
+              onClose={() =>
+                setShowHeadingModal(false)
+              }
+              onAdd={addSelectedHeadings}
+            />
+          )}
 
-    {isBuilderRoute && (
-      <>
-        {/* keep all your modals here */}
-        {showHeadingModal && (
-        <HeadingSelectModal
-          headingOptions={headingOptions}
-          onClose={() =>
-            setShowHeadingModal(false)
-          }
-          onAdd={addSelectedHeadings}
-        />
+          {showButtonModal && (
+            <ButtonSelectModal
+              buttonOptions={buttonOptions}
+              onClose={() =>
+                setShowButtonModal(false)
+              }
+              onAdd={addSelectedButtons}
+            />
+          )}
+
+          {showTextFieldModal && (
+            <TextFieldSelectModal
+              textFieldOptions={textFieldOptions}
+              onClose={() => setShowTextFieldModal(false)}
+              onAdd={addSelectedTextFields}
+            />
+          )}
+
+          {showEmailFieldModal && (
+            <EmailFieldSelectModal
+              emailFieldOptions={emailFieldOptions}
+              onClose={() => setShowEmailFieldModal(false)}
+              onAdd={addSelectedEmailFields}
+            />
+          )}
+
+          {showPasswordFieldModal && (
+            <PasswordFieldSelectModal
+              passwordFieldOptions={passwordFieldOptions}
+              onClose={() =>
+                setShowPasswordFieldModal(false)
+              }
+              onAdd={addSelectedPasswordFields}
+            />
+          )}
+
+          {showSearchFieldModal && (
+            <SearchFieldSelectModal
+              searchFieldOptions={searchFieldOptions}
+              onClose={() => setShowSearchFieldModal(false)}
+              onAdd={addSelectedSearchFields}
+            />
+          )}
+
+
+          {showVerificationFieldModal && (
+            <VerificationFieldSelectModal
+              verificationFieldOptions={
+                verificationFieldOptions
+              }
+              onClose={() =>
+                setShowVerificationFieldModal(false)
+              }
+              onAdd={addSelectedVerificationFields}
+            />
+          )}
+
+          {showDobFieldModal && (
+            <DobFieldSelectModal
+              dobFieldOptions={dobFieldOptions}
+              onClose={() =>
+                setShowDobFieldModal(false)
+              }
+              onAdd={addSelectedDobFields}
+            />
+          )}
+
+          {showOtpFieldModal && (
+            <OtpFieldSelectModal
+              otpFieldOptions={otpFieldOptions}
+              onClose={() => setShowOtpFieldModal(false)}
+              onAdd={addSelectedOtpFields}
+            />
+          )}
+
+          {showBioFieldModal && (
+            <BioFieldSelectModal
+              bioFieldOptions={bioFieldOptions}
+              onClose={() =>
+                setShowBioFieldModal(false)
+              }
+              onAdd={addSelectedBioFields}
+            />
+          )}
+
+          {showCreditCardFieldModal && (
+            <CreditCardFieldSelectModal
+              creditCardFieldOptions={
+                creditCardFieldOptions
+              }
+              onClose={() =>
+                setShowCreditCardFieldModal(false)
+              }
+              onAdd={addSelectedCreditCardFields}
+            />
+          )}
+
+          {showCvvFieldModal && (
+            <CvvFieldSelectModal
+              cvvFieldOptions={cvvFieldOptions}
+              onClose={() =>
+                setShowCvvFieldModal(false)
+              }
+              onAdd={addSelectedCvvFields}
+            />
+          )}
+
+          {showPhoneNumberFieldModal && (
+            <PhoneNumberFieldSelectModal
+              phoneNumberFieldOptions={
+                phoneNumberFieldOptions
+              }
+              onClose={() =>
+                setShowPhoneNumberFieldModal(false)
+              }
+              onAdd={addSelectedPhoneNumberFields}
+            />
+          )}
+
+          {showCheckboxModal && (
+            <CheckboxSelectModal
+              checkboxOptions={checkboxOptions}
+              onClose={() => setShowCheckboxModal(false)}
+              onAdd={addSelectedCheckboxes}
+            />
+          )}
+
+          {showRadioButtonModal && (
+            <RadioButtonSelectModal
+              radioButtonOptions={radioButtonOptions}
+              onClose={() => setShowRadioButtonModal(false)}
+              onAdd={addSelectedRadioButtons}
+            />
+          )}
+
+          {showCardRadioModal && (
+            <CardRadioSelectModal
+              cardRadioOptions={cardRadioOptions}
+              onClose={() =>
+                setShowCardRadioModal(false)
+              }
+              onAdd={addSelectedCardRadios}
+            />
+          )}
+
+          {showCustomRadioModal && (
+            <CustomRadioSelectModal
+              customRadioOptions={customRadioOptions}
+              onClose={() => setShowCustomRadioModal(false)}
+              onAdd={addSelectedCustomRadios}
+            />
+          )}
+
+          {showDropdownModal && (
+            <DropdownSelectModal
+              dropdownOptions={dropdownOptions}
+              onClose={() => setShowDropdownModal(false)}
+              onAdd={addSelectedDropdowns}
+            />
+          )}
+
+          {showDropdownListModal && (
+            <DropdownListSelectModal
+              dropdownListOptions={dropdownListOptions}
+              onClose={() =>
+                setShowDropdownListModal(false)
+              }
+              onAdd={addSelectedDropdownLists}
+            />
+          )}
+
+          {showDropdownList2Modal && (
+            <DropdownList2SelectModal
+              dropdownList2Options={dropdownList2Options}
+              onClose={() =>
+                setShowDropdownList2Modal(false)
+              }
+              onAdd={addSelectedDropdownList2}
+            />
+          )}
+
+          {showAccordionModal && (
+            <AccordionSelectModal
+              accordionOptions={accordionOptions}
+              onClose={() => setShowAccordionModal(false)}
+              onAdd={addSelectedAccordions}
+            />
+          )}
+
+          {showImageSliderModal && (
+            <ImageSliderSelectModal
+              imageSliderOptions={imageSliderOptions}
+              onClose={() =>
+                setShowImageSliderModal(false)
+              }
+              onAdd={addSelectedImageSliders}
+            />
+          )}
+
+          {showAppImageModal && (
+            <AppImageSelectModal
+              appImageOptions={appImageOptions}
+              onClose={() => setShowAppImageModal(false)}
+              onAdd={addSelectedAppImages}
+            />
+          )}
+
+          {showSnackBarModal && (
+            <SnackBarSelectModal
+              snackBarOptions={snackBarOptions}
+              onClose={() => setShowSnackBarModal(false)}
+              onAdd={addSelectedSnackBars}
+            />
+          )}
+
+          {showToggleButtonModal && (
+            <ToggleButtonSelectModal
+              toggleButtonOptions={toggleButtonOptions}
+              onClose={() =>
+                setShowToggleButtonModal(false)
+              }
+              onAdd={addSelectedToggleButtons}
+            />
+          )}
+
+          {showInformationCardModal && (
+            <InformationCardSelectModal
+              informationCardOptions={
+                informationCardOptions
+              }
+              onClose={() =>
+                setShowInformationCardModal(false)
+              }
+              onAdd={addSelectedInformationCards}
+            />
+          )}
+
+          {showChipTagModal && (
+            <ChipTagSelectModal
+              chipTagOptions={chipTagOptions}
+              onClose={() => setShowChipTagModal(false)}
+              onAdd={addSelectedChipTags}
+            />
+          )}
+
+          {showMultiSelectChipModal && (
+            <MultiSelectChipSelectModal
+              multiSelectChipOptions={
+                multiSelectChipOptions
+              }
+              onClose={() =>
+                setShowMultiSelectChipModal(false)
+              }
+              onAdd={addSelectedMultiSelectChips}
+            />
+          )}
+
+          {showVerticalStepperModal && (
+            <VerticalStepperSelectModal
+              verticalStepperOptions={verticalStepperOptions}
+              onClose={() =>
+                setShowVerticalStepperModal(false)
+              }
+              onAdd={addSelectedVerticalSteppers}
+            />
+          )}
+
+          {showHorizontalStepperModal && (
+            <HorizontalStepperSelectModal
+              horizontalStepperOptions={
+                horizontalStepperOptions
+              }
+              onClose={() =>
+                setShowHorizontalStepperModal(false)
+              }
+              onAdd={addSelectedHorizontalSteppers}
+            />
+          )}
+
+          {showStepProgressModal && (
+            <StepProgressSelectModal
+              stepProgressOptions={stepProgressOptions}
+              onClose={() => setShowStepProgressModal(false)}
+              onAdd={addSelectedStepProgress}
+            />
+          )}
+
+          {showFileUploadModal && (
+            <FileUploadSelectModal
+              fileUploadOptions={fileUploadOptions}
+              onClose={() => setShowFileUploadModal(false)}
+              onAdd={addSelectedFileUploads}
+            />
+          )}
+
+          {showGalleryUploadModal && (
+            <GalleryUploadSelectModal
+              galleryUploadOptions={galleryUploadOptions}
+              onClose={() =>
+                setShowGalleryUploadModal(false)
+              }
+              onAdd={addSelectedGalleryUploads}
+            />
+          )}
+
+          {showCustomCameraModal && (
+            <CustomCameraSelectModal
+              customCameraOptions={customCameraOptions}
+              onClose={() =>
+                setShowCustomCameraModal(false)
+              }
+              onAdd={addSelectedCustomCameras}
+            />
+          )}
+
+          {showActionSheetModal && (
+            <ActionSheetSelectModal
+              actionSheetOptions={actionSheetOptions}
+              onClose={() =>
+                setShowActionSheetModal(false)
+              }
+              onAdd={addSelectedActionSheets}
+            />
+          )}
+
+          {showActionSheetImageModal && (
+            <ActionSheetImageSelectModal
+              actionSheetImageOptions={
+                actionSheetImageOptions
+              }
+              onClose={() =>
+                setShowActionSheetImageModal(false)
+              }
+              onAdd={addSelectedActionSheetImages}
+            />
+          )}
+
+          {showSelectionActionSheetModal && (
+            <SelectionActionSheetSelectModal
+              selectionActionSheetOptions={
+                selectionActionSheetOptions
+              }
+              onClose={() =>
+                setShowSelectionActionSheetModal(false)
+              }
+              onAdd={addSelectedSelectionActionSheets}
+            />
+          )}
+
+          {showSelectionIconButtonModal && (
+            <SelectionIconButtonSelectModal
+              selectionIconButtonOptions={
+                selectionIconButtonOptions
+              }
+              onClose={() =>
+                setShowSelectionIconButtonModal(false)
+              }
+              onAdd={addSelectedSelectionIconButtons}
+            />
+          )}
+
+          {showTopTabsModal && (
+            <TopTabsSelectModal
+              topTabsOptions={topTabsOptions}
+              onClose={() => setShowTopTabsModal(false)}
+              onAdd={addSelectedTopTabs}
+            />
+          )}
+
+          {showBottomTabsModal && (
+            <BottomTabsSelectModal
+              bottomTabsOptions={bottomTabsOptions}
+              onClose={() => setShowBottomTabsModal(false)}
+              onAdd={addSelectedBottomTabs}
+            />
+          )}
+
+          {showAccordionSkeletonModal && (
+            <AccordionSkeletonSelectModal
+              accordionSkeletonOptions={
+                accordionSkeletonOptions
+              }
+              onClose={() =>
+                setShowAccordionSkeletonModal(false)
+              }
+              onAdd={addSelectedAccordionSkeletons}
+            />
+          )}
+
+          {showImageSliderSkeletonModal && (
+            <ImageSliderSkeletonSelectModal
+              imageSliderSkeletonOptions={
+                imageSliderSkeletonOptions
+              }
+              onClose={() =>
+                setShowImageSliderSkeletonModal(false)
+              }
+              onAdd={addSelectedImageSliderSkeletons}
+            />
+          )}
+
+          {showStepperSkeletonModal && (
+            <StepperSkeletonSelectModal
+              stepperSkeletonOptions={
+                stepperSkeletonOptions
+              }
+              onClose={() =>
+                setShowStepperSkeletonModal(false)
+              }
+              onAdd={addSelectedStepperSkeletons}
+            />
+          )}
+
+          {showBiometricModal && (
+            <BiometricSelectModal
+              biometricOptions={biometricOptions}
+              onClose={() =>
+                setShowBiometricModal(false)
+              }
+              onAdd={addSelectedBiometrics}
+            />
+          )}
+
+          {showBiometricErrorModal && (
+            <BiometricErrorSelectModal
+              biometricErrorOptions={biometricErrorOptions}
+              onClose={() =>
+                setShowBiometricErrorModal(false)
+              }
+              onAdd={addSelectedBiometricErrors}
+            />
+          )}
+
+          {showContactsModal && (
+            <ContactsSelectModal
+              contactsOptions={contactsOptions}
+              onClose={() => setShowContactsModal(false)}
+              onAdd={addSelectedContacts}
+            />
+          )}
+
+          {showContactsErrorModal && (
+            <ContactsErrorSelectModal
+              contactsErrorOptions={contactsErrorOptions}
+              onClose={() =>
+                setShowContactsErrorModal(false)
+              }
+              onAdd={addSelectedContactsError}
+            />
+          )}
+
+          {showLocationModal && (
+            <LocationSelectModal
+              locationOptions={locationOptions}
+              onClose={() => setShowLocationModal(false)}
+              onAdd={addSelectedLocations}
+            />
+          )}
+
+          {showLanguageModal && (
+            <LanguageSelectModal
+              languageOptions={languageOptions}
+              onClose={() => setShowLanguageModal(false)}
+              onAdd={addSelectedLanguages}
+            />
+          )}
+
+          {showDateNumberFormattingModal && (
+            <DateNumberFormattingSelectModal
+              dateNumberFormattingOptions={
+                dateNumberFormattingOptions
+              }
+              onClose={() =>
+                setShowDateNumberFormattingModal(false)
+              }
+              onAdd={addSelectedDateNumberFormatting}
+            />
+          )}
+
+          {showDeviceInfoModal && (
+            <DeviceInfoSelectModal
+              deviceInfoOptions={deviceInfoOptions}
+              onClose={() => setShowDeviceInfoModal(false)}
+              onAdd={addSelectedDeviceInfo}
+            />
+          )}
+
+          {showDeviceConfigurationModal && (
+            <DeviceConfigurationSelectModal
+              deviceConfigurationOptions={
+                deviceConfigurationOptions
+              }
+              onClose={() =>
+                setShowDeviceConfigurationModal(false)
+              }
+              onAdd={addSelectedDeviceConfigurations}
+            />
+          )}
+
+          {showNavigationModal && (
+            <NavigationSelectModal
+              navigationOptions={navigationOptions}
+              onClose={() => setShowNavigationModal(false)}
+              onAdd={addSelectedNavigation}
+            />
+          )}
+
+          {showInputFieldModal && (
+            <InputFieldSelectModal
+              inputFieldOptions={inputFieldOptions}
+              onClose={() => setShowInputFieldModal(false)}
+              onAdd={addSelectedInputFields}
+            />
+          )}
+
+          {showNotificationModal && (
+            <NotificationSelectModal
+              notificationOptions={notificationOptions}
+              onClose={() => setShowNotificationModal(false)}
+              onAdd={addSelectedNotifications}
+            />
+          )}
+
+          {showToggleModal && (
+            <ToggleSelectModal
+              toggleOptions={toggleOptions}
+              onClose={() => setShowToggleModal(false)}
+              onAdd={addSelectedToggles}
+            />
+          )}
+
+          {showSwitchButtonModal && (
+            <SwitchButtonSelectModal
+              switchButtonOptions={switchButtonOptions}
+              onClose={() => setShowSwitchButtonModal(false)}
+              onAdd={addSelectedSwitchButtons}
+            />
+          )}
+
+          {showHeaderModal && (
+            <HeaderSelectModal
+              headerOptions={headerOptions}
+              onClose={() => setShowHeaderModal(false)}
+              onAdd={addSelectedHeaders}
+            />
+          )}
+
+          {showReadOnlyFormModal && (
+            <ReadOnlyFormSelectModal
+              readOnlyFormOptions={readOnlyFormOptions}
+              onClose={() => setShowReadOnlyFormModal(false)}
+              onAdd={addSelectedReadOnlyForms}
+            />
+          )}
+
+          {showTransactionModal && (
+            <TransactionSelectModal
+              transactionOptions={transactionOptions}
+              onClose={() => setShowTransactionModal(false)}
+              onAdd={addSelectedTransactions}
+            />
+          )}
+
+          {showTransactionSuccessfulModal && (
+            <TransactionSuccessfulSelectModal
+              transactionSuccessfulOptions={
+                transactionSuccessfulOptions
+              }
+              onClose={() =>
+                setShowTransactionSuccessfulModal(false)
+              }
+              onAdd={addSelectedTransactionSuccessful}
+            />
+          )}
+
+          {showPassbookModal && (
+            <PassbookSelectModal
+              passbookOptions={passbookOptions}
+              onClose={() => setShowPassbookModal(false)}
+              onAdd={addSelectedPassbooks}
+            />
+          )}
+
+          {showFundTransferModal && (
+            <FundTransferSelectModal
+              fundTransferOptions={fundTransferOptions}
+              onClose={() => setShowFundTransferModal(false)}
+              onAdd={addSelectedFundTransfers}
+            />
+          )}
+
+          {showTransactionSuccessStatusModal && (
+            <TransactionSuccessStatusSelectModal
+              transactionSuccessStatusOptions={
+                transactionSuccessStatusOptions
+              }
+              onClose={() =>
+                setShowTransactionSuccessStatusModal(false)
+              }
+              onAdd={addSelectedTransactionSuccessStatus}
+            />
+          )}
+
+          {showTransactionFailedStatusModal && (
+            <TransactionFailedStatusSelectModal
+              transactionFailedStatusOptions={
+                transactionFailedStatusOptions
+              }
+              onClose={() =>
+                setShowTransactionFailedStatusModal(false)
+              }
+              onAdd={addSelectedTransactionFailedStatus}
+            />
+          )}
+
+          {showTransactionDetailsModal && (
+            <TransactionDetailsSelectModal
+              transactionDetailsOptions={
+                transactionDetailsOptions
+              }
+              onClose={() =>
+                setShowTransactionDetailsModal(false)
+              }
+              onAdd={addSelectedTransactionDetails}
+            />
+          )}
+
+          {showMyTransactionsModal && (
+            <MyTransactionsSelectModal
+              myTransactionsOptions={myTransactionsOptions}
+              onClose={() => setShowMyTransactionsModal(false)}
+              onAdd={addSelectedMyTransactions}
+            />
+          )}
+
+          {showPhonebookModal && (
+            <PhonebookSelectModal
+              phonebookOptions={phonebookOptions}
+              onClose={() => setShowPhonebookModal(false)}
+              onAdd={addSelectedPhonebooks}
+            />
+          )}
+
+          {showPhonebookAccessModal && (
+            <PhonebookAccessSelectModal
+              phonebookAccessOptions={
+                phonebookAccessOptions
+              }
+              onClose={() =>
+                setShowPhonebookAccessModal(false)
+              }
+              onAdd={addSelectedPhonebookAccess}
+            />
+          )}
+
+          {showMultiSelectCardsModal && (
+            <MultiSelectCardsSelectModal
+              multiSelectCardsOptions={multiSelectCardsOptions}
+              onClose={() => setShowMultiSelectCardsModal(false)}
+              onAdd={addSelectedMultiSelectCards}
+            />
+          )}
+
+          {showIconWithCardModal && (
+            <IconWithCardSelectModal
+              iconWithCardOptions={iconWithCardOptions}
+              onClose={() => setShowIconWithCardModal(false)}
+              onAdd={addSelectedIconWithCard}
+            />
+          )}
+
+          {showScannerModal && (
+            <ScannerSelectModal
+              scannerOptions={scannerOptions}
+              onClose={() => setShowScannerModal(false)}
+              onAdd={addSelectedScanners}
+            />
+          )}
+
+          {showBackButtonModal && (
+            <BackButtonSelectModal
+              backButtonOptions={
+                backButtonOptions
+              }
+              onClose={() =>
+                setShowBackButtonModal(false)
+              }
+              onAdd={
+                addSelectedBackButtons
+              }
+            />
+          )}
+        </>
       )}
-
-      {showButtonModal && (
-        <ButtonSelectModal
-          buttonOptions={buttonOptions}
-          onClose={() =>
-            setShowButtonModal(false)
-          }
-          onAdd={addSelectedButtons}
-        />
-      )}
-
-      {showTextFieldModal && (
-        <TextFieldSelectModal
-          textFieldOptions={textFieldOptions}
-          onClose={() => setShowTextFieldModal(false)}
-          onAdd={addSelectedTextFields}
-        />
-      )}
-
-      {showEmailFieldModal && (
-        <EmailFieldSelectModal
-          emailFieldOptions={emailFieldOptions}
-          onClose={() => setShowEmailFieldModal(false)}
-          onAdd={addSelectedEmailFields}
-        />
-      )}
-
-      {showPasswordFieldModal && (
-        <PasswordFieldSelectModal
-          passwordFieldOptions={passwordFieldOptions}
-          onClose={() =>
-            setShowPasswordFieldModal(false)
-          }
-          onAdd={addSelectedPasswordFields}
-        />
-      )}
-
-      {showSearchFieldModal && (
-        <SearchFieldSelectModal
-          searchFieldOptions={searchFieldOptions}
-          onClose={() => setShowSearchFieldModal(false)}
-          onAdd={addSelectedSearchFields}
-        />
-      )}
-
-
-      {showVerificationFieldModal && (
-        <VerificationFieldSelectModal
-          verificationFieldOptions={
-            verificationFieldOptions
-          }
-          onClose={() =>
-            setShowVerificationFieldModal(false)
-          }
-          onAdd={addSelectedVerificationFields}
-        />
-      )}
-
-      {showDobFieldModal && (
-        <DobFieldSelectModal
-          dobFieldOptions={dobFieldOptions}
-          onClose={() =>
-            setShowDobFieldModal(false)
-          }
-          onAdd={addSelectedDobFields}
-        />
-      )}
-
-      {showOtpFieldModal && (
-        <OtpFieldSelectModal
-          otpFieldOptions={otpFieldOptions}
-          onClose={() => setShowOtpFieldModal(false)}
-          onAdd={addSelectedOtpFields}
-        />
-      )}
-
-      {showBioFieldModal && (
-        <BioFieldSelectModal
-          bioFieldOptions={bioFieldOptions}
-          onClose={() =>
-            setShowBioFieldModal(false)
-          }
-          onAdd={addSelectedBioFields}
-        />
-      )}
-
-      {showCreditCardFieldModal && (
-        <CreditCardFieldSelectModal
-          creditCardFieldOptions={
-            creditCardFieldOptions
-          }
-          onClose={() =>
-            setShowCreditCardFieldModal(false)
-          }
-          onAdd={addSelectedCreditCardFields}
-        />
-      )}
-
-      {showCvvFieldModal && (
-        <CvvFieldSelectModal
-          cvvFieldOptions={cvvFieldOptions}
-          onClose={() =>
-            setShowCvvFieldModal(false)
-          }
-          onAdd={addSelectedCvvFields}
-        />
-      )}
-
-      {showPhoneNumberFieldModal && (
-        <PhoneNumberFieldSelectModal
-          phoneNumberFieldOptions={
-            phoneNumberFieldOptions
-          }
-          onClose={() =>
-            setShowPhoneNumberFieldModal(false)
-          }
-          onAdd={addSelectedPhoneNumberFields}
-        />
-      )}
-
-      {showCheckboxModal && (
-        <CheckboxSelectModal
-          checkboxOptions={checkboxOptions}
-          onClose={() => setShowCheckboxModal(false)}
-          onAdd={addSelectedCheckboxes}
-        />
-      )}
-
-      {showRadioButtonModal && (
-        <RadioButtonSelectModal
-          radioButtonOptions={radioButtonOptions}
-          onClose={() => setShowRadioButtonModal(false)}
-          onAdd={addSelectedRadioButtons}
-        />
-      )}
-
-      {showCardRadioModal && (
-        <CardRadioSelectModal
-          cardRadioOptions={cardRadioOptions}
-          onClose={() =>
-            setShowCardRadioModal(false)
-          }
-          onAdd={addSelectedCardRadios}
-        />
-      )}
-
-      {showCustomRadioModal && (
-        <CustomRadioSelectModal
-          customRadioOptions={customRadioOptions}
-          onClose={() => setShowCustomRadioModal(false)}
-          onAdd={addSelectedCustomRadios}
-        />
-      )}
-
-      {showDropdownModal && (
-        <DropdownSelectModal
-          dropdownOptions={dropdownOptions}
-          onClose={() => setShowDropdownModal(false)}
-          onAdd={addSelectedDropdowns}
-        />
-      )}
-
-      {showDropdownListModal && (
-        <DropdownListSelectModal
-          dropdownListOptions={dropdownListOptions}
-          onClose={() =>
-            setShowDropdownListModal(false)
-          }
-          onAdd={addSelectedDropdownLists}
-        />
-      )}
-
-      {showDropdownList2Modal && (
-        <DropdownList2SelectModal
-          dropdownList2Options={dropdownList2Options}
-          onClose={() =>
-            setShowDropdownList2Modal(false)
-          }
-          onAdd={addSelectedDropdownList2}
-        />
-      )}
-
-      {showAccordionModal && (
-        <AccordionSelectModal
-          accordionOptions={accordionOptions}
-          onClose={() => setShowAccordionModal(false)}
-          onAdd={addSelectedAccordions}
-        />
-      )}
-
-      {showImageSliderModal && (
-        <ImageSliderSelectModal
-          imageSliderOptions={imageSliderOptions}
-          onClose={() =>
-            setShowImageSliderModal(false)
-          }
-          onAdd={addSelectedImageSliders}
-        />
-      )}
-
-      {showAppImageModal && (
-        <AppImageSelectModal
-          appImageOptions={appImageOptions}
-          onClose={() => setShowAppImageModal(false)}
-          onAdd={addSelectedAppImages}
-        />
-      )}
-
-      {showSnackBarModal && (
-        <SnackBarSelectModal
-          snackBarOptions={snackBarOptions}
-          onClose={() => setShowSnackBarModal(false)}
-          onAdd={addSelectedSnackBars}
-        />
-      )}
-
-      {showToggleButtonModal && (
-        <ToggleButtonSelectModal
-          toggleButtonOptions={toggleButtonOptions}
-          onClose={() =>
-            setShowToggleButtonModal(false)
-          }
-          onAdd={addSelectedToggleButtons}
-        />
-      )}
-
-      {showInformationCardModal && (
-        <InformationCardSelectModal
-          informationCardOptions={
-            informationCardOptions
-          }
-          onClose={() =>
-            setShowInformationCardModal(false)
-          }
-          onAdd={addSelectedInformationCards}
-        />
-      )}
-
-      {showChipTagModal && (
-        <ChipTagSelectModal
-          chipTagOptions={chipTagOptions}
-          onClose={() => setShowChipTagModal(false)}
-          onAdd={addSelectedChipTags}
-        />
-      )}
-
-      {showMultiSelectChipModal && (
-        <MultiSelectChipSelectModal
-          multiSelectChipOptions={
-            multiSelectChipOptions
-          }
-          onClose={() =>
-            setShowMultiSelectChipModal(false)
-          }
-          onAdd={addSelectedMultiSelectChips}
-        />
-      )}
-
-      {showVerticalStepperModal && (
-        <VerticalStepperSelectModal
-          verticalStepperOptions={verticalStepperOptions}
-          onClose={() =>
-            setShowVerticalStepperModal(false)
-          }
-          onAdd={addSelectedVerticalSteppers}
-        />
-      )}
-
-      {showHorizontalStepperModal && (
-        <HorizontalStepperSelectModal
-          horizontalStepperOptions={
-            horizontalStepperOptions
-          }
-          onClose={() =>
-            setShowHorizontalStepperModal(false)
-          }
-          onAdd={addSelectedHorizontalSteppers}
-        />
-      )}
-
-      {showStepProgressModal && (
-        <StepProgressSelectModal
-          stepProgressOptions={stepProgressOptions}
-          onClose={() => setShowStepProgressModal(false)}
-          onAdd={addSelectedStepProgress}
-        />
-      )}
-
-      {showFileUploadModal && (
-        <FileUploadSelectModal
-          fileUploadOptions={fileUploadOptions}
-          onClose={() => setShowFileUploadModal(false)}
-          onAdd={addSelectedFileUploads}
-        />
-      )}
-
-      {showGalleryUploadModal && (
-        <GalleryUploadSelectModal
-          galleryUploadOptions={galleryUploadOptions}
-          onClose={() =>
-            setShowGalleryUploadModal(false)
-          }
-          onAdd={addSelectedGalleryUploads}
-        />
-      )}
-
-      {showCustomCameraModal && (
-        <CustomCameraSelectModal
-          customCameraOptions={customCameraOptions}
-          onClose={() =>
-            setShowCustomCameraModal(false)
-          }
-          onAdd={addSelectedCustomCameras}
-        />
-      )}
-
-      {showActionSheetModal && (
-        <ActionSheetSelectModal
-          actionSheetOptions={actionSheetOptions}
-          onClose={() =>
-            setShowActionSheetModal(false)
-          }
-          onAdd={addSelectedActionSheets}
-        />
-      )}
-
-      {showActionSheetImageModal && (
-        <ActionSheetImageSelectModal
-          actionSheetImageOptions={
-            actionSheetImageOptions
-          }
-          onClose={() =>
-            setShowActionSheetImageModal(false)
-          }
-          onAdd={addSelectedActionSheetImages}
-        />
-      )}
-
-      {showSelectionActionSheetModal && (
-        <SelectionActionSheetSelectModal
-          selectionActionSheetOptions={
-            selectionActionSheetOptions
-          }
-          onClose={() =>
-            setShowSelectionActionSheetModal(false)
-          }
-          onAdd={addSelectedSelectionActionSheets}
-        />
-      )}
-
-      {showSelectionIconButtonModal && (
-        <SelectionIconButtonSelectModal
-          selectionIconButtonOptions={
-            selectionIconButtonOptions
-          }
-          onClose={() =>
-            setShowSelectionIconButtonModal(false)
-          }
-          onAdd={addSelectedSelectionIconButtons}
-        />
-      )}
-
-      {showTopTabsModal && (
-        <TopTabsSelectModal
-          topTabsOptions={topTabsOptions}
-          onClose={() => setShowTopTabsModal(false)}
-          onAdd={addSelectedTopTabs}
-        />
-      )}
-
-      {showBottomTabsModal && (
-        <BottomTabsSelectModal
-          bottomTabsOptions={bottomTabsOptions}
-          onClose={() => setShowBottomTabsModal(false)}
-          onAdd={addSelectedBottomTabs}
-        />
-      )}
-
-      {showAccordionSkeletonModal && (
-        <AccordionSkeletonSelectModal
-          accordionSkeletonOptions={
-            accordionSkeletonOptions
-          }
-          onClose={() =>
-            setShowAccordionSkeletonModal(false)
-          }
-          onAdd={addSelectedAccordionSkeletons}
-        />
-      )}
-
-      {showImageSliderSkeletonModal && (
-        <ImageSliderSkeletonSelectModal
-          imageSliderSkeletonOptions={
-            imageSliderSkeletonOptions
-          }
-          onClose={() =>
-            setShowImageSliderSkeletonModal(false)
-          }
-          onAdd={addSelectedImageSliderSkeletons}
-        />
-      )}
-
-      {showStepperSkeletonModal && (
-        <StepperSkeletonSelectModal
-          stepperSkeletonOptions={
-            stepperSkeletonOptions
-          }
-          onClose={() =>
-            setShowStepperSkeletonModal(false)
-          }
-          onAdd={addSelectedStepperSkeletons}
-        />
-      )}
-
-      {showBiometricModal && (
-        <BiometricSelectModal
-          biometricOptions={biometricOptions}
-          onClose={() =>
-            setShowBiometricModal(false)
-          }
-          onAdd={addSelectedBiometrics}
-        />
-      )}
-
-      {showBiometricErrorModal && (
-        <BiometricErrorSelectModal
-          biometricErrorOptions={biometricErrorOptions}
-          onClose={() =>
-            setShowBiometricErrorModal(false)
-          }
-          onAdd={addSelectedBiometricErrors}
-        />
-      )}
-
-      {showContactsModal && (
-        <ContactsSelectModal
-          contactsOptions={contactsOptions}
-          onClose={() => setShowContactsModal(false)}
-          onAdd={addSelectedContacts}
-        />
-      )}
-
-      {showContactsErrorModal && (
-        <ContactsErrorSelectModal
-          contactsErrorOptions={contactsErrorOptions}
-          onClose={() =>
-            setShowContactsErrorModal(false)
-          }
-          onAdd={addSelectedContactsError}
-        />
-      )}
-
-      {showLocationModal && (
-        <LocationSelectModal
-          locationOptions={locationOptions}
-          onClose={() => setShowLocationModal(false)}
-          onAdd={addSelectedLocations}
-        />
-      )}
-
-      {showLanguageModal && (
-        <LanguageSelectModal
-          languageOptions={languageOptions}
-          onClose={() => setShowLanguageModal(false)}
-          onAdd={addSelectedLanguages}
-        />
-      )}
-
-      {showDateNumberFormattingModal && (
-        <DateNumberFormattingSelectModal
-          dateNumberFormattingOptions={
-            dateNumberFormattingOptions
-          }
-          onClose={() =>
-            setShowDateNumberFormattingModal(false)
-          }
-          onAdd={addSelectedDateNumberFormatting}
-        />
-      )}
-
-      {showDeviceInfoModal && (
-        <DeviceInfoSelectModal
-          deviceInfoOptions={deviceInfoOptions}
-          onClose={() => setShowDeviceInfoModal(false)}
-          onAdd={addSelectedDeviceInfo}
-        />
-      )}
-
-      {showDeviceConfigurationModal && (
-        <DeviceConfigurationSelectModal
-          deviceConfigurationOptions={
-            deviceConfigurationOptions
-          }
-          onClose={() =>
-            setShowDeviceConfigurationModal(false)
-          }
-          onAdd={addSelectedDeviceConfigurations}
-        />
-      )}
-
-      {showNavigationModal && (
-        <NavigationSelectModal
-          navigationOptions={navigationOptions}
-          onClose={() => setShowNavigationModal(false)}
-          onAdd={addSelectedNavigation}
-        />
-      )}
-
-      {showInputFieldModal && (
-        <InputFieldSelectModal
-          inputFieldOptions={inputFieldOptions}
-          onClose={() => setShowInputFieldModal(false)}
-          onAdd={addSelectedInputFields}
-        />
-      )}
-      </>
-    )}
-  </>
-);
+    </>
+  );
 }

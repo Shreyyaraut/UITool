@@ -19,7 +19,7 @@ export default function NavigationComponent() {
               index === 0 ? "active" : ""
             }`}
           >
-            <IoMdHome/>
+            <IoMdHome />
             <span>{item}</span>
           </div>
         ))}
