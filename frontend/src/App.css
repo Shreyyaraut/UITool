@@ -882,7 +882,7 @@ body {
 
 .heading-add-btn {
   width: 100%;
-  height: 44px;
+  height: 35px;
   margin-top: 18px;
   border: none;
   border-radius: 12px;
@@ -1705,7 +1705,7 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
   color: var(--text-white);
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 700;
 }
 
@@ -2595,7 +2595,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 28px;
+  height: 25px;
   width: fit-content;
   padding: 0 14px;
   border-radius: 999px;
@@ -2667,7 +2667,7 @@ body {
 }
 
 .multi-chip {
-  height: 32px;
+  height: 25px;
   padding: 0 10px;
   border-radius: 999px;
   font-size: 9px;
@@ -3958,20 +3958,20 @@ body {
 
 .biometric-sheet h3 {
   margin: 0 0 44px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--text-primary);
 }
 
 .biometric-icon {
-  font-size: 54px;
+  font-size: 45px;
   color: var(--primary-color);
-  margin-bottom: 44px;
+  margin-bottom: 40px;
 }
 
 .biometric-sheet p {
   margin: 0 0 50px;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-primary);
 }
 
@@ -5481,7 +5481,7 @@ input[type="radio"] {
 }
 
 .toggle-preview-option {
-  min-height: 58px;
+  height: 55px;
   border: 1px solid var(--border-light);
   border-radius: 12px;
   padding: 14px;
@@ -7359,4 +7359,92 @@ input[type="radio"] {
   min-height: 100%;
   margin: -42px -24px 0 -24px;
   padding: 0 12px;
+}
+
+.face-id-screen {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  background: #a3a3a3;
+  overflow: hidden;
+}
+
+.face-id-overlay {
+  position: absolute;
+  inset: 0;
+  background: #a3a3a3;
+}
+
+.face-id-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 26px 20px 46px;
+  border-radius: 24px 24px 0 0;
+  background: var(--bg-primary);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.face-id-sheet h3 {
+  margin: 0 0 44px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.face-id-icon {
+  font-size: 40px;
+  color: var(--text-primary);
+  margin-bottom: 40px;
+}
+
+.face-id-sheet p {
+  margin: 0 0 38px;
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.face-id-sheet button {
+  width: 100%;
+  height: 35px;
+  border: 1px solid var(--text-primary);
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.face-id-preview-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.face-id-preview-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.face-id-preview-option > input {
+  width: 16px;
+  height: 16px;
+  margin-top: 14px;
+  flex-shrink: 0;
+  accent-color: var(--primary-color);
+}
+
+.face-id-preview-box {
+  flex: 1;
+  height: 420px;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-primary);
 }

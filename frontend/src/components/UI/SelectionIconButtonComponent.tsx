@@ -44,7 +44,7 @@ export default function SelectionIconButtonComponent({
       </h4>
 
       <div className="selection-icon-row">
-        {[1, 2, 3].map((item) => (
+        {[1].map((item) => (
           <button
             key={item}
             disabled={variant === "disabled"}

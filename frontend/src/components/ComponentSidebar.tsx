@@ -3,37 +3,34 @@ import {
   FiSearch,
   FiDownload,
 } from "react-icons/fi";
-import { componentList } from "../data/components";
-import type {
-  ComponentType,
-  HeadingLevel,
-} from "../types";
+import { componentGroups } from "../data/components";
 
 interface Props {
   search: string;
   setSearch: React.Dispatch<
     React.SetStateAction<string>
   >;
-  addComponent: (
-    type: ComponentType,
-    label: string,
-    headingLevel?: HeadingLevel
-  ) => void;
+  openGroupModal: (groupIndex: number) => void;
   downloadPng: () => void;
 }
 
 export default function ComponentSidebar({
   search,
   setSearch,
-  addComponent,
+  openGroupModal,
   downloadPng,
 }: Props) {
-  const filteredComponents =
-    componentList.filter((item) =>
-      item.label
+  const filteredGroups = componentGroups.filter(
+    (group) =>
+      group.category
         .toLowerCase()
-        .includes(search.toLowerCase())
-    );
+        .includes(search.toLowerCase()) ||
+      group.options.some((item) =>
+        item.label
+          .toLowerCase()
+          .includes(search.toLowerCase())
+      )
+  );
 
   return (
     <div className="components-panel">
@@ -66,27 +63,31 @@ export default function ComponentSidebar({
       </div>
 
       <div className="component-list">
-        {filteredComponents.map((item, index) => (
-          <div
-            className="component-item"
-            key={`${item.type}-${item.label}-${index}`}
-          >
-            <span>{item.label}</span>
+        {filteredGroups.map((group) => {
+          const groupIndex =
+            componentGroups.findIndex(
+              (item) =>
+                item.category === group.category
+            );
 
-            <button
-              type="button"
-              onClick={() =>
-                addComponent(
-                  item.type,
-                  item.label,
-                  // item.headingLevel
-                )
-              }
+          return (
+            <div
+              className="component-item"
+              key={group.category}
             >
-              <FiPlus />
-            </button>
-          </div>
-        ))}
+              <span>{group.category}</span>
+
+              <button
+                type="button"
+                onClick={() =>
+                  openGroupModal(groupIndex)
+                }
+              >
+                <FiPlus />
+              </button>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

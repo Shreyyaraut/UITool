@@ -1,85 +1,114 @@
 import type { ComponentType } from "../types";
 
-export const componentList: {
-    type: ComponentType;
-    label: string;
-}[] = [
-        { type: "heading", label: "Heading" },
-        { type: "button", label: "Button" },
-        { type: "inputField", label: "Input Field" },
-        // { type: "textField", label: "Text Field" },
-        // { type: "emailField", label: "Email Field" },
-        // { type: "passwordField", label: "Password Field" },
-        // { type: "searchField", label: "Serach Field" },
-        // { type: "verificationField", label: "Verification Field" },
-        // { type: "dobField", label: "DOB Field" },
-        // { type: "otpField", label: "OTP Field" },
-        // { type: "bioField", label: "Bio Field" },
-        // { type: "creditCardField", label: "Credit Card Field" },
-        // { type: "cvvField", label: "CVV Field" },
-        // { type: "phoneNumberField", label: "Phone Number Field" },
-        { type: "checkbox", label: "Check Box" },
-        { type: "radioButton", label: "Radio Button" },
-        { type: "cardRadio", label: "Card Radio" },
-        { type: "customRadio", label: "Custom Radio" },
-        { type: "dropdown", label: "Dropdown" },
-        { type: "dropdownList", label: "Dropdown List" },
-        { type: "dropdownList2", label: "Dropdown List 2" },
-        { type: "accordion", label: "Accordion" },
-        { type: "imageSlider", label: "Image Slider" },
-        { type: "appImage", label: "App Image" },
-        { type: "snackBar", label: "Snack Bar" },
-        { type: "toggleButton", label: "Toggle Button" },
-        { type: "informationCard", label: "Information Card" },
-        { type: "chipTag", label: "Chip Tag" },
-        { type: "multiSelectChip", label: "Multi Select Chip Tag" },
-        { type: "verticalStepper", label: "Vertical Stepper" },
-        { type: "horizontalStepper", label: "Horizontal Stepper" },
-        { type: "stepProgress", label: "Step Progress Bar" },
-        { type: "fileUpload", label: "File Upload" },
-        { type: "galleryUpload", label: "Gallery Upload" },
-        { type: "customCamera", label: "Custom Camera" },
-        { type: "actionSheet", label: "Action Sheet" },
-        { type: "actionSheetImage", label: "Action Sheet with Image" },
-        { type: "selectionActionSheet", label: "Selection Action Sheet" },
-        { type: "selectionIconButton", label: "Selection Icon Button" },
-        { type: "accordionSkeleton", label: "Accordion Skeleton" },
-        { type: "imageSliderSkeleton", label: "Image Slider Skeleton" },
-        { type: "stepperSkeleton", label: "Stepper Skeleton" },
-        { type: "biometric", label: "Biometric" },
-        { type: "biometricError", label: "Biometric Error" },
-        { type: "contacts", label: "Contacts" },
-        { type: "contactsError", label: "Contacts Error" },
-        { type: "location", label: "Location" },
-        { type: "language", label: "Language" },
-        { type: "dateNumberFormatting", label: "Date & Number Formatting" },
-        { type: "deviceInfo", label: "Device Info" },
-        { type: "deviceConfiguration", label: "Device Configuration" },
-        { type: "navigation", label: "Navigation" },
-        // { type: "card", label: "Card" },
-        // // { type: "input", label: "Input Box" },
-        // // { type: "textarea", label: "Textarea" },
-        // // { type: "paragraph", label: "Paragraph" },
-        // { type: "sideMenu", label: "Side Menu" },
-        { type: "topTabs", label: "Top Tabs" },
-        { type: "bottomTabs", label: "Bottom Tabs" },
-        { type: "notification", label: "Notification" },
-        { type: "toggle", label: "Toggle" },
-        { type: "switchButton", label: "Switch Button" },
-        { type: "header", label: "Header" },
-        { type: "readOnlyForm", label: "Read Only Form" },
-        { type: "transaction", label: "Transaction" },
-        { type: "transactionSuccessful", label: "Transaction Successful" },
-        { type: "passbook", label: "Passbook" },
-        { type: "fundTransfer", label: "Fund Transfer" },
-        { type: "transactionSuccessStatus", label: "Transaction Success Status" },
-        { type: "transactionFailedStatus", label: "Transaction Failed Status" },
-        { type: "transactionDetails", label: "Transaction Details" },
-        // { type: "myTransactions", label: "My Transactions" },
-        { type: "phonebook", label: "Phonebook" },
-        { type: "phonebookAccess", label: "Phonebook Access" },
-        { type: "multiSelectCards", label: "Multi Select Cards" },
-        { type: "iconWithCard", label: "Icons With Card" },
-        { type: "scanner", label: "Scanner" },
-        { type: "backButton", label: "Back Button" }
-    ];
+export interface ComponentOption {
+  type: ComponentType;
+  label: string;
+}
+
+export interface ComponentGroup {
+  category: string;
+  options: ComponentOption[];
+}
+
+export const componentGroups: ComponentGroup[] = [
+  {
+    category: "Basic Components",
+    options: [
+      { type: "heading", label: "Heading" },
+      { type: "button", label: "Button" },
+      { type: "inputField", label: "Input Field" },
+    ],
+  },
+  {
+    category: "Selection Controls",
+    options: [
+      { type: "checkbox", label: "Check Box" },
+      { type: "radioButton", label: "Radio Button" },
+      { type: "cardRadio", label: "Card Radio" },
+      { type: "customRadio", label: "Custom Radio" },
+      { type: "toggle", label: "Toggle" },
+      { type: "toggleButton", label: "Toggle Button" },
+      { type: "switchButton", label: "Switch Button" },
+    ],
+  },
+  {
+    category: "Dropdowns & Forms",
+    options: [
+      { type: "dropdown", label: "Dropdown" },
+      { type: "dropdownList", label: "Dropdown List" },
+      { type: "dropdownList2", label: "Dropdown List 2" },
+      { type: "readOnlyForm", label: "Read Only Form" },
+    ],
+  },
+  {
+    category: "Media & Upload",
+    options: [
+      { type: "accordion", label: "Accordion" },
+      { type: "imageSlider", label: "Image Slider" },
+      { type: "appImage", label: "App Image" },
+      { type: "fileUpload", label: "File Upload" },
+      { type: "galleryUpload", label: "Gallery Upload" },
+      { type: "customCamera", label: "Custom Camera" },
+      { type: "scanner", label: "Scanner" },
+    ],
+  },
+  {
+    category: "Navigation",
+    options: [
+      { type: "navigation", label: "Navigation" },
+      { type: "topTabs", label: "Top Tabs" },
+      { type: "bottomTabs", label: "Bottom Tabs" },
+      { type: "header", label: "Header" },
+      { type: "backButton", label: "Back Button" },
+    ],
+  },
+  {
+    category: "Transaction",
+    options: [
+      { type: "transaction", label: "Transaction" },
+      { type: "transactionSuccessful", label: "Transaction Successful" },
+      { type: "passbook", label: "Passbook" },
+      { type: "fundTransfer", label: "Fund Transfer" },
+      { type: "transactionSuccessStatus", label: "Transaction Success Status" },
+      { type: "transactionFailedStatus", label: "Transaction Failed Status" },
+      { type: "transactionDetails", label: "Transaction Details" },
+    ],
+  },
+  {
+    category: "Device & Access",
+    options: [
+      { type: "contacts", label: "Contacts" },
+      { type: "contactsError", label: "Contacts Error" },
+      { type: "phonebook", label: "Phonebook" },
+      { type: "phonebookAccess", label: "Phonebook Access" },
+      { type: "location", label: "Location" },
+      { type: "language", label: "Language" },
+      { type: "dateNumberFormatting", label: "Date & Number Formatting" },
+      { type: "deviceInfo", label: "Device Info" },
+      { type: "deviceConfiguration", label: "Device Configuration" },
+    ],
+  },
+  {
+    category: "Security",
+    options: [
+      { type: "biometric", label: "Biometric" },
+      { type: "faceId", label: "Face ID" },
+      { type: "biometricError", label: "Biometric Error" },
+    ],
+  },
+  {
+    category: "Feedback",
+    options: [
+      { type: "snackBar", label: "Snack Bar" },
+      { type: "notification", label: "Notification" },
+    ],
+  },
+  {
+    category: "Skeletons",
+    options: [
+      { type: "accordionSkeleton", label: "Accordion Skeleton" },
+      { type: "imageSliderSkeleton", label: "Image Slider Skeleton" },
+      { type: "stepperSkeleton", label: "Stepper Skeleton" },
+    ],
+  },
+];

@@ -77,6 +77,7 @@ import MultiSelectCardsComponent from "./UI/MultiSelectCardsComponent";
 import IconWithCardComponent from "./UI/IconWithCardComponent";
 import ScannerComponent from "./UI/ScannerComponent";
 import BackButtonComponent from "./UI/BackButtonComponent";
+import FaceIdComponent from "./UI/FaceIdComponent";
 
 interface Props {
     item: UIComponent;
@@ -335,6 +336,9 @@ export default function RenderComponent({ item }: Props) {
 
         case "backButton":
             return <BackButtonComponent />;    
+
+        case "faceId":
+            return <FaceIdComponent />;    
 
         default:
             return null;

@@ -85,6 +85,9 @@ import IconWithCardSelectModal from "./components/IconWithCardSelectModal";
 import ToggleSelectModal from "./components/ToggleSelectModal";
 import ScannerSelectModal from "./components/ScannerSelectModal";
 import BackButtonSelectModal from "./components/BackButtonSelectModal";
+import FaceIdSelectModal from "./components/FaceIdSelectModal";
+import ComponentGroupSelectModal from "./components/ComponentGroupSelectModal";
+import { componentGroups } from "./data/components";
 
 
 import type {
@@ -699,6 +702,12 @@ const biometricOptions = [
   },
 ];
 
+const faceIdOptions = [
+  {
+    label: "Face ID",
+  },
+];
+
 const biometricErrorOptions = [
   {
     label: "Biometric Error",
@@ -1123,6 +1132,9 @@ export default function App() {
   const [showBiometricModal, setShowBiometricModal] =
     useState(false);
 
+  const [showFaceIdModal, setShowFaceIdModal] =
+    useState(false);  
+
   const [
     showBiometricErrorModal,
     setShowBiometricErrorModal,
@@ -1218,6 +1230,9 @@ export default function App() {
     showBackButtonModal,
     setShowBackButtonModal,
   ] = useState(false);
+
+  const [selectedGroupIndex, setSelectedGroupIndex] =
+  useState<number | null>(null);
 
 
   useEffect(() => {
@@ -1337,6 +1352,21 @@ export default function App() {
       return [...prev, ...newItems];
     });
   };
+
+  const addSelectedGroupComponents = (
+  selectedItems: {
+    type: ComponentType;
+    label: string;
+  }[]
+) => {
+  setSelectedGroupIndex(null);
+
+  selectedItems.forEach((item) => {
+    setTimeout(() => {
+      addComponent(item.type, item.label);
+    }, 0);
+  });
+};
 
   const addComponent = (
     type: ComponentType,
@@ -1562,6 +1592,11 @@ export default function App() {
       return;
     }
 
+    if (type === "faceId") {
+  setShowFaceIdModal(true);
+  return;
+}
+
     if (type === "biometricError") {
       setShowBiometricErrorModal(true);
       return;
@@ -1705,7 +1740,6 @@ export default function App() {
       setShowBackButtonModal(true);
       return;
     }
-
 
     const size = getDefaultSize(type);
 
@@ -2748,6 +2782,25 @@ export default function App() {
     setShowBiometricModal(false);
   };
 
+  const addSelectedFaceIds = (
+  selectedItems: { label: string }[]
+) => {
+  const faceIdComponents: UIComponent[] =
+    selectedItems.map((item) => ({
+      id: crypto.randomUUID(),
+      type: "faceId",
+      label: item.label,
+      x: 0,
+      y: 0,
+      width: 220,
+      height: 560,
+      children: [],
+    }));
+
+  addItemsToCanvas(faceIdComponents);
+  setShowFaceIdModal(false);
+};
+
   const addSelectedBiometricErrors = (
     selectedBiometricErrors: {
       label: string;
@@ -3558,11 +3611,11 @@ export default function App() {
           />
 
           <ComponentSidebar
-            search={search}
-            setSearch={setSearch}
-            addComponent={addComponent}
-            downloadPng={downloadPng}
-          />
+  search={search}
+  setSearch={setSearch}
+  openGroupModal={setSelectedGroupIndex}
+  downloadPng={downloadPng}
+/>
 
         </div>
       )}
@@ -3587,6 +3640,16 @@ export default function App() {
       {isBuilderRoute && (
         <>
           {/* keep all your modals here */}
+
+          {selectedGroupIndex !== null && (
+  <ComponentGroupSelectModal
+    title={componentGroups[selectedGroupIndex].category}
+    options={componentGroups[selectedGroupIndex].options}
+    onClose={() => setSelectedGroupIndex(null)}
+    onAdd={addSelectedGroupComponents}
+  />
+)}
+
           {showHeadingModal && (
             <HeadingSelectModal
               headingOptions={headingOptions}
@@ -4019,6 +4082,14 @@ export default function App() {
               onAdd={addSelectedBiometrics}
             />
           )}
+
+          {showFaceIdModal && (
+  <FaceIdSelectModal
+    faceIdOptions={faceIdOptions}
+    onClose={() => setShowFaceIdModal(false)}
+    onAdd={addSelectedFaceIds}
+  />
+)}
 
           {showBiometricErrorModal && (
             <BiometricErrorSelectModal

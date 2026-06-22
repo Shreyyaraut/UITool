@@ -76,7 +76,8 @@ export type ComponentType =
   | "multiSelectCards"
   | "iconWithCard"
   | "scanner"
-  | "backButton";
+  | "backButton"
+  | "faceId";
 
 export type HeadingLevel =
   | "display"
