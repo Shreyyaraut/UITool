@@ -3378,27 +3378,29 @@ export default function App() {
     setShowScannerModal(false);
   };
 
-  const addSelectedBackButtons = (
-    selectedItems: {
-      label: string;
-    }[]
-  ) => {
-    const backButtonComponents =
-      selectedItems.map((item) => ({
-        id: crypto.randomUUID(),
-        type: "backButton",
-        label: item.label,
-        width: 220,
-        height: 56,
-        children: [],
-      }));
+ const addSelectedBackButtons = (
+  selectedItems: {
+    label: string;
+  }[]
+) => {
+  const backButtonComponents: UIComponent[] =
+    selectedItems.map((item) => ({
+      id: crypto.randomUUID(),
+      type: "backButton",
+      label: item.label,
+      width: 220,
+      height: 56,
+      x: 0,
+      y: 0,
+      children: [],
+    }));
 
-    addItemsToCanvas(
-      backButtonComponents
-    );
+  addItemsToCanvas(
+    backButtonComponents
+  );
 
-    setShowBackButtonModal(false);
-  };
+  setShowBackButtonModal(false);
+};
 
   const deleteComponent = (id: string) => {
     setComponents((prev) =>

@@ -22,21 +22,21 @@ export default function ComponentGroupSelectModal({
   const [selected, setSelected] =
     useState<ComponentOption[]>([]);
 
-  const toggleOption = (option: ComponentOption) => {
-    setSelected((prev) => {
-      const exists = prev.some(
-        (item) => item.type === option.type
-      );
+  // const toggleOption = (option: ComponentOption) => {
+  //   setSelected((prev) => {
+  //     const exists = prev.some(
+  //       (item) => item.type === option.type
+  //     );
 
-      if (exists) {
-        return prev.filter(
-          (item) => item.type !== option.type
-        );
-      }
+  //     if (exists) {
+  //       return prev.filter(
+  //         (item) => item.type !== option.type
+  //       );
+  //     }
 
-      return [...prev, option];
-    });
-  };
+  //     return [...prev, option];
+  //   });
+  // };
 
   return (
     <div className="heading-modal-overlay">
